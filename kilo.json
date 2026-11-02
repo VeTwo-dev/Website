@@ -1,0 +1,8 @@
+{
+  "$schema": "https://app.kilo.ai/config.json",
+  "default_agent": "design-qa",
+  "instructions": [
+    "AGENTS.md",
+    "docs/design-references/pier-gorelli/design-system.md"
+  ]
+}

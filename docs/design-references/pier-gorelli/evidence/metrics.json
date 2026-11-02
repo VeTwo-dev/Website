@@ -1,0 +1,389 @@
+{
+ "1440x900": {
+  "viewport": {
+   "w": 1440,
+   "h": 900
+  },
+  "container": {
+   "width": 1440,
+   "paddingLeft": "31.68px",
+   "paddingRight": "31.68px"
+  },
+  "grid12": {
+   "display": "grid",
+   "columns": 12,
+   "gap": "normal 20.16px",
+   "width": 1377
+  },
+  "sectionSpacing": {
+   "paddingTop": "158.4px",
+   "paddingBottom": "0px"
+  },
+  "type": {
+   "display": {
+    "selector": ".hero__human.display",
+    "fontSize": "177.6px",
+    "lineHeight": "152.736px",
+    "letterSpacing": "-9.768px",
+    "fontWeight": "500",
+    "fontFamily": "Geist Variable",
+    "width": 1386,
+    "height": 153
+   },
+   "editorial": {
+    "selector": ".wf-line.h1",
+    "fontSize": "120.64px",
+    "lineHeight": "108.576px",
+    "letterSpacing": "-6.032px",
+    "fontWeight": "400",
+    "fontFamily": "Geist Variable",
+    "width": 694,
+    "height": 109
+   },
+   "subhead": {
+    "selector": ".hero__machine",
+    "fontSize": "70.08px",
+    "lineHeight": "66.576px",
+    "letterSpacing": "-3.1536px",
+    "fontWeight": "500",
+    "fontFamily": "Geist Variable",
+    "width": 1132,
+    "height": 200
+   },
+   "h2": {
+    "selector": "h2",
+    "fontSize": "40px",
+    "lineHeight": "42px",
+    "letterSpacing": "-1.2px",
+    "fontWeight": "500",
+    "fontFamily": "Geist Variable",
+    "width": 445,
+    "height": 84
+   },
+   "h3": {
+    "selector": "h3",
+    "fontSize": "26px",
+    "lineHeight": "24.7px",
+    "letterSpacing": "-0.91px",
+    "fontWeight": "500",
+    "fontFamily": "Geist Variable",
+    "width": 329,
+    "height": 25
+   },
+   "bodyLead": {
+    "selector": ".hero__intro.lead",
+    "fontSize": "26px",
+    "lineHeight": "35.1px",
+    "letterSpacing": "-0.39px",
+    "fontWeight": "400",
+    "fontFamily": "Geist Variable",
+    "width": 586,
+    "height": 70
+   },
+   "body": {
+    "selector": ".ws__summary",
+    "fontSize": "18px",
+    "lineHeight": "27.9px",
+    "letterSpacing": "normal",
+    "fontWeight": "400",
+    "fontFamily": "Geist Variable",
+    "width": 445,
+    "height": 112
+   },
+   "monoNote": {
+    "selector": ".note",
+    "fontSize": "11.52px",
+    "lineHeight": "16.128px",
+    "letterSpacing": "0.2304px",
+    "fontWeight": "400",
+    "fontFamily": "Geist Mono Variable",
+    "width": 136,
+    "height": 35
+   },
+   "nav": {
+    "selector": ".nav__link",
+    "fontSize": "15.2px",
+    "lineHeight": "23.56px",
+    "letterSpacing": "normal",
+    "fontWeight": "400",
+    "fontFamily": "Geist Variable",
+    "width": 57,
+    "height": 18
+   }
+  },
+  "counters": {
+   "displayWork": {
+    "selector": ".ws__count",
+    "fontSize": "120.64px",
+    "lineHeight": "102.544px",
+    "letterSpacing": "-7.2384px",
+    "fontWeight": "500",
+    "fontFamily": "Geist Variable",
+    "width": 445,
+    "height": 103
+   }
+  },
+  "scroll": {
+   "scrollWidth": 1440,
+   "clientWidth": 1440
+  }
+ },
+ "768x1024": {
+  "viewport": {
+   "w": 768,
+   "h": 1024
+  },
+  "container": {
+   "width": 768,
+   "paddingLeft": "16.896px",
+   "paddingRight": "16.896px"
+  },
+  "grid12": {
+   "display": "grid",
+   "columns": 12,
+   "gap": "normal 12px",
+   "width": 734
+  },
+  "sectionSpacing": {
+   "paddingTop": "88px",
+   "paddingBottom": "0px"
+  },
+  "type": {
+   "display": {
+    "selector": ".hero__human.display",
+    "fontSize": "103.68px",
+    "lineHeight": "89.1648px",
+    "letterSpacing": "-5.7024px",
+    "fontWeight": "500",
+    "fontFamily": "Geist Variable",
+    "width": 739,
+    "height": 89
+   },
+   "editorial": {
+    "selector": ".wf-line.h1",
+    "fontSize": "76.288px",
+    "lineHeight": "68.6592px",
+    "letterSpacing": "-3.8144px",
+    "fontWeight": "400",
+    "fontFamily": "Geist Variable",
+    "width": 439,
+    "height": 69
+   },
+   "subhead": {
+    "selector": ".hero__machine",
+    "fontSize": "48.576px",
+    "lineHeight": "46.1472px",
+    "letterSpacing": "-2.18592px",
+    "fontWeight": "500",
+    "fontFamily": "Geist Variable",
+    "width": 734,
+    "height": 138
+   },
+   "h2": {
+    "selector": "h2",
+    "fontSize": "31.552px",
+    "lineHeight": "33.1296px",
+    "letterSpacing": "-0.94656px",
+    "fontWeight": "500",
+    "fontFamily": "Geist Variable",
+    "width": 734,
+    "height": 33
+   },
+   "h3": {
+    "selector": "h3",
+    "fontSize": "22.688px",
+    "lineHeight": "21.5536px",
+    "letterSpacing": "-0.79408px",
+    "fontWeight": "500",
+    "fontFamily": "Geist Variable",
+    "width": 175,
+    "height": 22
+   },
+   "bodyLead": {
+    "selector": ".hero__intro.lead",
+    "fontSize": "22.688px",
+    "lineHeight": "30.6288px",
+    "letterSpacing": "-0.34032px",
+    "fontWeight": "400",
+    "fontFamily": "Geist Variable",
+    "width": 511,
+    "height": 61
+   },
+   "body": {
+    "selector": ".ws__summary",
+    "fontSize": "16.896px",
+    "lineHeight": "26.1888px",
+    "letterSpacing": "normal",
+    "fontWeight": "400",
+    "fontFamily": "Geist Variable",
+    "width": 470,
+    "height": 79
+   },
+   "monoNote": {
+    "selector": ".note",
+    "fontSize": "11.52px",
+    "lineHeight": "16.128px",
+    "letterSpacing": "0.2304px",
+    "fontWeight": "400",
+    "fontFamily": "Geist Mono Variable",
+    "width": 136,
+    "height": 35
+   },
+   "nav": {
+    "selector": ".nav__link",
+    "fontSize": "15.2px",
+    "lineHeight": "23.56px",
+    "letterSpacing": "normal",
+    "fontWeight": "400",
+    "fontFamily": "Geist Variable",
+    "width": 0,
+    "height": 0
+   }
+  },
+  "counters": {
+   "displayWork": {
+    "selector": ".ws__count",
+    "fontSize": "76.288px",
+    "lineHeight": "64.8448px",
+    "letterSpacing": "-4.57728px",
+    "fontWeight": "500",
+    "fontFamily": "Geist Variable",
+    "width": 0,
+    "height": 0
+   }
+  },
+  "scroll": {
+   "scrollWidth": 768,
+   "clientWidth": 768
+  }
+ },
+ "390x844": {
+  "viewport": {
+   "w": 390,
+   "h": 844
+  },
+  "container": {
+   "width": 390,
+   "paddingLeft": "16px",
+   "paddingRight": "16px"
+  },
+  "grid12": {
+   "display": "grid",
+   "columns": 4,
+   "gap": "normal 12px",
+   "width": 358
+  },
+  "sectionSpacing": {
+   "paddingTop": "88px",
+   "paddingBottom": "0px"
+  },
+  "type": {
+   "display": {
+    "selector": ".hero__human.display",
+    "fontSize": "62.1px",
+    "lineHeight": "53.406px",
+    "letterSpacing": "-3.4155px",
+    "fontWeight": "500",
+    "fontFamily": "Geist Variable",
+    "width": 361,
+    "height": 53
+   },
+   "editorial": {
+    "selector": ".wf-line.h1",
+    "fontSize": "36.48px",
+    "lineHeight": "32.832px",
+    "letterSpacing": "-1.824px",
+    "fontWeight": "400",
+    "fontFamily": "Geist Variable",
+    "width": 210,
+    "height": 33
+   },
+   "subhead": {
+    "selector": ".hero__machine",
+    "fontSize": "36.48px",
+    "lineHeight": "34.656px",
+    "letterSpacing": "-1.6416px",
+    "fontWeight": "500",
+    "fontFamily": "Geist Variable",
+    "width": 358,
+    "height": 139
+   },
+   "h2": {
+    "selector": "h2",
+    "fontSize": "26.26px",
+    "lineHeight": "27.573px",
+    "letterSpacing": "-0.7878px",
+    "fontWeight": "500",
+    "fontFamily": "Geist Variable",
+    "width": 358,
+    "height": 55
+   },
+   "h3": {
+    "selector": "h3",
+    "fontSize": "20.42px",
+    "lineHeight": "19.399px",
+    "letterSpacing": "-0.7147px",
+    "fontWeight": "500",
+    "fontFamily": "Geist Variable",
+    "width": 330,
+    "height": 19
+   },
+   "bodyLead": {
+    "selector": ".hero__intro.lead",
+    "fontSize": "20.42px",
+    "lineHeight": "27.567px",
+    "letterSpacing": "-0.3063px",
+    "fontWeight": "400",
+    "fontFamily": "Geist Variable",
+    "width": 358,
+    "height": 55
+   },
+   "body": {
+    "selector": ".ws__summary",
+    "fontSize": "16.14px",
+    "lineHeight": "25.017px",
+    "letterSpacing": "normal",
+    "fontWeight": "400",
+    "fontFamily": "Geist Variable",
+    "width": 358,
+    "height": 100
+   },
+   "monoNote": {
+    "selector": ".note",
+    "fontSize": "11.52px",
+    "lineHeight": "16.128px",
+    "letterSpacing": "0.2304px",
+    "fontWeight": "400",
+    "fontFamily": "Geist Mono Variable",
+    "width": 136,
+    "height": 35
+   },
+   "nav": {
+    "selector": ".nav__link",
+    "fontSize": "15.2px",
+    "lineHeight": "23.56px",
+    "letterSpacing": "normal",
+    "fontWeight": "400",
+    "fontFamily": "Geist Variable",
+    "width": 0,
+    "height": 0
+   }
+  },
+  "counters": {
+   "displayWork": {
+    "selector": ".ws__count",
+    "fontSize": "51.34px",
+    "lineHeight": "43.639px",
+    "letterSpacing": "-3.0804px",
+    "fontWeight": "500",
+    "fontFamily": "Geist Variable",
+    "width": 0,
+    "height": 0
+   }
+  },
+  "scroll": {
+   "scrollWidth": 390,
+   "clientWidth": 390
+  }
+ }
+}

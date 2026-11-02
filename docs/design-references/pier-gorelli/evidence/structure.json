@@ -1,0 +1,305 @@
+{
+ "title": "Freelance Web & AI Developer for Creative Agencies | Pier Gorelli",
+ "generator": "Astro v7.3.5",
+ "doc": {
+  "height": 11126,
+  "width": 1440
+ },
+ "sections": [
+  {
+   "i": 0,
+   "cls": "hero wrap",
+   "rect": {
+    "w": 1440,
+    "h": 900,
+    "top": 0
+   },
+   "padding": [
+    "96px",
+    "32px",
+    "31.68px",
+    "31.68px"
+   ],
+   "borderTop": "0px rgb(14, 14, 13)",
+   "labels": [
+    "Pier Gorelli · freelance web & AI developerBase ca",
+    "● human · written by hand",
+    "◆ machine · generated · 3 tokens · 68 ms",
+    "▲ terrain · point anywhere to raise the hard part",
+    "h1.human · 1386×153",
+    "h1.machine · 1132×200"
+   ],
+   "headings": [
+    {
+     "tag": "H1",
+     "size": "18px",
+     "text": "I do dev.Web & AI development for creative agencies, when th"
+    }
+   ],
+   "data": [
+    "data-hero",
+    "data-astro-cid-lcdefpme"
+   ]
+  },
+  {
+   "i": 1,
+   "cls": "section wrap manifesto",
+   "rect": {
+    "w": 1440,
+    "h": 820,
+    "top": 900
+   },
+   "padding": [
+    "158.4px",
+    "0px",
+    "31.68px",
+    "31.68px"
+   ],
+   "borderTop": "0px rgb(14, 14, 13)",
+   "labels": [
+    "[01] Manifesto",
+    "fig. 01 · wireframe → production",
+    "↤ 12 col ↦",
+    "font-size: var(--step-4)",
+    "ls −0.05em"
+   ],
+   "headings": [],
+   "data": [
+    "data-wireframe",
+    "data-astro-cid-lcdefpme"
+   ]
+  },
+  {
+   "i": 2,
+   "cls": "section wrap",
+   "rect": {
+    "w": 1440,
+    "h": 5546,
+    "top": 1720
+   },
+   "padding": [
+    "158.4px",
+    "0px",
+    "31.68px",
+    "31.68px"
+   ],
+   "borderTop": "0px rgb(14, 14, 13)",
+   "labels": [
+    "[02] Selected work",
+    "Field reports · client names under NDA",
+    "01Plot02Build03Live",
+    "01 / 2026",
+    "WordPress · GSAP · Lenis",
+    "Retail · through an agency"
+   ],
+   "headings": [
+    {
+     "tag": "H2",
+     "size": "40px",
+     "text": "A retail site drawn from one letter"
+    },
+    {
+     "tag": "H2",
+     "size": "40px",
+     "text": "Image SEO that runs every day"
+    },
+    {
+     "tag": "H2",
+     "size": "40px",
+     "text": "piergorelli.com, redesigned"
+    }
+   ],
+   "data": [
+    "data-astro-cid-lcdefpme"
+   ]
+  },
+  {
+   "i": 3,
+   "cls": "section wrap",
+   "rect": {
+    "w": 1440,
+    "h": 1038,
+    "top": 7267
+   },
+   "padding": [
+    "158.4px",
+    "0px",
+    "31.68px",
+    "31.68px"
+   ],
+   "borderTop": "0px rgb(14, 14, 13)",
+   "labels": [
+    "[03] Services",
+    "All services →",
+    "01",
+    "Astro",
+    "GSAP",
+    "WordPress"
+   ],
+   "headings": [
+    {
+     "tag": "H2",
+     "size": "70.08px",
+     "text": "Web development for agencies"
+    },
+    {
+     "tag": "H2",
+     "size": "70.08px",
+     "text": "AI for agencies"
+    },
+    {
+     "tag": "H2",
+     "size": "70.08px",
+     "text": "AI in products"
+    }
+   ],
+   "data": [
+    "data-astro-cid-lcdefpme"
+   ]
+  },
+  {
+   "i": 4,
+   "cls": "section wrap",
+   "rect": {
+    "w": 1440,
+    "h": 680,
+    "top": 8305
+   },
+   "padding": [
+    "158.4px",
+    "0px",
+    "31.68px",
+    "31.68px"
+   ],
+   "borderTop": "0px rgb(14, 14, 13)",
+   "labels": [
+    "[04] How I work with agencies",
+    "Under NDA · anonymised",
+    "01",
+    "02",
+    "03",
+    "04"
+   ],
+   "headings": [
+    {
+     "tag": "H2",
+     "size": "70.08px",
+     "text": "Your design on top. My code underneath."
+    },
+    {
+     "tag": "H3",
+     "size": "26px",
+     "text": "Brief"
+    },
+    {
+     "tag": "H3",
+     "size": "26px",
+     "text": "Prototype"
+    },
+    {
+     "tag": "H3",
+     "size": "26px",
+     "text": "Build"
+    },
+    {
+     "tag": "H3",
+     "size": "26px",
+     "text": "Handover"
+    }
+   ],
+   "data": [
+    "data-astro-cid-lcdefpme"
+   ]
+  },
+  {
+   "i": 5,
+   "cls": "section wrap",
+   "rect": {
+    "w": 1440,
+    "h": 698,
+    "top": 8985
+   },
+   "padding": [
+    "158.4px",
+    "0px",
+    "31.68px",
+    "31.68px"
+   ],
+   "borderTop": "0px rgb(14, 14, 13)",
+   "labels": [
+    "[05] From the blog",
+    "All posts →",
+    "09 Jun 2025",
+    "AI in practice",
+    "21 Apr 2025",
+    "Dev"
+   ],
+   "headings": [],
+   "data": [
+    "data-astro-cid-lcdefpme"
+   ]
+  },
+  {
+   "i": 6,
+   "cls": "section wrap cta",
+   "rect": {
+    "w": 1440,
+    "h": 702,
+    "top": 9683
+   },
+   "padding": [
+    "158.4px",
+    "0px",
+    "31.68px",
+    "31.68px"
+   ],
+   "borderTop": "0px rgb(14, 14, 13)",
+   "labels": [
+    "[06] Next",
+    "30 minutes"
+   ],
+   "headings": [
+    {
+     "tag": "H2",
+     "size": "177.6px",
+     "text": "Tell me what you're building."
+    }
+   ],
+   "data": [
+    "data-astro-cid-lcdefpme"
+   ]
+  }
+ ],
+ "tokens": {
+  "--bg": "#f4f4f0",
+  "--bg-raised": "#ecece6",
+  "--ink": "#0e0e0d",
+  "--muted": "#65655f",
+  "--line": "#0e0e0d24",
+  "--line-strong": "#0e0e0d52",
+  "--accent": "#2f5bff",
+  "--accent-ink": "#fff",
+  "--gutter": "clamp(16px, 2.2vw, 32px)",
+  "--columns": "12",
+  "--col-gap": "clamp(12px, 1.4vw, 24px)",
+  "--section": "clamp(88px, 11vw, 180px)",
+  "--step--1": "clamp(.8rem, .78rem + .1vw, .875rem)",
+  "--step-0": "clamp(1rem, .96rem + .2vw, 1.125rem)",
+  "--step-1": "clamp(1.25rem, 1.13rem + .6vw, 1.625rem)",
+  "--step-2": "clamp(1.6rem, 1.3rem + 1.4vw, 2.5rem)",
+  "--step-3": "clamp(2.2rem, 1.5rem + 3.2vw, 4.5rem)",
+  "--step-4": "clamp(3rem, 1.6rem + 6.6vw, 8.5rem)",
+  "--step-5": "clamp(3.6rem, 1.2rem + 11vw, 14rem)",
+  "--dur-1": ".4s",
+  "--dur-2": ".8s",
+  "--dur-3": "1.2s",
+  "--ease-in-out": "cubic-bezier(.76, 0, .24, 1)",
+  "--ease-out": "cubic-bezier(.25, 1, .5, 1)"
+ },
+ "media": {
+  "svg": 7,
+  "img": 0,
+  "video": 0,
+  "canvas": 0
+ }
+}

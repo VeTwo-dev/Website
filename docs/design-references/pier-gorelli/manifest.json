@@ -1,0 +1,1555 @@
+{
+  "reference": "Pier Gorelli",
+  "origin": "https://piergorelli.com/",
+  "capturedAt": "2026-10-21",
+  "method": "Headless Chromium (Playwright 1.64.1), viewport screenshots and full-page captures; states driven by scroll, hover, keyboard (Ctrl+K), theme emulation, and prefers-reduced-motion emulation.",
+  "viewports": [
+    {
+      "name": "desktop",
+      "width": 1440,
+      "height": 900
+    },
+    {
+      "name": "tablet",
+      "width": 768,
+      "height": 1024
+    },
+    {
+      "name": "mobile",
+      "width": 390,
+      "height": 844
+    }
+  ],
+  "screenshotCount": 59,
+  "principles": {
+    "editorial-hierarchy": {
+      "label": "Editorial hierarchy",
+      "rule": "Oversized display vs constrained body; 2-3x jump between roles."
+    },
+    "container-grid": {
+      "label": "Container & grid",
+      "rule": "Gutter-scaled container, 12/4-column alignment, hairline edges."
+    },
+    "section-rhythm": {
+      "label": "Section rhythm",
+      "rule": "Generous, consistent vertical spacing (88-158px)."
+    },
+    "numbering": {
+      "label": "Numbered sections",
+      "rule": "Mono [0N] index + label as a structural marker."
+    },
+    "mono-metadata": {
+      "label": "Mono metadata",
+      "rule": "Fixed 11.52px uppercase technical labels."
+    },
+    "negative-space": {
+      "label": "Negative space",
+      "rule": "Narrow measures offset inside wide columns."
+    },
+    "hairlines": {
+      "label": "Hairline rules",
+      "rule": "Alpha-ink 1px rules instead of boxes/shadows."
+    },
+    "graphics": {
+      "label": "Blueprint graphics",
+      "rule": "Drawn diagrams, grid paper, dimension labels."
+    },
+    "outline-text": {
+      "label": "Outline/fill type",
+      "rule": "Stroke-only text layered with solid text."
+    },
+    "motion": {
+      "label": "Motion system",
+      "rule": "0.4/0.8/1.2s, cubic-bezier(.76,0,.24,1)."
+    },
+    "interaction": {
+      "label": "Interaction states",
+      "rule": "Label roll, focus ring, command palette."
+    },
+    "responsive": {
+      "label": "Responsive behaviour",
+      "rule": "4-col mobile, reduced spacing, menu->palette."
+    },
+    "theme": {
+      "label": "Theme system",
+      "rule": "Light/dark via CSS variables, single accent."
+    },
+    "accessibility": {
+      "label": "Accessibility",
+      "rule": "Visible focus, reduced-motion branch, keyboard paths."
+    }
+  },
+  "limitations": [
+    "Runtime-rendered work media renders blank in still captures (no img/video/canvas in DOM on home).",
+    "Hover and open states are settled snapshots, not transition recordings.",
+    "Preloader timing sampled at ~150ms resolution.",
+    "Only the default accent colour was captured.",
+    "Four pages plus one article; Firefox/Safari and physical devices not tested."
+  ],
+  "screenshots": [
+    {
+      "file": "screenshots/about-desktop-1440-full.png",
+      "page": "About",
+      "url": "https://piergorelli.com/about/",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "image": {
+        "width": 1440,
+        "height": 8552
+      },
+      "theme": "light",
+      "state": "full",
+      "description": "Full-page capture (light theme) for overall composition and section order.",
+      "principles": [
+        "editorial-hierarchy",
+        "container-grid",
+        "section-rhythm"
+      ],
+      "limitation": "",
+      "capturedAt": "2026-10-18T03:20:34Z",
+      "bytes": 1089195
+    },
+    {
+      "file": "screenshots/about-desktop-1440-initial.png",
+      "page": "About",
+      "url": "https://piergorelli.com/about/",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "image": {
+        "width": 1440,
+        "height": 900
+      },
+      "theme": "light",
+      "state": "initial",
+      "description": "First paint: preloader panel with path draw and counter; page content behind is not yet interactive.",
+      "principles": [
+        "editorial-hierarchy",
+        "container-grid"
+      ],
+      "limitation": "Sampled ~0.9s after navigation; preloader timing not frame-accurate.",
+      "capturedAt": "2026-10-18T03:20:25Z",
+      "bytes": 49184
+    },
+    {
+      "file": "screenshots/about-desktop-1440-timeline.png",
+      "page": "About",
+      "url": "https://piergorelli.com/about/",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "image": {
+        "width": 1440,
+        "height": 900
+      },
+      "theme": "light",
+      "state": "timeline",
+      "description": "About: timeline/career section.",
+      "principles": [
+        "editorial-hierarchy",
+        "container-grid",
+        "section-rhythm",
+        "hairlines",
+        "mono-metadata",
+        "negative-space"
+      ],
+      "limitation": "",
+      "capturedAt": "2026-10-18T03:25:45Z",
+      "bytes": 94024
+    },
+    {
+      "file": "screenshots/about-desktop-1440-writing.png",
+      "page": "About",
+      "url": "https://piergorelli.com/about/",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "image": {
+        "width": 1440,
+        "height": 900
+      },
+      "theme": "light",
+      "state": "writing",
+      "description": "About: writing/speaking section.",
+      "principles": [
+        "editorial-hierarchy",
+        "container-grid",
+        "section-rhythm",
+        "hairlines",
+        "mono-metadata",
+        "negative-space"
+      ],
+      "limitation": "",
+      "capturedAt": "2026-10-18T03:25:47Z",
+      "bytes": 99150
+    },
+    {
+      "file": "screenshots/about-mobile-390-scroll1.png",
+      "page": "About",
+      "url": "https://piergorelli.com/about/",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "image": {
+        "width": 390,
+        "height": 844
+      },
+      "theme": "light",
+      "state": "scroll1",
+      "description": "First scroll stop below the hero.",
+      "principles": [
+        "editorial-hierarchy",
+        "container-grid",
+        "section-rhythm"
+      ],
+      "limitation": "",
+      "capturedAt": "2026-10-18T03:22:31Z",
+      "bytes": 73531
+    },
+    {
+      "file": "screenshots/about-mobile-390-scroll2.png",
+      "page": "About",
+      "url": "https://piergorelli.com/about/",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "image": {
+        "width": 390,
+        "height": 844
+      },
+      "theme": "light",
+      "state": "scroll2",
+      "description": "Second scroll stop (mid-page content).",
+      "principles": [
+        "editorial-hierarchy",
+        "container-grid",
+        "section-rhythm",
+        "negative-space"
+      ],
+      "limitation": "",
+      "capturedAt": "2026-10-18T03:22:33Z",
+      "bytes": 51951
+    },
+    {
+      "file": "screenshots/about-mobile-390-top.png",
+      "page": "About",
+      "url": "https://piergorelli.com/about/",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "image": {
+        "width": 390,
+        "height": 844
+      },
+      "theme": "light",
+      "state": "top",
+      "description": "Top of page after load; header and first viewport.",
+      "principles": [
+        "editorial-hierarchy",
+        "container-grid",
+        "section-rhythm"
+      ],
+      "limitation": "",
+      "capturedAt": "2026-10-18T03:22:23Z",
+      "bytes": 22463
+    },
+    {
+      "file": "screenshots/about-tablet-768-scroll1.png",
+      "page": "About",
+      "url": "https://piergorelli.com/about/",
+      "viewport": {
+        "width": 768,
+        "height": 1024
+      },
+      "image": {
+        "width": 768,
+        "height": 1024
+      },
+      "theme": "light",
+      "state": "scroll1",
+      "description": "First scroll stop below the hero.",
+      "principles": [
+        "editorial-hierarchy",
+        "container-grid",
+        "section-rhythm"
+      ],
+      "limitation": "",
+      "capturedAt": "2026-10-18T03:21:38Z",
+      "bytes": 114837
+    },
+    {
+      "file": "screenshots/about-tablet-768-scroll2.png",
+      "page": "About",
+      "url": "https://piergorelli.com/about/",
+      "viewport": {
+        "width": 768,
+        "height": 1024
+      },
+      "image": {
+        "width": 768,
+        "height": 1024
+      },
+      "theme": "light",
+      "state": "scroll2",
+      "description": "Second scroll stop (mid-page content).",
+      "principles": [
+        "editorial-hierarchy",
+        "container-grid",
+        "section-rhythm",
+        "negative-space"
+      ],
+      "limitation": "",
+      "capturedAt": "2026-10-18T03:21:39Z",
+      "bytes": 100788
+    },
+    {
+      "file": "screenshots/about-tablet-768-top.png",
+      "page": "About",
+      "url": "https://piergorelli.com/about/",
+      "viewport": {
+        "width": 768,
+        "height": 1024
+      },
+      "image": {
+        "width": 768,
+        "height": 1024
+      },
+      "theme": "light",
+      "state": "top",
+      "description": "Top of page after load; header and first viewport.",
+      "principles": [
+        "editorial-hierarchy",
+        "container-grid",
+        "section-rhythm"
+      ],
+      "limitation": "",
+      "capturedAt": "2026-10-18T03:21:31Z",
+      "bytes": 36410
+    },
+    {
+      "file": "screenshots/blog-desktop-1440-categories.png",
+      "page": "Blog index",
+      "url": "https://piergorelli.com/blog/",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "image": {
+        "width": 1440,
+        "height": 900
+      },
+      "theme": "light",
+      "state": "categories",
+      "description": "Blog category filter row and filtered listing.",
+      "principles": [
+        "editorial-hierarchy",
+        "container-grid",
+        "section-rhythm"
+      ],
+      "limitation": "",
+      "capturedAt": "2026-10-18T03:27:38Z",
+      "bytes": 121625
+    },
+    {
+      "file": "screenshots/blog-desktop-1440-full.png",
+      "page": "Blog index",
+      "url": "https://piergorelli.com/blog/",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "image": {
+        "width": 1440,
+        "height": 5792
+      },
+      "theme": "light",
+      "state": "full",
+      "description": "Full-page capture (light theme) for overall composition and section order.",
+      "principles": [
+        "editorial-hierarchy",
+        "container-grid",
+        "section-rhythm"
+      ],
+      "limitation": "",
+      "capturedAt": "2026-10-18T03:20:43Z",
+      "bytes": 951014
+    },
+    {
+      "file": "screenshots/blog-desktop-1440-initial.png",
+      "page": "Blog index",
+      "url": "https://piergorelli.com/blog/",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "image": {
+        "width": 1440,
+        "height": 900
+      },
+      "theme": "light",
+      "state": "initial",
+      "description": "First paint: preloader panel with path draw and counter; page content behind is not yet interactive.",
+      "principles": [
+        "editorial-hierarchy",
+        "container-grid"
+      ],
+      "limitation": "Sampled ~0.9s after navigation; preloader timing not frame-accurate.",
+      "capturedAt": "2026-10-18T03:20:37Z",
+      "bytes": 111427
+    },
+    {
+      "file": "screenshots/blog-desktop-1440-listing.png",
+      "page": "Blog index",
+      "url": "https://piergorelli.com/blog/",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "image": {
+        "width": 1440,
+        "height": 900
+      },
+      "theme": "light",
+      "state": "listing",
+      "description": "Blog listing rows with year groups and entry counts.",
+      "principles": [
+        "editorial-hierarchy",
+        "container-grid",
+        "section-rhythm",
+        "hairlines",
+        "mono-metadata",
+        "negative-space"
+      ],
+      "limitation": "",
+      "capturedAt": "2026-10-18T03:26:02Z",
+      "bytes": 267427
+    },
+    {
+      "file": "screenshots/blog-mobile-390-scroll1.png",
+      "page": "Blog index",
+      "url": "https://piergorelli.com/blog/",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "image": {
+        "width": 390,
+        "height": 844
+      },
+      "theme": "light",
+      "state": "scroll1",
+      "description": "First scroll stop below the hero.",
+      "principles": [
+        "editorial-hierarchy",
+        "container-grid",
+        "section-rhythm"
+      ],
+      "limitation": "",
+      "capturedAt": "2026-10-18T03:22:44Z",
+      "bytes": 73753
+    },
+    {
+      "file": "screenshots/blog-mobile-390-scroll2.png",
+      "page": "Blog index",
+      "url": "https://piergorelli.com/blog/",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "image": {
+        "width": 390,
+        "height": 844
+      },
+      "theme": "light",
+      "state": "scroll2",
+      "description": "Second scroll stop (mid-page content).",
+      "principles": [
+        "editorial-hierarchy",
+        "container-grid",
+        "section-rhythm",
+        "negative-space"
+      ],
+      "limitation": "",
+      "capturedAt": "2026-10-18T03:22:45Z",
+      "bytes": 56273
+    },
+    {
+      "file": "screenshots/blog-mobile-390-top.png",
+      "page": "Blog index",
+      "url": "https://piergorelli.com/blog/",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "image": {
+        "width": 390,
+        "height": 844
+      },
+      "theme": "light",
+      "state": "top",
+      "description": "Top of page after load; header and first viewport.",
+      "principles": [
+        "editorial-hierarchy",
+        "container-grid",
+        "section-rhythm"
+      ],
+      "limitation": "",
+      "capturedAt": "2026-10-18T03:22:37Z",
+      "bytes": 65520
+    },
+    {
+      "file": "screenshots/blog-tablet-768-scroll1.png",
+      "page": "Blog index",
+      "url": "https://piergorelli.com/blog/",
+      "viewport": {
+        "width": 768,
+        "height": 1024
+      },
+      "image": {
+        "width": 768,
+        "height": 1024
+      },
+      "theme": "light",
+      "state": "scroll1",
+      "description": "First scroll stop below the hero.",
+      "principles": [
+        "editorial-hierarchy",
+        "container-grid",
+        "section-rhythm"
+      ],
+      "limitation": "",
+      "capturedAt": "2026-10-18T03:21:50Z",
+      "bytes": 119409
+    },
+    {
+      "file": "screenshots/blog-tablet-768-scroll2.png",
+      "page": "Blog index",
+      "url": "https://piergorelli.com/blog/",
+      "viewport": {
+        "width": 768,
+        "height": 1024
+      },
+      "image": {
+        "width": 768,
+        "height": 1024
+      },
+      "theme": "light",
+      "state": "scroll2",
+      "description": "Second scroll stop (mid-page content).",
+      "principles": [
+        "editorial-hierarchy",
+        "container-grid",
+        "section-rhythm",
+        "negative-space"
+      ],
+      "limitation": "",
+      "capturedAt": "2026-10-18T03:21:51Z",
+      "bytes": 106899
+    },
+    {
+      "file": "screenshots/blog-tablet-768-top.png",
+      "page": "Blog index",
+      "url": "https://piergorelli.com/blog/",
+      "viewport": {
+        "width": 768,
+        "height": 1024
+      },
+      "image": {
+        "width": 768,
+        "height": 1024
+      },
+      "theme": "light",
+      "state": "top",
+      "description": "Top of page after load; header and first viewport.",
+      "principles": [
+        "editorial-hierarchy",
+        "container-grid",
+        "section-rhythm"
+      ],
+      "limitation": "",
+      "capturedAt": "2026-10-18T03:21:44Z",
+      "bytes": 119877
+    },
+    {
+      "file": "screenshots/home-desktop-1440-button-hover.png",
+      "page": "Home",
+      "url": "https://piergorelli.com/",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "image": {
+        "width": 214,
+        "height": 240
+      },
+      "theme": "light",
+      "state": "button-hover",
+      "description": "Primary control hover state.",
+      "principles": [
+        "editorial-hierarchy",
+        "container-grid",
+        "interaction"
+      ],
+      "limitation": "Settled hover state; transition frames not captured.",
+      "capturedAt": "2026-10-18T03:20:55Z",
+      "bytes": 13084
+    },
+    {
+      "file": "screenshots/home-desktop-1440-command-palette.png",
+      "page": "Home",
+      "url": "https://piergorelli.com/",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "image": {
+        "width": 1440,
+        "height": 900
+      },
+      "theme": "light",
+      "state": "command-palette",
+      "description": "Command palette (Ctrl/Cmd+K): search field, GO TO/DO groups, inverted selection.",
+      "principles": [
+        "editorial-hierarchy",
+        "container-grid",
+        "interaction",
+        "accessibility"
+      ],
+      "limitation": "Open-state only; open/close transition timing not measured.",
+      "capturedAt": "2026-10-18T03:20:58Z",
+      "bytes": 218079
+    },
+    {
+      "file": "screenshots/home-desktop-1440-dark.png",
+      "page": "Home",
+      "url": "https://piergorelli.com/",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "image": {
+        "width": 1440,
+        "height": 900
+      },
+      "theme": "dark",
+      "state": "dark",
+      "description": "Dark theme, full page.",
+      "principles": [
+        "editorial-hierarchy",
+        "container-grid",
+        "theme"
+      ],
+      "limitation": "Default accent only; the accent-switcher alternatives were not captured.",
+      "capturedAt": "2026-10-18T03:21:03Z",
+      "bytes": 249741
+    },
+    {
+      "file": "screenshots/home-desktop-1440-footer.png",
+      "page": "Home",
+      "url": "https://piergorelli.com/",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "image": {
+        "width": 1440,
+        "height": 900
+      },
+      "theme": "light",
+      "state": "footer",
+      "description": "footer",
+      "principles": [
+        "editorial-hierarchy",
+        "container-grid"
+      ],
+      "limitation": "",
+      "capturedAt": "2026-10-18T03:25:04Z",
+      "bytes": 87916
+    },
+    {
+      "file": "screenshots/home-desktop-1440-full.png",
+      "page": "Home",
+      "url": "https://piergorelli.com/",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "image": {
+        "width": 1440,
+        "height": 11126
+      },
+      "theme": "light",
+      "state": "full",
+      "description": "Full-page capture (light theme) for overall composition and section order.",
+      "principles": [
+        "editorial-hierarchy",
+        "container-grid",
+        "section-rhythm",
+        "graphics"
+      ],
+      "limitation": "Runtime-rendered work media plate appears blank in still captures.",
+      "capturedAt": "2026-10-18T03:20:06Z",
+      "bytes": 810826
+    },
+    {
+      "file": "screenshots/home-desktop-1440-header-scrolled.png",
+      "page": "Home",
+      "url": "https://piergorelli.com/",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "image": {
+        "width": 1440,
+        "height": 900
+      },
+      "theme": "light",
+      "state": "header-scrolled",
+      "description": "Scrolled state: condensed fixed header with tick-ruler scroll progress and percentage tag.",
+      "principles": [
+        "editorial-hierarchy",
+        "container-grid",
+        "interaction"
+      ],
+      "limitation": "",
+      "capturedAt": "2026-10-18T03:20:49Z",
+      "bytes": 79059
+    },
+    {
+      "file": "screenshots/home-desktop-1440-hero-loaded.png",
+      "page": "Home",
+      "url": "https://piergorelli.com/",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "image": {
+        "width": 1440,
+        "height": 900
+      },
+      "theme": "light",
+      "state": "hero-loaded",
+      "description": "Hero settled after the intro preloader is removed.",
+      "principles": [
+        "editorial-hierarchy",
+        "container-grid",
+        "section-rhythm",
+        "graphics"
+      ],
+      "limitation": "Work media plate may be blank where present (runtime rendering).",
+      "capturedAt": "2026-10-18T03:24:44Z",
+      "bytes": 118854
+    },
+    {
+      "file": "screenshots/home-desktop-1440-initial.png",
+      "page": "Home",
+      "url": "https://piergorelli.com/",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "image": {
+        "width": 1440,
+        "height": 900
+      },
+      "theme": "light",
+      "state": "initial",
+      "description": "First paint: preloader panel with path draw and counter; page content behind is not yet interactive.",
+      "principles": [
+        "editorial-hierarchy",
+        "container-grid",
+        "graphics"
+      ],
+      "limitation": "Sampled ~0.9s after navigation; preloader timing not frame-accurate.",
+      "capturedAt": "2026-10-18T03:19:55Z",
+      "bytes": 34819
+    },
+    {
+      "file": "screenshots/home-desktop-1440-menu-open.png",
+      "page": "Home",
+      "url": "https://piergorelli.com/",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "image": {
+        "width": 1440,
+        "height": 900
+      },
+      "theme": "light",
+      "state": "menu-open",
+      "description": "Menu control opens the same command palette on mobile.",
+      "principles": [
+        "editorial-hierarchy",
+        "container-grid",
+        "interaction",
+        "accessibility"
+      ],
+      "limitation": "",
+      "capturedAt": "2026-10-18T03:21:00Z",
+      "bytes": 250994
+    },
+    {
+      "file": "screenshots/home-desktop-1440-reduced-motion.png",
+      "page": "Home",
+      "url": "https://piergorelli.com/",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "image": {
+        "width": 1440,
+        "height": 900
+      },
+      "theme": "light",
+      "state": "reduced-motion",
+      "description": "prefers-reduced-motion emulation: no preloader, cursor, or transitions.",
+      "principles": [
+        "editorial-hierarchy",
+        "container-grid",
+        "theme",
+        "accessibility",
+        "motion"
+      ],
+      "limitation": "Emulated media query in Chromium, not a physical device.",
+      "capturedAt": "2026-10-21T03:18:31Z",
+      "bytes": 103765
+    },
+    {
+      "file": "screenshots/home-desktop-1440-section-blog.png",
+      "page": "Home",
+      "url": "https://piergorelli.com/",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "image": {
+        "width": 1440,
+        "height": 900
+      },
+      "theme": "light",
+      "state": "section-blog",
+      "description": "Blog rows grouped by year with mono metadata.",
+      "principles": [
+        "editorial-hierarchy",
+        "container-grid",
+        "section-rhythm",
+        "hairlines",
+        "mono-metadata",
+        "negative-space"
+      ],
+      "limitation": "",
+      "capturedAt": "2026-10-18T03:27:25Z",
+      "bytes": 74816
+    },
+    {
+      "file": "screenshots/home-desktop-1440-section-cta.png",
+      "page": "Home",
+      "url": "https://piergorelli.com/",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "image": {
+        "width": 1440,
+        "height": 900
+      },
+      "theme": "light",
+      "state": "section-cta",
+      "description": "Closing CTA: oversized statement plus two actions.",
+      "principles": [
+        "editorial-hierarchy",
+        "container-grid",
+        "section-rhythm",
+        "hairlines",
+        "mono-metadata",
+        "negative-space"
+      ],
+      "limitation": "",
+      "capturedAt": "2026-10-18T03:25:02Z",
+      "bytes": 80303
+    },
+    {
+      "file": "screenshots/home-desktop-1440-section-manifesto.png",
+      "page": "Home",
+      "url": "https://piergorelli.com/",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "image": {
+        "width": 1440,
+        "height": 900
+      },
+      "theme": "light",
+      "state": "section-manifesto",
+      "description": "Manifesto: oversized outlined/solid statement with scroll fill mid-state.",
+      "principles": [
+        "editorial-hierarchy",
+        "container-grid",
+        "section-rhythm",
+        "hairlines",
+        "mono-metadata",
+        "negative-space",
+        "outline-text",
+        "motion"
+      ],
+      "limitation": "Scroll-fill curve unverified; snapshot of one scroll position.",
+      "capturedAt": "2026-10-18T03:27:09Z",
+      "bytes": 105034
+    },
+    {
+      "file": "screenshots/home-desktop-1440-section-process.png",
+      "page": "Home",
+      "url": "https://piergorelli.com/",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "image": {
+        "width": 1440,
+        "height": 900
+      },
+      "theme": "light",
+      "state": "section-process",
+      "description": "Process steps: four numbered columns.",
+      "principles": [
+        "editorial-hierarchy",
+        "container-grid",
+        "section-rhythm",
+        "hairlines",
+        "mono-metadata",
+        "negative-space"
+      ],
+      "limitation": "",
+      "capturedAt": "2026-10-18T03:25:00Z",
+      "bytes": 72126
+    },
+    {
+      "file": "screenshots/home-desktop-1440-section-services.png",
+      "page": "Home",
+      "url": "https://piergorelli.com/",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "image": {
+        "width": 1440,
+        "height": 900
+      },
+      "theme": "light",
+      "state": "section-services",
+      "description": "Services list with numbered rows and hairline separation.",
+      "principles": [
+        "editorial-hierarchy",
+        "container-grid",
+        "section-rhythm",
+        "hairlines",
+        "mono-metadata",
+        "negative-space"
+      ],
+      "limitation": "",
+      "capturedAt": "2026-10-18T03:24:58Z",
+      "bytes": 86056
+    },
+    {
+      "file": "screenshots/home-desktop-1440-section-work.png",
+      "page": "Home",
+      "url": "https://piergorelli.com/",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "image": {
+        "width": 1440,
+        "height": 900
+      },
+      "theme": "light",
+      "state": "section-work",
+      "description": "Selected work: 01/03 counter with outlined total, metadata, media plate.",
+      "principles": [
+        "editorial-hierarchy",
+        "container-grid",
+        "section-rhythm",
+        "hairlines",
+        "mono-metadata",
+        "negative-space",
+        "numbering"
+      ],
+      "limitation": "",
+      "capturedAt": "2026-10-18T03:24:56Z",
+      "bytes": 82392
+    },
+    {
+      "file": "screenshots/home-desktop-1440-work-card-hover.png",
+      "page": "Home",
+      "url": "https://piergorelli.com/",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "image": {
+        "width": 1440,
+        "height": 900
+      },
+      "theme": "light",
+      "state": "work-card-hover",
+      "description": "Work item hover state.",
+      "principles": [
+        "editorial-hierarchy",
+        "container-grid",
+        "interaction"
+      ],
+      "limitation": "Settled hover state; transition frames not captured.",
+      "capturedAt": "2026-10-18T03:20:51Z",
+      "bytes": 81252
+    },
+    {
+      "file": "screenshots/home-mobile-390-hero-loaded.png",
+      "page": "Home",
+      "url": "https://piergorelli.com/",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "image": {
+        "width": 390,
+        "height": 844
+      },
+      "theme": "light",
+      "state": "hero-loaded",
+      "description": "Hero settled after the intro preloader is removed.",
+      "principles": [
+        "editorial-hierarchy",
+        "container-grid",
+        "section-rhythm",
+        "graphics"
+      ],
+      "limitation": "Work media plate may be blank where present (runtime rendering).",
+      "capturedAt": "2026-10-21T03:18:41Z",
+      "bytes": 68096
+    },
+    {
+      "file": "screenshots/home-mobile-390-menu-open.png",
+      "page": "Home",
+      "url": "https://piergorelli.com/",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "image": {
+        "width": 390,
+        "height": 844
+      },
+      "theme": "light",
+      "state": "menu-open",
+      "description": "Menu control opens the same command palette on mobile.",
+      "principles": [
+        "editorial-hierarchy",
+        "container-grid",
+        "interaction",
+        "accessibility"
+      ],
+      "limitation": "",
+      "capturedAt": "2026-10-21T03:18:43Z",
+      "bytes": 57776
+    },
+    {
+      "file": "screenshots/home-mobile-390-scroll1.png",
+      "page": "Home",
+      "url": "https://piergorelli.com/",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "image": {
+        "width": 390,
+        "height": 844
+      },
+      "theme": "light",
+      "state": "scroll1",
+      "description": "First scroll stop below the hero.",
+      "principles": [
+        "editorial-hierarchy",
+        "container-grid",
+        "section-rhythm"
+      ],
+      "limitation": "Work media plate may be blank where present (runtime rendering).",
+      "capturedAt": "2026-10-18T03:22:04Z",
+      "bytes": 79711
+    },
+    {
+      "file": "screenshots/home-mobile-390-scroll2.png",
+      "page": "Home",
+      "url": "https://piergorelli.com/",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "image": {
+        "width": 390,
+        "height": 844
+      },
+      "theme": "light",
+      "state": "scroll2",
+      "description": "Second scroll stop (mid-page content).",
+      "principles": [
+        "editorial-hierarchy",
+        "container-grid",
+        "section-rhythm",
+        "negative-space"
+      ],
+      "limitation": "Work media plate may be blank where present (runtime rendering).",
+      "capturedAt": "2026-10-18T03:22:05Z",
+      "bytes": 49464
+    },
+    {
+      "file": "screenshots/home-mobile-390-top.png",
+      "page": "Home",
+      "url": "https://piergorelli.com/",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "image": {
+        "width": 390,
+        "height": 844
+      },
+      "theme": "light",
+      "state": "top",
+      "description": "Top of page after load; header and first viewport.",
+      "principles": [
+        "editorial-hierarchy",
+        "container-grid",
+        "section-rhythm",
+        "graphics"
+      ],
+      "limitation": "Work media plate may be blank where present (runtime rendering).",
+      "capturedAt": "2026-10-18T03:21:57Z",
+      "bytes": 12412
+    },
+    {
+      "file": "screenshots/home-tablet-768-hero-loaded.png",
+      "page": "Home",
+      "url": "https://piergorelli.com/",
+      "viewport": {
+        "width": 768,
+        "height": 1024
+      },
+      "image": {
+        "width": 768,
+        "height": 1024
+      },
+      "theme": "light",
+      "state": "hero-loaded",
+      "description": "Hero settled after the intro preloader is removed.",
+      "principles": [
+        "editorial-hierarchy",
+        "container-grid",
+        "section-rhythm",
+        "graphics"
+      ],
+      "limitation": "Work media plate may be blank where present (runtime rendering).",
+      "capturedAt": "2026-10-21T03:18:53Z",
+      "bytes": 88573
+    },
+    {
+      "file": "screenshots/home-tablet-768-scroll1.png",
+      "page": "Home",
+      "url": "https://piergorelli.com/",
+      "viewport": {
+        "width": 768,
+        "height": 1024
+      },
+      "image": {
+        "width": 768,
+        "height": 1024
+      },
+      "theme": "light",
+      "state": "scroll1",
+      "description": "First scroll stop below the hero.",
+      "principles": [
+        "editorial-hierarchy",
+        "container-grid",
+        "section-rhythm"
+      ],
+      "limitation": "Work media plate may be blank where present (runtime rendering).",
+      "capturedAt": "2026-10-18T03:21:14Z",
+      "bytes": 87882
+    },
+    {
+      "file": "screenshots/home-tablet-768-scroll2.png",
+      "page": "Home",
+      "url": "https://piergorelli.com/",
+      "viewport": {
+        "width": 768,
+        "height": 1024
+      },
+      "image": {
+        "width": 768,
+        "height": 1024
+      },
+      "theme": "light",
+      "state": "scroll2",
+      "description": "Second scroll stop (mid-page content).",
+      "principles": [
+        "editorial-hierarchy",
+        "container-grid",
+        "section-rhythm",
+        "negative-space"
+      ],
+      "limitation": "Work media plate may be blank where present (runtime rendering).",
+      "capturedAt": "2026-10-18T03:21:15Z",
+      "bytes": 103088
+    },
+    {
+      "file": "screenshots/home-tablet-768-top.png",
+      "page": "Home",
+      "url": "https://piergorelli.com/",
+      "viewport": {
+        "width": 768,
+        "height": 1024
+      },
+      "image": {
+        "width": 768,
+        "height": 1024
+      },
+      "theme": "light",
+      "state": "top",
+      "description": "Top of page after load; header and first viewport.",
+      "principles": [
+        "editorial-hierarchy",
+        "container-grid",
+        "section-rhythm",
+        "graphics"
+      ],
+      "limitation": "Work media plate may be blank where present (runtime rendering).",
+      "capturedAt": "2026-10-18T03:21:07Z",
+      "bytes": 45148
+    },
+    {
+      "file": "screenshots/services-desktop-1440-extra.png",
+      "page": "Services",
+      "url": "https://piergorelli.com/services/",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "image": {
+        "width": 1440,
+        "height": 900
+      },
+      "theme": "light",
+      "state": "extra",
+      "description": "Additional service-page region (remaining sheets/notes).",
+      "principles": [
+        "editorial-hierarchy",
+        "container-grid",
+        "section-rhythm"
+      ],
+      "limitation": "",
+      "capturedAt": "2026-10-18T03:25:28Z",
+      "bytes": 92957
+    },
+    {
+      "file": "screenshots/services-desktop-1440-full.png",
+      "page": "Services",
+      "url": "https://piergorelli.com/services/",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "image": {
+        "width": 1440,
+        "height": 9667
+      },
+      "theme": "light",
+      "state": "full",
+      "description": "Full-page capture (light theme) for overall composition and section order.",
+      "principles": [
+        "editorial-hierarchy",
+        "container-grid",
+        "section-rhythm"
+      ],
+      "limitation": "",
+      "capturedAt": "2026-10-18T03:20:21Z",
+      "bytes": 1173176
+    },
+    {
+      "file": "screenshots/services-desktop-1440-hero-loaded.png",
+      "page": "Services",
+      "url": "https://piergorelli.com/services/",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "image": {
+        "width": 1440,
+        "height": 900
+      },
+      "theme": "light",
+      "state": "hero-loaded",
+      "description": "Hero settled after the intro preloader is removed.",
+      "principles": [
+        "editorial-hierarchy",
+        "container-grid",
+        "section-rhythm"
+      ],
+      "limitation": "",
+      "capturedAt": "2026-10-18T03:25:11Z",
+      "bytes": 118866
+    },
+    {
+      "file": "screenshots/services-desktop-1440-initial.png",
+      "page": "Services",
+      "url": "https://piergorelli.com/services/",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "image": {
+        "width": 1440,
+        "height": 900
+      },
+      "theme": "light",
+      "state": "initial",
+      "description": "First paint: preloader panel with path draw and counter; page content behind is not yet interactive.",
+      "principles": [
+        "editorial-hierarchy",
+        "container-grid"
+      ],
+      "limitation": "Sampled ~0.9s after navigation; preloader timing not frame-accurate.",
+      "capturedAt": "2026-10-18T03:20:11Z",
+      "bytes": 52197
+    },
+    {
+      "file": "screenshots/services-desktop-1440-sheet-ai-agencies.png",
+      "page": "Services",
+      "url": "https://piergorelli.com/services/",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "image": {
+        "width": 1440,
+        "height": 900
+      },
+      "theme": "light",
+      "state": "sheet-ai-agencies",
+      "description": "Service sheet 3/3 (AI for agencies): sheet metadata and layout.",
+      "principles": [
+        "editorial-hierarchy",
+        "container-grid",
+        "section-rhythm",
+        "graphics"
+      ],
+      "limitation": "",
+      "capturedAt": "2026-10-18T03:25:24Z",
+      "bytes": 146303
+    },
+    {
+      "file": "screenshots/services-desktop-1440-sheet-ai-products.png",
+      "page": "Services",
+      "url": "https://piergorelli.com/services/",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "image": {
+        "width": 1440,
+        "height": 900
+      },
+      "theme": "light",
+      "state": "sheet-ai-products",
+      "description": "Service sheet 2/3 (AI products): sheet metadata and layout.",
+      "principles": [
+        "editorial-hierarchy",
+        "container-grid",
+        "section-rhythm",
+        "graphics"
+      ],
+      "limitation": "",
+      "capturedAt": "2026-10-18T03:25:26Z",
+      "bytes": 132257
+    },
+    {
+      "file": "screenshots/services-desktop-1440-sheet-web.png",
+      "page": "Services",
+      "url": "https://piergorelli.com/services/",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "image": {
+        "width": 1440,
+        "height": 900
+      },
+      "theme": "light",
+      "state": "sheet-web",
+      "description": "Service sheet 1/3 (web): SHEET/SCALE stamps, blueprint plate, two-column copy.",
+      "principles": [
+        "editorial-hierarchy",
+        "container-grid",
+        "section-rhythm",
+        "graphics"
+      ],
+      "limitation": "",
+      "capturedAt": "2026-10-18T03:25:22Z",
+      "bytes": 117915
+    },
+    {
+      "file": "screenshots/services-mobile-390-scroll1.png",
+      "page": "Services",
+      "url": "https://piergorelli.com/services/",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "image": {
+        "width": 390,
+        "height": 844
+      },
+      "theme": "light",
+      "state": "scroll1",
+      "description": "First scroll stop below the hero.",
+      "principles": [
+        "editorial-hierarchy",
+        "container-grid",
+        "section-rhythm"
+      ],
+      "limitation": "",
+      "capturedAt": "2026-10-18T03:22:18Z",
+      "bytes": 75465
+    },
+    {
+      "file": "screenshots/services-mobile-390-scroll2.png",
+      "page": "Services",
+      "url": "https://piergorelli.com/services/",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "image": {
+        "width": 390,
+        "height": 844
+      },
+      "theme": "light",
+      "state": "scroll2",
+      "description": "Second scroll stop (mid-page content).",
+      "principles": [
+        "editorial-hierarchy",
+        "container-grid",
+        "section-rhythm",
+        "negative-space"
+      ],
+      "limitation": "",
+      "capturedAt": "2026-10-18T03:22:19Z",
+      "bytes": 54308
+    },
+    {
+      "file": "screenshots/services-mobile-390-top.png",
+      "page": "Services",
+      "url": "https://piergorelli.com/services/",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "image": {
+        "width": 390,
+        "height": 844
+      },
+      "theme": "light",
+      "state": "top",
+      "description": "Top of page after load; header and first viewport.",
+      "principles": [
+        "editorial-hierarchy",
+        "container-grid",
+        "section-rhythm"
+      ],
+      "limitation": "",
+      "capturedAt": "2026-10-18T03:22:09Z",
+      "bytes": 27964
+    },
+    {
+      "file": "screenshots/services-tablet-768-scroll1.png",
+      "page": "Services",
+      "url": "https://piergorelli.com/services/",
+      "viewport": {
+        "width": 768,
+        "height": 1024
+      },
+      "image": {
+        "width": 768,
+        "height": 1024
+      },
+      "theme": "light",
+      "state": "scroll1",
+      "description": "First scroll stop below the hero.",
+      "principles": [
+        "editorial-hierarchy",
+        "container-grid",
+        "section-rhythm"
+      ],
+      "limitation": "",
+      "capturedAt": "2026-10-18T03:21:26Z",
+      "bytes": 98296
+    },
+    {
+      "file": "screenshots/services-tablet-768-scroll2.png",
+      "page": "Services",
+      "url": "https://piergorelli.com/services/",
+      "viewport": {
+        "width": 768,
+        "height": 1024
+      },
+      "image": {
+        "width": 768,
+        "height": 1024
+      },
+      "theme": "light",
+      "state": "scroll2",
+      "description": "Second scroll stop (mid-page content).",
+      "principles": [
+        "editorial-hierarchy",
+        "container-grid",
+        "section-rhythm",
+        "negative-space"
+      ],
+      "limitation": "",
+      "capturedAt": "2026-10-18T03:21:27Z",
+      "bytes": 91134
+    },
+    {
+      "file": "screenshots/services-tablet-768-top.png",
+      "page": "Services",
+      "url": "https://piergorelli.com/services/",
+      "viewport": {
+        "width": 768,
+        "height": 1024
+      },
+      "image": {
+        "width": 768,
+        "height": 1024
+      },
+      "theme": "light",
+      "state": "top",
+      "description": "Top of page after load; header and first viewport.",
+      "principles": [
+        "editorial-hierarchy",
+        "container-grid",
+        "section-rhythm"
+      ],
+      "limitation": "",
+      "capturedAt": "2026-10-18T03:21:19Z",
+      "bytes": 40926
+    }
+  ]
+}
