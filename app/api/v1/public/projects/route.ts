@@ -4,12 +4,16 @@ import { PUBLIC_API_CACHE_CONTROL } from "@/lib/data/cache-policy";
 import { clientKey, rateLimit } from "@/lib/security/rate-limit";
 
 export async function GET(request: Request) {
-  const ip = request.headers.get("x-forwarded-for")?.split(",")[0]?.trim() ?? null;
+  const ip =
+    request.headers.get("x-forwarded-for")?.split(",")[0]?.trim() ?? null;
   const rl = rateLimit(clientKey(ip, "public-projects"), 100, 60_000);
   if (!rl.allowed) {
     return NextResponse.json(
       { error: "rate_limited", retryAfterMs: rl.resetAfterMs },
-      { status: 429, headers: { "Retry-After": String(Math.ceil(rl.resetAfterMs / 1000)) } },
+      {
+        status: 429,
+        headers: { "Retry-After": String(Math.ceil(rl.resetAfterMs / 1000)) },
+      },
     );
   }
   const url = new URL(request.url);
@@ -24,11 +28,16 @@ export async function GET(request: Request) {
   if (!parsed.success) {
     return NextResponse.json({ error: "invalid_query" }, { status: 400 });
   }
-  const page = await listPublicProjectsPaged(parsed.data.q, parsed.data.limit, parsed.data.page, {
-    category: parsed.data.category,
-    status: parsed.data.status,
-    sort: parsed.data.sort,
-  });
+  const page = await listPublicProjectsPaged(
+    parsed.data.q,
+    parsed.data.limit,
+    parsed.data.page,
+    {
+      category: parsed.data.category,
+      status: parsed.data.status,
+      sort: parsed.data.sort,
+    },
+  );
   return NextResponse.json(
     {
       data: page.items,

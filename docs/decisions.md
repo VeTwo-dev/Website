@@ -1,8 +1,9 @@
 # Decision Register
 
 ## Confirmed (from brief — applied)
+
 - Primary database: MongoDB. No PostgreSQL introduced. Persistence via `lib/db/mongodb.ts` + `lib/db/repository.ts`.
-- **Neon exception (explicitly authorized 2026-10-15):** Lakebase Postgres (via Neon) + S3-compatible object storage provisioned as *auxiliary* services (`neon.ts`, branch `production`, private `assets` bucket) alongside MongoDB, which remains primary. Server-only access via `lib/neon/*`; surfaced only as connected/not-configured in health. This supersedes the earlier "no second database" rule by direct user approval.
+- **Neon exception (explicitly authorized 2026-10-15):** Lakebase Postgres (via Neon) + S3-compatible object storage provisioned as _auxiliary_ services (`neon.ts`, branch `production`, private `assets` bucket) alongside MongoDB, which remains primary. Server-only access via `lib/neon/*`; surfaced only as connected/not-configured in health. This supersedes the earlier "no second database" rule by direct user approval.
 - **MongoDB removal (explicitly authorized 2026-10-15):** all MongoDB code, tests, scripts, and the `mongodb` dependency were removed (backup: `/tmp/vetwo-mongo-backup-20261015.tar.gz`). The catalog is static editorial content (`lib/projects/data.ts` via `lib/catalog.ts`); external-metadata snapshots are validated process-local records. This supersedes the "MongoDB is primary" decision above by direct user approval. The user-owned `.env` Atlas credentials were left untouched.
 - Brand: existing official horse-head logo. NOT found in repo → interim abstract mark + gap doc; no redraw passed off as official.
 - Motion: strong effects only in hero + selected reveals; lightweight elsewhere; `prefers-reduced-motion` supported.

@@ -31,7 +31,10 @@ const option = (name, fallback) => {
 };
 
 const base = option("--base", "http://localhost:3000").replace(/\/$/, "");
-const routes = option("--routes", "/en,/ar").split(",").map((r) => r.trim()).filter(Boolean);
+const routes = option("--routes", "/en,/ar")
+  .split(",")
+  .map((r) => r.trim())
+  .filter(Boolean);
 const viewports = option("--viewports", "1440x900,768x1024,390x844")
   .split(",")
   .map((v) => {
@@ -42,8 +45,14 @@ const useAxe = flag("--axe");
 const fullPage = flag("--full");
 const settle = Number(option("--settle", "600"));
 const colorScheme = option("--color-scheme", "dark");
-const timestamp = new Date().toISOString().replace(/[:.]/g, "-").replace("T", "_").slice(0, 19);
-const outDir = path.resolve(option("--out", path.join(".agent", "reports", "visual-qa", timestamp)));
+const timestamp = new Date()
+  .toISOString()
+  .replace(/[:.]/g, "-")
+  .replace("T", "_")
+  .slice(0, 19);
+const outDir = path.resolve(
+  option("--out", path.join(".agent", "reports", "visual-qa", timestamp)),
+);
 
 const HARNESS = path.resolve(".agent/qa-harness/node_modules");
 
@@ -56,9 +65,10 @@ async function loadPlaywright() {
   ].filter(Boolean);
   for (const candidate of candidates) {
     try {
-      const specifier = candidate.startsWith("/") || candidate.startsWith(".")
-        ? pathToFileURL(candidate).href
-        : candidate;
+      const specifier =
+        candidate.startsWith("/") || candidate.startsWith(".")
+          ? pathToFileURL(candidate).href
+          : candidate;
       return await import(specifier);
     } catch {
       // try next
@@ -74,7 +84,9 @@ async function loadAxe() {
     searchPaths.push(path.dirname(path.dirname(process.env.PLAYWRIGHT_MODULE)));
   }
   try {
-    const resolved = require.resolve("@axe-core/playwright", { paths: searchPaths });
+    const resolved = require.resolve("@axe-core/playwright", {
+      paths: searchPaths,
+    });
     const mod = await import(pathToFileURL(resolved).href);
     return mod.default ?? mod;
   } catch {
@@ -83,7 +95,9 @@ async function loadAxe() {
 }
 
 function slug(route) {
-  return route === "/" ? "root" : route.replace(/^\/+|\/+$/g, "").replace(/[^a-zA-Z0-9-]+/g, "-");
+  return route === "/"
+    ? "root"
+    : route.replace(/^\/+|\/+$/g, "").replace(/[^a-zA-Z0-9-]+/g, "-");
 }
 
 async function checkServer() {
@@ -101,7 +115,7 @@ if (!playwright) {
     "Playwright is not available.\n" +
       "Install it in the project-local harness, e.g.:\n" +
       "  cd .agent/qa-harness && bun add playwright @axe-core/playwright\n" +
-      "Or set PLAYWRIGHT_MODULE=/abs/path/to/node_modules/playwright. No files were written."
+      "Or set PLAYWRIGHT_MODULE=/abs/path/to/node_modules/playwright. No files were written.",
   );
   process.exit(2);
 }
@@ -112,7 +126,9 @@ if (useAxe && !axe) {
 }
 
 if (!(await checkServer())) {
-  console.error(`No server reachable at ${base}. Start it first (bun run dev or bun run start).`);
+  console.error(
+    `No server reachable at ${base}. Start it first (bun run dev or bun run start).`,
+  );
   process.exit(2);
 }
 
@@ -134,7 +150,8 @@ for (const viewport of viewports) {
     page.on("pageerror", (err) => pageErrors.push(err.message));
     page.on("requestfailed", (req) => {
       const failure = req.failure()?.errorText ?? "unknown";
-      if (!failure.includes("ERR_ABORTED")) failedRequests.push(`${req.url()} (${failure})`);
+      if (!failure.includes("ERR_ABORTED"))
+        failedRequests.push(`${req.url()} (${failure})`);
     });
 
     const url = `${base}${route}`;
@@ -143,7 +160,10 @@ for (const viewport of viewports) {
     let axeViolations = [];
     let shot = null;
     try {
-      const response = await page.goto(url, { waitUntil: "networkidle", timeout: 45_000 });
+      const response = await page.goto(url, {
+        waitUntil: "networkidle",
+        timeout: 45_000,
+      });
       status = response?.status() ?? null;
       await page.evaluate(() => document.fonts.ready);
       await page.waitForTimeout(settle);
@@ -168,18 +188,28 @@ for (const viewport of viewports) {
       // Trigger every scroll reveal, return to the top, and let animations
       // finish — measuring mid-transition produces false contrast failures.
       await page.evaluate(async () => {
-        window.scrollTo({ top: document.documentElement.scrollHeight, behavior: "instant" });
+        window.scrollTo({
+          top: document.documentElement.scrollHeight,
+          behavior: "instant",
+        });
         await new Promise((resolve) => setTimeout(resolve, 250));
         window.scrollTo({ top: 0, behavior: "instant" });
       });
       await page.waitForTimeout(settle);
       await page.evaluate(async () => {
         const animations = document.getAnimations().filter((animation) => {
-          const timing = animation.effect && "getTiming" in animation.effect ? animation.effect.getTiming() : null;
+          const timing =
+            animation.effect && "getTiming" in animation.effect
+              ? animation.effect.getTiming()
+              : null;
           return timing ? timing.iterations !== Infinity : false;
         });
         await Promise.race([
-          Promise.all(animations.map((animation) => animation.finished.catch(() => undefined))),
+          Promise.all(
+            animations.map((animation) =>
+              animation.finished.catch(() => undefined),
+            ),
+          ),
           new Promise((resolve) => setTimeout(resolve, 1500)),
         ]);
       });
@@ -195,14 +225,19 @@ for (const viewport of viewports) {
             if (excess > 1 && r.width > 0) {
               offenders.push({
                 tag: el.tagName.toLowerCase(),
-                className: typeof el.className === "string" ? el.className.slice(0, 80) : "",
+                className:
+                  typeof el.className === "string"
+                    ? el.className.slice(0, 80)
+                    : "",
                 excess: Math.round(excess),
               });
             }
           }
           offenders.sort((a, b) => b.excess - a.excess);
         }
-        const headings = Array.from(document.querySelectorAll("h1")).map((h) => h.textContent?.trim() ?? "");
+        const headings = Array.from(document.querySelectorAll("h1")).map(
+          (h) => h.textContent?.trim() ?? "",
+        );
         return {
           title: document.title,
           lang: doc.lang,
@@ -219,7 +254,9 @@ for (const viewport of viewports) {
 
       if (axe) {
         const builder = new axe({ page });
-        const report = await builder.withTags(["wcag2a", "wcag2aa", "wcag21a", "wcag21aa"]).analyze();
+        const report = await builder
+          .withTags(["wcag2a", "wcag2aa", "wcag21a", "wcag21aa"])
+          .analyze();
         axeViolations = report.violations.map((v) => ({
           id: v.id,
           impact: v.impact,
@@ -227,12 +264,17 @@ for (const viewport of viewports) {
           help: v.help,
         }));
       }
-
     } catch (error) {
       pageErrors.push(error instanceof Error ? error.message : String(error));
     }
 
-    const problems = consoleErrors.length + pageErrors.length + failedRequests.length + (metrics.overflow > 1 ? 1 : 0) + axeViolations.length + (status && status >= 400 ? 1 : 0);
+    const problems =
+      consoleErrors.length +
+      pageErrors.length +
+      failedRequests.length +
+      (metrics.overflow > 1 ? 1 : 0) +
+      axeViolations.length +
+      (status && status >= 400 ? 1 : 0);
     if (problems) failures += 1;
 
     results.push({
@@ -249,7 +291,7 @@ for (const viewport of viewports) {
       screenshot: shot,
     });
     console.log(
-      `${problems ? "FAIL" : "ok  "} ${route} @ ${viewport.width}x${viewport.height} · ${status ?? "?"} · h1=${metrics.h1Count ?? "?"} · overflow=${metrics.overflow ?? "?"}px · console=${consoleErrors.length} · axe=${axeViolations.length}${shot ? ` · ${shot}` : ""}`
+      `${problems ? "FAIL" : "ok  "} ${route} @ ${viewport.width}x${viewport.height} · ${status ?? "?"} · h1=${metrics.h1Count ?? "?"} · overflow=${metrics.overflow ?? "?"}px · console=${consoleErrors.length} · axe=${axeViolations.length}${shot ? ` · ${shot}` : ""}`,
     );
     await context.close();
   }
@@ -268,17 +310,33 @@ const manifest = {
   failures,
   results,
 };
-await writeFile(path.join(outDir, "manifest.json"), JSON.stringify(manifest, null, 2) + "\n");
+await writeFile(
+  path.join(outDir, "manifest.json"),
+  JSON.stringify(manifest, null, 2) + "\n",
+);
 
-console.log(`\n${results.length - failures}/${results.length} clean · output: ${outDir}`);
+console.log(
+  `\n${results.length - failures}/${results.length} clean · output: ${outDir}`,
+);
 if (failures) {
-  for (const r of results.filter((x) => x.consoleErrors.length || x.pageErrors.length || x.failedRequests.length || x.axeViolations.length || x.metrics.overflow > 1)) {
+  for (const r of results.filter(
+    (x) =>
+      x.consoleErrors.length ||
+      x.pageErrors.length ||
+      x.failedRequests.length ||
+      x.axeViolations.length ||
+      x.metrics.overflow > 1,
+  )) {
     console.log(`\n${r.url} @ ${r.viewport.width}x${r.viewport.height}`);
-    for (const msg of r.consoleErrors.slice(0, 5)) console.log(`  console: ${msg}`);
+    for (const msg of r.consoleErrors.slice(0, 5))
+      console.log(`  console: ${msg}`);
     for (const msg of r.pageErrors.slice(0, 5)) console.log(`  page: ${msg}`);
-    for (const msg of r.failedRequests.slice(0, 5)) console.log(`  request: ${msg}`);
-    if (r.metrics.overflow > 1) console.log(`  overflow: ${r.metrics.overflow}px`, r.metrics.offenders);
-    for (const v of r.axeViolations.slice(0, 5)) console.log(`  axe ${v.id} (${v.impact}) x${v.nodes}: ${v.help}`);
+    for (const msg of r.failedRequests.slice(0, 5))
+      console.log(`  request: ${msg}`);
+    if (r.metrics.overflow > 1)
+      console.log(`  overflow: ${r.metrics.overflow}px`, r.metrics.offenders);
+    for (const v of r.axeViolations.slice(0, 5))
+      console.log(`  axe ${v.id} (${v.impact}) x${v.nodes}: ${v.help}`);
   }
   process.exitCode = 1;
 }

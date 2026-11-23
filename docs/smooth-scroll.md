@@ -4,11 +4,11 @@
 
 ## Where things live
 
-| File | Role |
-| --- | --- |
-| `lib/smooth-scroll.ts` | Configuration single source of truth (`SMOOTH_SCROLL_CONFIG`), neutral `ScrollState`/`ScrollTarget` types, native fallback math (`resolveNativeTop`). Pure, unit-tested. |
-| `components/smooth-scroll-provider.tsx` | Client `<SmoothScrollProvider>` + context + `useSmoothScroll` (core). Mounted once in `app/[locale]/layout.tsx`. |
-| `components/use-smooth-scroll.ts` | Public hook, re-exports types. Consumer-facing single import. |
+| File                                    | Role                                                                                                                                                                     |
+| --------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `lib/smooth-scroll.ts`                  | Configuration single source of truth (`SMOOTH_SCROLL_CONFIG`), neutral `ScrollState`/`ScrollTarget` types, native fallback math (`resolveNativeTop`). Pure, unit-tested. |
+| `components/smooth-scroll-provider.tsx` | Client `<SmoothScrollProvider>` + context + `useSmoothScroll` (core). Mounted once in `app/[locale]/layout.tsx`.                                                         |
+| `components/use-smooth-scroll.ts`       | Public hook, re-exports types. Consumer-facing single import.                                                                                                            |
 
 The **root** `app/layout.tsx` is a pass-through; `<html>/<body>` live in the
 locale layout — that is the highest shared mount point, so the provider sits
@@ -22,18 +22,20 @@ destroyed before re-creation).
 
 ```ts
 new Lenis({
-  lerp: 0.1,               // Lenis default; fast settle, no float
-  smoothWheel: true,       // wheel/trackpad interpolation
-  syncTouch: false,        // native momentum on touch (mobile keeps its feel)
-  wheelMultiplier: 1, touchMultiplier: 1,
-  orientation: "vertical", gestureOrientation: "vertical",
+  lerp: 0.1, // Lenis default; fast settle, no float
+  smoothWheel: true, // wheel/trackpad interpolation
+  syncTouch: false, // native momentum on touch (mobile keeps its feel)
+  wheelMultiplier: 1,
+  touchMultiplier: 1,
+  orientation: 'vertical',
+  gestureOrientation: 'vertical',
   infinite: false,
-  autoRaf: false,          // stepped by the GSAP ticker (see below)
+  autoRaf: false, // stepped by the GSAP ticker (see below)
   respectReducedMotion: true, // built-in live honoring of prefers-reduced-motion
-  anchors: true,           // same-path hash links scroll via Lenis easing;
-                           // per-target offsets come from authored scroll-mt-*
+  anchors: true, // same-path hash links scroll via Lenis easing;
+  // per-target offsets come from authored scroll-mt-*
   stopInertiaOnNavigate: true, // no momentum carry-over when a link changes route
-})
+});
 ```
 
 Every non-default is a deliberate, source-verified decision — see the
@@ -45,7 +47,7 @@ the QA harness (`bun run qa:browser`).
 The provider connects Lenis to GSAP exactly as the official recipe:
 
 ```ts
-lenis.on("scroll", () => ScrollTrigger.update());
+lenis.on('scroll', () => ScrollTrigger.update());
 const tickerCallback = (time: number) => lenis.raf(time * 1000); // s → ms
 gsap.ticker.add(tickerCallback);
 gsap.ticker.lagSmoothing(0);
@@ -60,17 +62,18 @@ gsap.ticker.lagSmoothing(0);
 ## Public scroll API (`useSmoothScroll`)
 
 ```tsx
-"use client";
-import { useSmoothScroll } from "@/components/use-smooth-scroll";
+'use client';
+import { useSmoothScroll } from '@/components/use-smooth-scroll';
 
 const scroll = useSmoothScroll();
-scroll.scrollToTop();                          // 0
-scroll.scrollToBottom({ immediate: true });    // document end, instant
-scroll.scrollTo("#projects", { offset: -16 }); // element/selector/number
-scroll.getScrollState();                       // {scroll, limit, progress, velocity, direction} | native
-scroll.start(); scroll.stop();                 // pause/resume wheel+touch smoothing
+scroll.scrollToTop(); // 0
+scroll.scrollToBottom({ immediate: true }); // document end, instant
+scroll.scrollTo('#projects', { offset: -16 }); // element/selector/number
+scroll.getScrollState(); // {scroll, limit, progress, velocity, direction} | native
+scroll.start();
+scroll.stop(); // pause/resume wheel+touch smoothing
 const off = scroll.onScroll((state) => console.log(state.progress)); // snapshot events (frame-scheduled)
-scroll.getLenis();                              // live instance or null
+scroll.getLenis(); // live instance or null
 ```
 
 Fallback semantics (same signature, no Lenis — reduced motion at mount or

@@ -13,11 +13,11 @@ Types from manifests: **libraries** (units, nutrition-units, whichenv, repo-fetc
 
 ### Verified direct dependency edges (manifest `dependencies`, runtime)
 
-| From (slug) | To (package) | Range | Source |
-|---|---|---|---|
-| nutrition-units | `@vetwo/units` | ^0.0.1 | `nutrition-units/package.json` + README domain-layer statement |
-| marketplace-fetch-pack | `@vetwo/repo-fetch` | ^1.0.0 | `marketplace-fetch-pack/package.json` |
-| create-vetwo-pack | `@vetwo/whichenv` | ^1.0.0 | `Create-VeTwo-Pack/package.json` |
+| From (slug)            | To (package)        | Range  | Source                                                         |
+| ---------------------- | ------------------- | ------ | -------------------------------------------------------------- |
+| nutrition-units        | `@vetwo/units`      | ^0.0.1 | `nutrition-units/package.json` + README domain-layer statement |
+| marketplace-fetch-pack | `@vetwo/repo-fetch` | ^1.0.0 | `marketplace-fetch-pack/package.json`                          |
+| create-vetwo-pack      | `@vetwo/whichenv`   | ^1.0.0 | `Create-VeTwo-Pack/package.json`                               |
 
 All other pairs: **no manifest dependency observed** (checked `dependencies` of all 12). Feed-Formulation has no VeTwo deps (standalone Next.js scaffold). Conceptual layering (engine→domain→app) is documented in org/README only — shown as conceptual, not dependency edges.
 
@@ -36,20 +36,20 @@ Published (200): `@vetwo/units`, `@vetwo/nutrition-units`, `@vetwo/whichenv`, `@
 
 ## 1.3 Coverage per project (V=verified, P=partial, M=missing, C=needs maintainer confirmation)
 
-| slug | overview | install | quickstart | arch | api ref | config | test | build | trouble | changelog | links | ar |
-|---|---|---|---|---|---|---|---|---|---|---|---|---|
-| units | V | V | V | V | V | M | M | M | M | M | V | summary |
-| nutrition-units | V | V | V | V | V | M | M | M | M | M | V | summary |
-| feed-formulation | C (boilerplate README) | P (generic dev) | P | M | M | M | M | M | M | M | V(repo) | summary |
-| whichenv | V | V(npx) | V | P | P | M | M | M | M | M | V | summary |
-| repo-fetch | V | V | V | P | P | M | M | M | M | M | V | summary |
-| cli-sound | V | C(unpublished) | V | P | V | V | M | M | M | M | V(repo) | summary |
-| create-vetwo-pack | C(stub README) | C(bin, unpublished cmd) | M | M | M | M | M | P(scripts) | M | M | V | summary |
-| vetwo-market-place | V | P(workspace) | V | V | P | M | M | V(scripts) | M | M | V(repo) | summary |
-| docs | V | V(README) | V | P | P | P | M | V(scripts) | M | M | V(repo) | summary |
-| units-manager | V | P(workspace) | P | V(structure) | M | M | M | V(scripts) | M | M | V(repo) | summary |
-| cli | V | P(workspace) | V | V(structure) | M | M | P(security audit) | V(scripts) | M | M | V(repo) | summary |
-| marketplace-fetch-pack | V | C(unpublished pkg) | V | P | P | M | M | M | M | M | V(repo) | summary |
+| slug                   | overview               | install                 | quickstart | arch         | api ref | config | test              | build      | trouble | changelog | links   | ar      |
+| ---------------------- | ---------------------- | ----------------------- | ---------- | ------------ | ------- | ------ | ----------------- | ---------- | ------- | --------- | ------- | ------- |
+| units                  | V                      | V                       | V          | V            | V       | M      | M                 | M          | M       | M         | V       | summary |
+| nutrition-units        | V                      | V                       | V          | V            | V       | M      | M                 | M          | M       | M         | V       | summary |
+| feed-formulation       | C (boilerplate README) | P (generic dev)         | P          | M            | M       | M      | M                 | M          | M       | M         | V(repo) | summary |
+| whichenv               | V                      | V(npx)                  | V          | P            | P       | M      | M                 | M          | M       | M         | V       | summary |
+| repo-fetch             | V                      | V                       | V          | P            | P       | M      | M                 | M          | M       | M         | V       | summary |
+| cli-sound              | V                      | C(unpublished)          | V          | P            | V       | V      | M                 | M          | M       | M         | V(repo) | summary |
+| create-vetwo-pack      | C(stub README)         | C(bin, unpublished cmd) | M          | M            | M       | M      | M                 | P(scripts) | M       | M         | V       | summary |
+| vetwo-market-place     | V                      | P(workspace)            | V          | V            | P       | M      | M                 | V(scripts) | M       | M         | V(repo) | summary |
+| docs                   | V                      | V(README)               | V          | P            | P       | P      | M                 | V(scripts) | M       | M         | V(repo) | summary |
+| units-manager          | V                      | P(workspace)            | P          | V(structure) | M       | M      | M                 | V(scripts) | M       | M         | V(repo) | summary |
+| cli                    | V                      | P(workspace)            | V          | V(structure) | M       | M      | P(security audit) | V(scripts) | M       | M         | V(repo) | summary |
+| marketplace-fetch-pack | V                      | C(unpublished pkg)      | V          | P            | P       | M      | M                 | M          | M       | M         | V(repo) | summary |
 
 No changelogs, troubleshooting, or test docs observed in any README — site shows none (no fabrication).
 

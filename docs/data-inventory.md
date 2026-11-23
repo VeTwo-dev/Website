@@ -4,18 +4,18 @@ Date: 2026-10-09 · Source: read-only inspection of `lib/`, `app/api/`, `.env.ex
 
 ## What exists
 
-| Item | Location | State |
-|---|---|---|
-| MongoDB connection (lazy singleton, server-only, 5s timeouts, safe null when unconfigured) | `lib/db/mongodb.ts` | Implemented, graceful-degradation verified by smoke test |
-| Editorial catalog, 12 records, unverified fields `null` | `lib/projects/data.ts` + `lib/projects/schema.ts` (Zod) | Implemented; no slugs duplicated (verified by new identity test) |
-| Public repository boundary (allow-list projection, `limit ≤ 50`, static fallback) | `lib/db/repository.ts` | Implemented; **no pagination, no stable ordering** (gap) |
-| Public list API `GET /api/v1/public/projects` (Zod query, 400/429 shapes) | `app/api/v1/public/projects/route.ts` | Implemented; **no detail route, no cache headers** (gap) |
-| Health probe (no creds/stacks) | `app/api/v1/public/health/route.ts` | Implemented |
-| Config placeholders | `.env.example` (`MONGODB_URI`, `MONGODB_DB`, Plausible, site URL) | Implemented; no prod secrets in repo |
-| Tests (schema, selectors, rate-limit, analytics-off, token mirror) | `lib/**/*.test.ts` | 12/12 pass; **no DB-touching or adapter tests** (gap) |
-| GitHub / registry integrations | — | **Missing by design** (correct so far; this prompt adds them) |
-| Scheduler / Redis / queues | — | **Intentionally absent**; per-request refresh-if-stale used instead |
-| Local `mongod` | `/usr/bin/mongod` present in this environment | Enables genuine local integration verification (test DB only) |
+| Item                                                                                       | Location                                                          | State                                                               |
+| ------------------------------------------------------------------------------------------ | ----------------------------------------------------------------- | ------------------------------------------------------------------- |
+| MongoDB connection (lazy singleton, server-only, 5s timeouts, safe null when unconfigured) | `lib/db/mongodb.ts`                                               | Implemented, graceful-degradation verified by smoke test            |
+| Editorial catalog, 12 records, unverified fields `null`                                    | `lib/projects/data.ts` + `lib/projects/schema.ts` (Zod)           | Implemented; no slugs duplicated (verified by new identity test)    |
+| Public repository boundary (allow-list projection, `limit ≤ 50`, static fallback)          | `lib/db/repository.ts`                                            | Implemented; **no pagination, no stable ordering** (gap)            |
+| Public list API `GET /api/v1/public/projects` (Zod query, 400/429 shapes)                  | `app/api/v1/public/projects/route.ts`                             | Implemented; **no detail route, no cache headers** (gap)            |
+| Health probe (no creds/stacks)                                                             | `app/api/v1/public/health/route.ts`                               | Implemented                                                         |
+| Config placeholders                                                                        | `.env.example` (`MONGODB_URI`, `MONGODB_DB`, Plausible, site URL) | Implemented; no prod secrets in repo                                |
+| Tests (schema, selectors, rate-limit, analytics-off, token mirror)                         | `lib/**/*.test.ts`                                                | 12/12 pass; **no DB-touching or adapter tests** (gap)               |
+| GitHub / registry integrations                                                             | —                                                                 | **Missing by design** (correct so far; this prompt adds them)       |
+| Scheduler / Redis / queues                                                                 | —                                                                 | **Intentionally absent**; per-request refresh-if-stale used instead |
+| Local `mongod`                                                                             | `/usr/bin/mongod` present in this environment                     | Enables genuine local integration verification (test DB only)       |
 
 ## Data categories observed
 

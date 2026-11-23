@@ -102,11 +102,7 @@
       "theme": "light",
       "state": "full",
       "description": "Full-page capture (light theme) for overall composition and section order.",
-      "principles": [
-        "editorial-hierarchy",
-        "container-grid",
-        "section-rhythm"
-      ],
+      "principles": ["editorial-hierarchy", "container-grid", "section-rhythm"],
       "limitation": "",
       "capturedAt": "2026-10-18T03:20:34Z",
       "bytes": 1089195
@@ -126,10 +122,7 @@
       "theme": "light",
       "state": "initial",
       "description": "First paint: preloader panel with path draw and counter; page content behind is not yet interactive.",
-      "principles": [
-        "editorial-hierarchy",
-        "container-grid"
-      ],
+      "principles": ["editorial-hierarchy", "container-grid"],
       "limitation": "Sampled ~0.9s after navigation; preloader timing not frame-accurate.",
       "capturedAt": "2026-10-18T03:20:25Z",
       "bytes": 49184
@@ -203,11 +196,7 @@
       "theme": "light",
       "state": "scroll1",
       "description": "First scroll stop below the hero.",
-      "principles": [
-        "editorial-hierarchy",
-        "container-grid",
-        "section-rhythm"
-      ],
+      "principles": ["editorial-hierarchy", "container-grid", "section-rhythm"],
       "limitation": "",
       "capturedAt": "2026-10-18T03:22:31Z",
       "bytes": 73531
@@ -252,11 +241,7 @@
       "theme": "light",
       "state": "top",
       "description": "Top of page after load; header and first viewport.",
-      "principles": [
-        "editorial-hierarchy",
-        "container-grid",
-        "section-rhythm"
-      ],
+      "principles": ["editorial-hierarchy", "container-grid", "section-rhythm"],
       "limitation": "",
       "capturedAt": "2026-10-18T03:22:23Z",
       "bytes": 22463
@@ -276,11 +261,7 @@
       "theme": "light",
       "state": "scroll1",
       "description": "First scroll stop below the hero.",
-      "principles": [
-        "editorial-hierarchy",
-        "container-grid",
-        "section-rhythm"
-      ],
+      "principles": ["editorial-hierarchy", "container-grid", "section-rhythm"],
       "limitation": "",
       "capturedAt": "2026-10-18T03:21:38Z",
       "bytes": 114837
@@ -325,11 +306,7 @@
       "theme": "light",
       "state": "top",
       "description": "Top of page after load; header and first viewport.",
-      "principles": [
-        "editorial-hierarchy",
-        "container-grid",
-        "section-rhythm"
-      ],
+      "principles": ["editorial-hierarchy", "container-grid", "section-rhythm"],
       "limitation": "",
       "capturedAt": "2026-10-18T03:21:31Z",
       "bytes": 36410
@@ -349,11 +326,7 @@
       "theme": "light",
       "state": "categories",
       "description": "Blog category filter row and filtered listing.",
-      "principles": [
-        "editorial-hierarchy",
-        "container-grid",
-        "section-rhythm"
-      ],
+      "principles": ["editorial-hierarchy", "container-grid", "section-rhythm"],
       "limitation": "",
       "capturedAt": "2026-10-18T03:27:38Z",
       "bytes": 121625
@@ -373,11 +346,7 @@
       "theme": "light",
       "state": "full",
       "description": "Full-page capture (light theme) for overall composition and section order.",
-      "principles": [
-        "editorial-hierarchy",
-        "container-grid",
-        "section-rhythm"
-      ],
+      "principles": ["editorial-hierarchy", "container-grid", "section-rhythm"],
       "limitation": "",
       "capturedAt": "2026-10-18T03:20:43Z",
       "bytes": 951014
@@ -397,10 +366,7 @@
       "theme": "light",
       "state": "initial",
       "description": "First paint: preloader panel with path draw and counter; page content behind is not yet interactive.",
-      "principles": [
-        "editorial-hierarchy",
-        "container-grid"
-      ],
+      "principles": ["editorial-hierarchy", "container-grid"],
       "limitation": "Sampled ~0.9s after navigation; preloader timing not frame-accurate.",
       "capturedAt": "2026-10-18T03:20:37Z",
       "bytes": 111427
@@ -447,11 +413,7 @@
       "theme": "light",
       "state": "scroll1",
       "description": "First scroll stop below the hero.",
-      "principles": [
-        "editorial-hierarchy",
-        "container-grid",
-        "section-rhythm"
-      ],
+      "principles": ["editorial-hierarchy", "container-grid", "section-rhythm"],
       "limitation": "",
       "capturedAt": "2026-10-18T03:22:44Z",
       "bytes": 73753
@@ -496,11 +458,7 @@
       "theme": "light",
       "state": "top",
       "description": "Top of page after load; header and first viewport.",
-      "principles": [
-        "editorial-hierarchy",
-        "container-grid",
-        "section-rhythm"
-      ],
+      "principles": ["editorial-hierarchy", "container-grid", "section-rhythm"],
       "limitation": "",
       "capturedAt": "2026-10-18T03:22:37Z",
       "bytes": 65520
@@ -520,11 +478,7 @@
       "theme": "light",
       "state": "scroll1",
       "description": "First scroll stop below the hero.",
-      "principles": [
-        "editorial-hierarchy",
-        "container-grid",
-        "section-rhythm"
-      ],
+      "principles": ["editorial-hierarchy", "container-grid", "section-rhythm"],
       "limitation": "",
       "capturedAt": "2026-10-18T03:21:50Z",
       "bytes": 119409
@@ -569,11 +523,7 @@
       "theme": "light",
       "state": "top",
       "description": "Top of page after load; header and first viewport.",
-      "principles": [
-        "editorial-hierarchy",
-        "container-grid",
-        "section-rhythm"
-      ],
+      "principles": ["editorial-hierarchy", "container-grid", "section-rhythm"],
       "limitation": "",
       "capturedAt": "2026-10-18T03:21:44Z",
       "bytes": 119877
@@ -593,11 +543,7 @@
       "theme": "light",
       "state": "button-hover",
       "description": "Primary control hover state.",
-      "principles": [
-        "editorial-hierarchy",
-        "container-grid",
-        "interaction"
-      ],
+      "principles": ["editorial-hierarchy", "container-grid", "interaction"],
       "limitation": "Settled hover state; transition frames not captured.",
       "capturedAt": "2026-10-18T03:20:55Z",
       "bytes": 13084
@@ -642,11 +588,7 @@
       "theme": "dark",
       "state": "dark",
       "description": "Dark theme, full page.",
-      "principles": [
-        "editorial-hierarchy",
-        "container-grid",
-        "theme"
-      ],
+      "principles": ["editorial-hierarchy", "container-grid", "theme"],
       "limitation": "Default accent only; the accent-switcher alternatives were not captured.",
       "capturedAt": "2026-10-18T03:21:03Z",
       "bytes": 249741
@@ -666,10 +608,7 @@
       "theme": "light",
       "state": "footer",
       "description": "footer",
-      "principles": [
-        "editorial-hierarchy",
-        "container-grid"
-      ],
+      "principles": ["editorial-hierarchy", "container-grid"],
       "limitation": "",
       "capturedAt": "2026-10-18T03:25:04Z",
       "bytes": 87916
@@ -714,11 +653,7 @@
       "theme": "light",
       "state": "header-scrolled",
       "description": "Scrolled state: condensed fixed header with tick-ruler scroll progress and percentage tag.",
-      "principles": [
-        "editorial-hierarchy",
-        "container-grid",
-        "interaction"
-      ],
+      "principles": ["editorial-hierarchy", "container-grid", "interaction"],
       "limitation": "",
       "capturedAt": "2026-10-18T03:20:49Z",
       "bytes": 79059
@@ -763,11 +698,7 @@
       "theme": "light",
       "state": "initial",
       "description": "First paint: preloader panel with path draw and counter; page content behind is not yet interactive.",
-      "principles": [
-        "editorial-hierarchy",
-        "container-grid",
-        "graphics"
-      ],
+      "principles": ["editorial-hierarchy", "container-grid", "graphics"],
       "limitation": "Sampled ~0.9s after navigation; preloader timing not frame-accurate.",
       "capturedAt": "2026-10-18T03:19:55Z",
       "bytes": 34819
@@ -1003,11 +934,7 @@
       "theme": "light",
       "state": "work-card-hover",
       "description": "Work item hover state.",
-      "principles": [
-        "editorial-hierarchy",
-        "container-grid",
-        "interaction"
-      ],
+      "principles": ["editorial-hierarchy", "container-grid", "interaction"],
       "limitation": "Settled hover state; transition frames not captured.",
       "capturedAt": "2026-10-18T03:20:51Z",
       "bytes": 81252
@@ -1077,11 +1004,7 @@
       "theme": "light",
       "state": "scroll1",
       "description": "First scroll stop below the hero.",
-      "principles": [
-        "editorial-hierarchy",
-        "container-grid",
-        "section-rhythm"
-      ],
+      "principles": ["editorial-hierarchy", "container-grid", "section-rhythm"],
       "limitation": "Work media plate may be blank where present (runtime rendering).",
       "capturedAt": "2026-10-18T03:22:04Z",
       "bytes": 79711
@@ -1176,11 +1099,7 @@
       "theme": "light",
       "state": "scroll1",
       "description": "First scroll stop below the hero.",
-      "principles": [
-        "editorial-hierarchy",
-        "container-grid",
-        "section-rhythm"
-      ],
+      "principles": ["editorial-hierarchy", "container-grid", "section-rhythm"],
       "limitation": "Work media plate may be blank where present (runtime rendering).",
       "capturedAt": "2026-10-18T03:21:14Z",
       "bytes": 87882
@@ -1250,11 +1169,7 @@
       "theme": "light",
       "state": "extra",
       "description": "Additional service-page region (remaining sheets/notes).",
-      "principles": [
-        "editorial-hierarchy",
-        "container-grid",
-        "section-rhythm"
-      ],
+      "principles": ["editorial-hierarchy", "container-grid", "section-rhythm"],
       "limitation": "",
       "capturedAt": "2026-10-18T03:25:28Z",
       "bytes": 92957
@@ -1274,11 +1189,7 @@
       "theme": "light",
       "state": "full",
       "description": "Full-page capture (light theme) for overall composition and section order.",
-      "principles": [
-        "editorial-hierarchy",
-        "container-grid",
-        "section-rhythm"
-      ],
+      "principles": ["editorial-hierarchy", "container-grid", "section-rhythm"],
       "limitation": "",
       "capturedAt": "2026-10-18T03:20:21Z",
       "bytes": 1173176
@@ -1298,11 +1209,7 @@
       "theme": "light",
       "state": "hero-loaded",
       "description": "Hero settled after the intro preloader is removed.",
-      "principles": [
-        "editorial-hierarchy",
-        "container-grid",
-        "section-rhythm"
-      ],
+      "principles": ["editorial-hierarchy", "container-grid", "section-rhythm"],
       "limitation": "",
       "capturedAt": "2026-10-18T03:25:11Z",
       "bytes": 118866
@@ -1322,10 +1229,7 @@
       "theme": "light",
       "state": "initial",
       "description": "First paint: preloader panel with path draw and counter; page content behind is not yet interactive.",
-      "principles": [
-        "editorial-hierarchy",
-        "container-grid"
-      ],
+      "principles": ["editorial-hierarchy", "container-grid"],
       "limitation": "Sampled ~0.9s after navigation; preloader timing not frame-accurate.",
       "capturedAt": "2026-10-18T03:20:11Z",
       "bytes": 52197
@@ -1420,11 +1324,7 @@
       "theme": "light",
       "state": "scroll1",
       "description": "First scroll stop below the hero.",
-      "principles": [
-        "editorial-hierarchy",
-        "container-grid",
-        "section-rhythm"
-      ],
+      "principles": ["editorial-hierarchy", "container-grid", "section-rhythm"],
       "limitation": "",
       "capturedAt": "2026-10-18T03:22:18Z",
       "bytes": 75465
@@ -1469,11 +1369,7 @@
       "theme": "light",
       "state": "top",
       "description": "Top of page after load; header and first viewport.",
-      "principles": [
-        "editorial-hierarchy",
-        "container-grid",
-        "section-rhythm"
-      ],
+      "principles": ["editorial-hierarchy", "container-grid", "section-rhythm"],
       "limitation": "",
       "capturedAt": "2026-10-18T03:22:09Z",
       "bytes": 27964
@@ -1493,11 +1389,7 @@
       "theme": "light",
       "state": "scroll1",
       "description": "First scroll stop below the hero.",
-      "principles": [
-        "editorial-hierarchy",
-        "container-grid",
-        "section-rhythm"
-      ],
+      "principles": ["editorial-hierarchy", "container-grid", "section-rhythm"],
       "limitation": "",
       "capturedAt": "2026-10-18T03:21:26Z",
       "bytes": 98296
@@ -1542,11 +1434,7 @@
       "theme": "light",
       "state": "top",
       "description": "Top of page after load; header and first viewport.",
-      "principles": [
-        "editorial-hierarchy",
-        "container-grid",
-        "section-rhythm"
-      ],
+      "principles": ["editorial-hierarchy", "container-grid", "section-rhythm"],
       "limitation": "",
       "capturedAt": "2026-10-18T03:21:19Z",
       "bytes": 40926

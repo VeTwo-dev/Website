@@ -50,52 +50,19 @@
     "mono": "Roboto Mono",
     "monoNote": "Roboto Mono via next/font/google (weights 400/500/600); variable --font-roboto-mono. PNU unchanged for Arabic.",
     "displayNote": "Headings use Inter (font-display role). Audiowide files remain on disk, unreferenced.",
-    "weights": [
-      400,
-      500,
-      600,
-      700
-    ],
+    "weights": [400, 500, 600, 700],
     "weightSources": {
       "Inter": "next/font/google, weights 400/500/600/700, latin subset, display swap; fetched at build, self-hosted at runtime",
       "Roboto Mono": "next/font/google, weights 400/500/600, latin subset, display swap; fetched at build, self-hosted at runtime",
       "PNU": "static files only: Light=300, Regular=400, Medium=500, Bold=700; weight 600 renders as 700 per CSS fallback rules"
     },
     "stacks": {
-      "sans": [
-        "var(--font-inter)",
-        "PNU",
-        "system-ui",
-        "sans-serif"
-      ],
-      "arabic": [
-        "PNU",
-        "system-ui",
-        "sans-serif"
-      ],
-      "display": [
-        "var(--font-inter)",
-        "PNU",
-        "system-ui",
-        "sans-serif"
-      ],
-      "mono": [
-        "var(--font-roboto-mono)",
-        "ui-monospace",
-        "monospace"
-      ]
+      "sans": ["var(--font-inter)", "PNU", "system-ui", "sans-serif"],
+      "arabic": ["PNU", "system-ui", "sans-serif"],
+      "display": ["var(--font-inter)", "PNU", "system-ui", "sans-serif"],
+      "mono": ["var(--font-roboto-mono)", "ui-monospace", "monospace"]
     },
-    "scalePx": [
-      12,
-      14,
-      16,
-      20,
-      24,
-      30,
-      36,
-      44,
-      52
-    ],
+    "scalePx": [12, 14, 16, 20, 24, 30, 36, 44, 52],
     "trackingRule": "Never apply letter-spacing (tracking-*) to Arabic text; Tailwind tracking utilities are Latin-only.",
     "strategy": "Self-hosted local @font-face from public/fonts with font-display: swap. Remote fonts and Google Fonts are prohibited."
   },
@@ -119,16 +86,7 @@
         "gutter": 24
       }
     },
-    "spacing": [
-      4,
-      8,
-      12,
-      16,
-      24,
-      32,
-      48,
-      64
-    ],
+    "spacing": [4, 8, 12, 16, 24, 32, 48, 64],
     "radius": {
       "control": 8,
       "card": 16

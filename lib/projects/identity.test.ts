@@ -36,13 +36,18 @@ describe("assertUniqueSlugs", () => {
     expect(() => assertUniqueSlugs(PROJECTS.map((p) => p.slug))).not.toThrow();
   });
   it("throws on duplicates instead of merging", () => {
-    expect(() => assertUniqueSlugs(["units", "units"])).toThrow(/duplicate project slug/);
+    expect(() => assertUniqueSlugs(["units", "units"])).toThrow(
+      /duplicate project slug/,
+    );
   });
 });
 
 describe("parseGitHubRef", () => {
   it("parses owner/repo from https URLs", () => {
-    expect(parseGitHubRef("https://github.com/VeTwo-dev/units")).toEqual({ owner: "VeTwo-dev", repo: "units" });
+    expect(parseGitHubRef("https://github.com/VeTwo-dev/units")).toEqual({
+      owner: "VeTwo-dev",
+      repo: "units",
+    });
   });
   it("rejects non-GitHub hosts and malformed input without throwing", () => {
     expect(parseGitHubRef("https://example.com/x")).toBeNull();

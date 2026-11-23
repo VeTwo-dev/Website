@@ -39,9 +39,16 @@ export type NpmPackageMeta = {
  * Fetch published metadata for one package. `name` must come from
  * NPM_PACKAGE_MAP (never raw user input).
  */
-export async function fetchNpmPackageMeta(
-  name: string,
-): Promise<{ ok: true; meta: NpmPackageMeta } | { ok: false; failure: { kind: "timeout" | "http" | "invalid" | "network" | "not_public"; status?: number } }> {
+export async function fetchNpmPackageMeta(name: string): Promise<
+  | { ok: true; meta: NpmPackageMeta }
+  | {
+      ok: false;
+      failure: {
+        kind: "timeout" | "http" | "invalid" | "network" | "not_public";
+        status?: number;
+      };
+    }
+> {
   if (!/^(?:@[a-z0-9-~][a-z0-9-._~]*\/)?[a-z0-9-~][a-z0-9-._~]*$/.test(name)) {
     return { ok: false, failure: { kind: "invalid" } };
   }

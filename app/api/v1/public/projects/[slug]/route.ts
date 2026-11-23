@@ -13,13 +13,20 @@ const ParamsSchema = z.object({ slug: z.string().min(1).max(80) });
  * Public detail: editorial record + cached external metadata with provenance.
  * Slug must be a known editorial slug — arbitrary upstream fetching is impossible.
  */
-export async function GET(request: Request, { params }: { params: Promise<{ slug: string }> }) {
-  const ip = request.headers.get("x-forwarded-for")?.split(",")[0]?.trim() ?? null;
+export async function GET(
+  request: Request,
+  { params }: { params: Promise<{ slug: string }> },
+) {
+  const ip =
+    request.headers.get("x-forwarded-for")?.split(",")[0]?.trim() ?? null;
   const rl = rateLimit(clientKey(ip, "public-project-detail"), 100, 60_000);
   if (!rl.allowed) {
     return NextResponse.json(
       { error: "rate_limited", retryAfterMs: rl.resetAfterMs },
-      { status: 429, headers: { "Retry-After": String(Math.ceil(rl.resetAfterMs / 1000)) } },
+      {
+        status: 429,
+        headers: { "Retry-After": String(Math.ceil(rl.resetAfterMs / 1000)) },
+      },
     );
   }
   const { slug } = await params;
@@ -36,7 +43,10 @@ export async function GET(request: Request, { params }: { params: Promise<{ slug
     getProjectExternalMeta(editorial.slug, "npm"),
   ]);
   return NextResponse.json(
-    { data: { project: editorial, github, npm }, meta: { retrievedAt: new Date().toISOString() } },
+    {
+      data: { project: editorial, github, npm },
+      meta: { retrievedAt: new Date().toISOString() },
+    },
     { headers: { "Cache-Control": PUBLIC_API_CACHE_CONTROL } },
   );
 }

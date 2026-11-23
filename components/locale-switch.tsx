@@ -13,7 +13,9 @@ export function LocaleSwitch({ locale }: { locale: Locale }) {
     <Link
       href={target === pathname ? `/${other}` : target}
       hrefLang={other}
-      aria-label={other === "ar" ? "التبديل إلى العربية" : "EN — التبديل إلى الإنجليزية"}
+      aria-label={
+        other === "ar" ? "التبديل إلى العربية" : "EN — التبديل إلى الإنجليزية"
+      }
       className="inline-flex min-h-[44px] items-center rounded-control border border-input px-3 text-xs font-semibold text-secondary hover:text-primary"
     >
       {other === "ar" ? "العربية" : "EN"}

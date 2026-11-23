@@ -26,8 +26,12 @@ export function Footer({ locale }: { locale: Locale }) {
     <footer className="border-t border-border">
       <div className="container-content grid gap-10 py-16 md:grid-cols-12">
         <div className="md:col-span-5">
-          <p className="max-w-md text-balance text-2xl font-semibold sm:text-3xl">{t.footer.tagline}</p>
-          <p className="mt-4 max-w-sm text-pretty text-sm text-secondary">{t.footer.rights}</p>
+          <p className="max-w-md text-balance text-2xl font-semibold sm:text-3xl">
+            {t.footer.tagline}
+          </p>
+          <p className="mt-4 max-w-sm text-pretty text-sm text-secondary">
+            {t.footer.rights}
+          </p>
         </div>
         <nav aria-label={t.common.footerNav} className="md:col-span-8">
           <div className="grid gap-6 sm:grid-cols-3">
@@ -47,7 +51,9 @@ export function Footer({ locale }: { locale: Locale }) {
               </ul>
             </div>
             <div>
-              <p className="font-mono text-[11px] text-secondary">{t.nav.home}</p>
+              <p className="font-mono text-[11px] text-secondary">
+                {t.nav.home}
+              </p>
               <ul className="mt-4 flex flex-col gap-1">
                 {sections.map((link) => (
                   <li key={link.href}>
@@ -62,7 +68,9 @@ export function Footer({ locale }: { locale: Locale }) {
               </ul>
             </div>
             <div>
-              <p className="font-mono text-[11px] text-secondary">{t.footer.contact}</p>
+              <p className="font-mono text-[11px] text-secondary">
+                {t.footer.contact}
+              </p>
               <ul className="mt-4 flex flex-col gap-1">
                 {externals.map((link) => (
                   <li key={link.href}>

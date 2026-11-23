@@ -1,0 +1,30 @@
+@font-face {
+  font-family: 'VeTwo Header';
+  src: url('../fonts/heading/Cairo-VariableFont_slnt,wght.ttf')
+    format('truetype');
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'VeTwo Second';
+  src: url('../fonts/body/Almarai-Regular.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'VeTwo Second';
+  src: url('../fonts/body/Almarai-Bold.ttf') format('truetype');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'VeTwo Code';
+  src: url('../fonts/code/JetBrainsMono-VariableFont_wght.ttf')
+    format('truetype');
+  font-weight: 100 800;
+  font-style: normal;
+  font-display: swap;
+}

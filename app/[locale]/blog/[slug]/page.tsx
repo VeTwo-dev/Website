@@ -1,28 +1,47 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
+import { headers } from "next/headers";
 import { isLocale, DEFAULT_LOCALE } from "@/lib/i18n/config";
 import { getDict } from "@/lib/i18n/dict";
-import { localeAlternates } from "@/lib/seo/alternates";
+import { pageMetadata } from "@/lib/seo/page-meta";
+import {
+  articleDescription,
+  articleJsonLd,
+  serializeJsonLd,
+} from "@/lib/seo/jsonld";
 import { SECTIONS, getArticle } from "@/lib/docs/content";
 import { ArticleBody } from "@/components/article-body";
 
 type Params = { locale: string; slug: string };
 
-export async function generateMetadata({ params }: { params: Promise<Params> }): Promise<Metadata> {
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<Params>;
+}): Promise<Metadata> {
   const { locale: raw, slug } = await params;
   const locale = isLocale(raw) ? raw : DEFAULT_LOCALE;
   const article = getArticle(slug);
   if (!article) return { title: "Note not found" };
-  const title = locale === "ar" ? article.titleAr : article.title;
-  return {
-    title,
-    description: locale === "ar" ? article.summaryAr : article.title,
-    alternates: localeAlternates(`/blog/${article.slug}`),
-  };
+  const description =
+    locale === "ar"
+      ? `${article.summaryAr} ${getDict(locale).pages.blog.lead}`
+      : articleDescription(article, locale);
+  return pageMetadata({
+    locale,
+    path: `/blog/${article.slug}`,
+    title: locale === "ar" ? article.titleAr : article.title,
+    description,
+    article: { modifiedTime: article.reviewed },
+  });
 }
 
-export default async function ArticlePage({ params }: { params: Promise<Params> }) {
+export default async function ArticlePage({
+  params,
+}: {
+  params: Promise<Params>;
+}) {
   const { locale: raw, slug } = await params;
   const locale = isLocale(raw) ? raw : DEFAULT_LOCALE;
   const isArabic = locale === "ar";
@@ -31,10 +50,18 @@ export default async function ArticlePage({ params }: { params: Promise<Params> 
   const article = getArticle(slug);
   if (!article) notFound();
 
+  const nonce = (await headers()).get("x-nonce") ?? undefined;
+  const jsonLd = serializeJsonLd(articleJsonLd(article, locale));
+
   const section = SECTIONS.find((s) => s.id === article.section);
 
   return (
     <article>
+      <script
+        type="application/ld+json"
+        nonce={nonce}
+        dangerouslySetInnerHTML={{ __html: jsonLd }}
+      />
       <header className="border-b border-border">
         <div className="container-content pt-32 pb-14 sm:pt-40 sm:pb-16">
           <Link
@@ -46,7 +73,11 @@ export default async function ArticlePage({ params }: { params: Promise<Params> 
           </Link>
           <p className="mt-6 font-mono text-[11px] text-secondary">
             <span className="text-mint">
-              {section ? (isArabic ? section.titleAr : section.title) : copy.eyebrow}
+              {section
+                ? isArabic
+                  ? section.titleAr
+                  : section.title
+                : copy.eyebrow}
             </span>
             <span aria-hidden="true"> · </span>
             {t.pages.blog.eyebrow}
@@ -54,7 +85,11 @@ export default async function ArticlePage({ params }: { params: Promise<Params> 
           <h1 className="text-display mt-4 max-w-4xl font-bold">
             {isArabic ? article.titleAr : article.title}
           </h1>
-          {isArabic ? <p className="mt-5 max-w-2xl text-pretty text-secondary">{article.summaryAr}</p> : null}
+          {isArabic ? (
+            <p className="mt-5 max-w-2xl text-pretty text-secondary">
+              {article.summaryAr}
+            </p>
+          ) : null}
           <dl className="mt-8 flex flex-wrap gap-x-8 gap-y-2 font-mono text-[11px] text-secondary">
             <div className="flex gap-2">
               <dt>{copy.stability}</dt>

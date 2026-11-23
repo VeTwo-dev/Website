@@ -1,6 +1,13 @@
 import { z } from "zod";
 
-export const ProjectStatus = z.enum(["Active", "Stable", "Beta", "Maintenance", "Deprecated", "Unknown"]);
+export const ProjectStatus = z.enum([
+  "Active",
+  "Stable",
+  "Beta",
+  "Maintenance",
+  "Deprecated",
+  "Unknown",
+]);
 export type ProjectStatus = z.infer<typeof ProjectStatus>;
 
 export const ProjectCategory = z.enum([

@@ -44,30 +44,53 @@ describe("getProjectExternalMeta", () => {
     expect(spy).not.toHaveBeenCalled();
   });
   it("serves fresh upstream data with cached provenance when no DB is configured", async () => {
-    vi.stubGlobal("fetch", vi.fn(async () => jsonResponse(GITHUB_REPO)));
+    vi.stubGlobal(
+      "fetch",
+      vi.fn(async () => jsonResponse(GITHUB_REPO)),
+    );
     const res = await getProjectExternalMeta("units", "github");
     expect(res.available).toBe(true);
     if (res.available) {
       expect(res.data).toMatchObject({ stars: 2, forks: 0 });
-      expect(res.provenance).toMatchObject({ kind: "cached", source: "api.github.com" });
+      expect(res.provenance).toMatchObject({
+        kind: "cached",
+        source: "api.github.com",
+      });
     }
   });
   it("serves stale-safe unavailable state when upstream fails and nothing is cached", async () => {
-    vi.stubGlobal("fetch", vi.fn(async () => jsonResponse({ error: "x" }, 404)));
+    vi.stubGlobal(
+      "fetch",
+      vi.fn(async () => jsonResponse({ error: "x" }, 404)),
+    );
     const res = await getProjectExternalMeta("units", "github");
     expect(res).toMatchObject({ available: false, reason: "unavailable" });
   });
   it("never persists a failure as success: a later good fetch wins", async () => {
     const t0 = Date.now();
-    vi.stubGlobal("fetch", vi.fn(async () => jsonResponse({ error: "x" }, 500)));
+    vi.stubGlobal(
+      "fetch",
+      vi.fn(async () => jsonResponse({ error: "x" }, 500)),
+    );
     const failed = await getProjectExternalMeta("units", "github", t0);
     expect(failed.available).toBe(false);
     // Inside the error TTL the failure is (correctly) not retried...
-    vi.stubGlobal("fetch", vi.fn(async () => jsonResponse(GITHUB_REPO)));
-    const suppressed = await getProjectExternalMeta("units", "github", t0 + 1000);
+    vi.stubGlobal(
+      "fetch",
+      vi.fn(async () => jsonResponse(GITHUB_REPO)),
+    );
+    const suppressed = await getProjectExternalMeta(
+      "units",
+      "github",
+      t0 + 1000,
+    );
     expect(suppressed.available).toBe(false);
     // ...but past it, a good fetch recovers to success.
-    const recovered = await getProjectExternalMeta("units", "github", t0 + ERROR_TTL_MS + 1000);
+    const recovered = await getProjectExternalMeta(
+      "units",
+      "github",
+      t0 + ERROR_TTL_MS + 1000,
+    );
     expect(recovered.available).toBe(true);
     if (recovered.available) {
       expect(recovered.data).toMatchObject({ stars: 2 });

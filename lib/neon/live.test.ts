@@ -4,12 +4,17 @@
  * object that is always deleted afterwards — never touches user data.
  */
 import { describe, expect, it } from "vitest";
-import { GetObjectCommand, PutObjectCommand, DeleteObjectCommand } from "@aws-sdk/client-s3";
+import {
+  GetObjectCommand,
+  PutObjectCommand,
+  DeleteObjectCommand,
+} from "@aws-sdk/client-s3";
 import { BUCKET } from "./storage";
 import { getSql, postgresStatus } from "./postgres";
 import { getS3, storageStatus } from "./storage";
 
-const ENABLED = process.env.VETWO_TEST_NEON === "1" && Boolean(process.env.DATABASE_URL);
+const ENABLED =
+  process.env.VETWO_TEST_NEON === "1" && Boolean(process.env.DATABASE_URL);
 const run = ENABLED ? describe : describe.skip;
 
 run("live neon services", () => {
@@ -27,8 +32,17 @@ run("live neon services", () => {
     const key = `vetwo-probe-${Date.now()}-${Math.floor(Math.random() * 1e6)}.txt`;
     const body = "vetwo connectivity probe — safe to delete";
     try {
-      await s3.send(new PutObjectCommand({ Bucket: BUCKET, Key: key, Body: body, ContentType: "text/plain" }));
-      const got = await s3.send(new GetObjectCommand({ Bucket: BUCKET, Key: key }));
+      await s3.send(
+        new PutObjectCommand({
+          Bucket: BUCKET,
+          Key: key,
+          Body: body,
+          ContentType: "text/plain",
+        }),
+      );
+      const got = await s3.send(
+        new GetObjectCommand({ Bucket: BUCKET, Key: key }),
+      );
       const text = await got.Body?.transformToString();
       expect(text).toBe(body);
       const status = await storageStatus();

@@ -3,16 +3,28 @@ import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import { isLocale, DEFAULT_LOCALE } from "@/lib/i18n/config";
 import { getDict } from "@/lib/i18n/dict";
-import { localeAlternates } from "@/lib/seo/alternates";
+import { pageMetadata } from "@/lib/seo/page-meta";
 import { ARTICLES, SECTIONS, articlesBySection } from "@/lib/docs/content";
 import { Button, PageIntro, CtaBand } from "@/components/ui";
 
-export const metadata: Metadata = {
-  title: "Engineering notes",
-  description:
-    "VeTwo documentation and engineering notes, written from verified sources and reviewed against the repositories.",
-  alternates: localeAlternates("/blog"),
-};
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}): Promise<Metadata> {
+  const { locale: raw } = await params;
+  const locale = isLocale(raw) ? raw : DEFAULT_LOCALE;
+  const copy = getDict(locale).pages.blog;
+  return pageMetadata({
+    locale,
+    path: "/blog",
+    title: copy.eyebrow,
+    description:
+      locale === "ar"
+        ? `${copy.title} ${copy.lead}`
+        : "VeTwo documentation and engineering notes, written from verified sources and reviewed against the repositories.",
+  });
+}
 
 const GITHUB_URL = "https://github.com/VeTwo-dev";
 
@@ -22,7 +34,11 @@ function excerpt(article: (typeof ARTICLES)[number], locale: string): string {
   return first && first.type === "p" ? first.text : "";
 }
 
-export default async function BlogPage({ params }: { params: Promise<{ locale: string }> }) {
+export default async function BlogPage({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}) {
   const { locale: raw } = await params;
   const locale = isLocale(raw) ? raw : DEFAULT_LOCALE;
   const t = getDict(locale);
@@ -30,7 +46,11 @@ export default async function BlogPage({ params }: { params: Promise<{ locale: s
 
   return (
     <div>
-      <PageIntro eyebrow={`${copy.eyebrow} · ${ARTICLES.length}`} title={copy.title} lead={copy.lead}>
+      <PageIntro
+        eyebrow={`${copy.eyebrow} · ${ARTICLES.length}`}
+        title={copy.title}
+        lead={copy.lead}
+      >
         <p className="mt-8 max-w-2xl border-s-2 border-accent/50 ps-4 text-sm text-pretty text-secondary">
           {copy.notice}
         </p>
@@ -49,7 +69,12 @@ export default async function BlogPage({ params }: { params: Promise<{ locale: s
                 <span>{locale === "ar" ? section.titleAr : section.title}</span>
                 <span aria-hidden="true" className="h-px flex-1 bg-border" />
                 <span>
-                  {items.length} {locale === "ar" ? "ملاحظة" : items.length === 1 ? "note" : "notes"}
+                  {items.length}{" "}
+                  {locale === "ar"
+                    ? "ملاحظة"
+                    : items.length === 1
+                      ? "note"
+                      : "notes"}
                 </span>
               </div>
               <ul>

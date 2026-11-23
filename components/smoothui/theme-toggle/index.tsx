@@ -342,7 +342,7 @@ const PillToggle = ({
               ? "text-foreground"
               : "text-muted-foreground hover:text-foreground/70",
             segmentClassName,
-            textClassName
+            textClassName,
           )}
           key={option.value}
           onClick={() => onSelect(option.value)}
@@ -366,7 +366,7 @@ const PillToggle = ({
             className={cn(
               "relative z-10 transition-colors duration-200",
               iconClassName,
-              active ? ACTIVE_ICON_COLOR[option.value] : ""
+              active ? ACTIVE_ICON_COLOR[option.value] : "",
             )}
           />
           <span className="relative z-10">{option.label}</span>
@@ -632,7 +632,7 @@ const CycleButton = ({
     aria-pressed={ariaPressed}
     className={cn(
       "inline-flex cursor-pointer items-center justify-center rounded-full transition-transform duration-150 ease-out focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-4 focus-visible:ring-offset-background active:scale-95 motion-reduce:transition-none motion-reduce:active:scale-100",
-      className
+      className,
     )}
     onClick={onSelect}
     onKeyDown={onKeyDown}
@@ -668,7 +668,7 @@ const ThemeToggle = ({
   const mounted = useSyncExternalStore(
     () => () => {},
     () => true,
-    () => false
+    () => false,
   );
   const canAnimate = mounted && !shouldReduceMotion;
 
@@ -684,17 +684,17 @@ const ThemeToggle = ({
       }
       onThemeChange?.(next);
     },
-    [isControlled, onThemeChange]
+    [isControlled, onThemeChange],
   );
 
   const sizeConfig = SIZES[size];
   const options = useMemo(
     () => (showSystem ? THEME_OPTIONS : THEME_OPTIONS.slice(0, 2)),
-    [showSystem]
+    [showSystem],
   );
   const selectedIndex = Math.max(
     0,
-    options.findIndex((option) => option.value === theme)
+    options.findIndex((option) => option.value === theme),
   );
   const selected = options[selectedIndex];
   const nextOption = options[(selectedIndex + 1) % options.length];
@@ -707,7 +707,7 @@ const ThemeToggle = ({
       selectTheme(options[nextIndex].value);
       return nextIndex;
     },
-    [options, selectedIndex, selectTheme]
+    [options, selectedIndex, selectTheme],
   );
 
   const handleCycleKeyDown = useCallback(
@@ -722,7 +722,7 @@ const ThemeToggle = ({
         step(-1);
       }
     },
-    [step]
+    [step],
   );
 
   const handleOptionKeyDown = useCallback(
@@ -750,14 +750,14 @@ const ThemeToggle = ({
       selectTheme(options[nextIndex].value);
       optionRefs.current[nextIndex]?.focus();
     },
-    [options, selectTheme]
+    [options, selectTheme],
   );
 
   const registerRef = useCallback(
     (index: number, el: HTMLButtonElement | null) => {
       optionRefs.current[index] = el;
     },
-    []
+    [],
   );
 
   /* Accessible naming. Localized action names win when provided; the legacy
@@ -771,7 +771,8 @@ const ThemeToggle = ({
       dark: ariaLabels?.optionDark,
       system: ariaLabels?.optionSystem,
     };
-    return (value: ThemeToggleValue, fallback: string) => map[value] ?? fallback;
+    return (value: ThemeToggleValue, fallback: string) =>
+      map[value] ?? fallback;
   }, [ariaLabels]);
 
   const actionLabelFor = useMemo(() => {

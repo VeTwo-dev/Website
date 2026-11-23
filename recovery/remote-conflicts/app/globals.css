@@ -1,0 +1,409 @@
+@import "tailwindcss";
+
+@custom-variant dark (&:is(.dark *));
+
+@config "../tailwind.config.js";
+
+:root {
+  color-scheme: dark;
+  /* --font-* families are token-derived in app/tokens.css (next/font vars + PNU). */
+  --amber: oklch(0.77 0.16 75);
+  --amber-fg: oklch(0.22 0 0);
+  --amber-hover: oklch(0.71 0.17 70);
+  --blue: oklch(0.62 0.19 256);
+  --blue-fg: #fff;
+  --blue-hover: oklch(0.56 0.2 256);
+  --green: oklch(0.7 0.17 152);
+  --green-fg: #fff;
+  --green-hover: oklch(0.64 0.18 152);
+  --thumb: #fff;
+  --smooth-50: oklch(0.99 0 0);
+  --smooth-100: oklch(0.972 0 0);
+  --smooth-200: oklch(0.945 0 0);
+  --smooth-300: oklch(0.91 0 0);
+  --smooth-400: oklch(0.865 0 0);
+  --smooth-500: oklch(0.81 0 0);
+  --smooth-600: oklch(0.74 0 0);
+  --smooth-700: oklch(0.66 0 0);
+  --smooth-800: oklch(0.56 0 0);
+  --smooth-900: oklch(0.47 0 0);
+  --smooth-950: oklch(0.36 0 0);
+  --smooth-1000: oklch(0.22 0 0);
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+html[lang="ar"], body[lang="ar"], html[dir="rtl"], body[dir="rtl"] {
+  direction: rtl;
+}
+
+/* Lenis smooth-scroll (components/smooth-scroll-provider.tsx). When Lenis
+   owns the scroll rail it adds `lenis` (+ transient "lenis-smoothing"/
+   "lenis-stopped"/"lenis-locked" states) to <html>; these are the required
+   rules from the lenis package CSS, kept here so the tokens CSS stays the
+   single style source of truth: */
+.lenis {
+  /* Lenis writers are instant (behavior:"instant"); CSS smoothing must
+     never stack on top of writes from the router or the rail itself.
+     Selector is `.lenis` (not `.lenis.lenis-smooth`) because the smooth
+     class is transient — present only while the rail is animating. */
+  scroll-behavior: auto;
+}
+.lenis:not(.lenis-autoToggle).lenis-stopped {
+  overflow: clip;
+}
+/* Independent scroll containers are marked data-lenis-prevent; their
+   overscroll must not chain into the smooth rail. */
+.lenis [data-lenis-prevent],
+.lenis [data-lenis-prevent-wheel],
+.lenis [data-lenis-prevent-touch],
+.lenis [data-lenis-prevent-vertical],
+.lenis [data-lenis-prevent-horizontal] {
+  overscroll-behavior: contain;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+body {
+  background: var(--color-background, #000000);
+  color: var(--color-primary-text, #ECFDF5);
+  font-family: var(--font-sans, system-ui, sans-serif);
+}
+
+:lang(ar) {
+  font-family: var(--font-arabic, PNU, system-ui, sans-serif);
+  /* Never apply Latin letter-spacing to Arabic text. */
+  letter-spacing: normal;
+}
+
+/* Inter is English-display; inside Arabic content it falls back
+   to PNU so Arabic glyphs never inherit the display face. */
+:lang(ar) .font-display {
+  font-family: var(--font-arabic, PNU, system-ui, sans-serif);
+}
+
+:focus-visible {
+  outline: var(--focus-width, 2px) solid var(--focus-ring, #10B981);
+  outline-offset: var(--focus-offset, 2px);
+  border-radius: 4px;
+}
+
+/* Editorial display type: one fluid role shared by EN and AR so the hero
+   keeps parity across locales. Latin gets tight leading and negative
+   tracking; Arabic keeps normal tracking and looser leading for its taller
+   ascenders/descenders (:lang(ar) guard below). */
+.text-display {
+  font-family: var(--font-display, system-ui, sans-serif);
+  font-size: clamp(2.75rem, 5.4vw + 0.5rem, 3.75rem);
+  line-height: 1.04;
+  letter-spacing: -0.025em;
+  text-wrap: balance;
+}
+
+:lang(ar) .text-display {
+  font-family: var(--font-arabic, PNU, system-ui, sans-serif);
+  font-size: clamp(2.25rem, 4.2vw + 0.4rem, 3.5rem);
+  line-height: 1.45;
+  letter-spacing: normal;
+}
+
+/* Statement role: the editorial scale used by the manifesto block and the
+   closing statement. Latin only — Arabic keeps the display role's guard. */
+.text-statement {
+  font-family: var(--font-display, system-ui, sans-serif);
+  font-size: clamp(2rem, 4.5vw + 0.5rem, 4.5rem);
+  line-height: 1.06;
+  letter-spacing: -0.02em;
+  text-wrap: balance;
+}
+
+:lang(ar) .text-statement {
+  font-family: var(--font-arabic, PNU, system-ui, sans-serif);
+  font-size: clamp(1.75rem, 3.6vw + 0.5rem, 3.5rem);
+  line-height: 1.35;
+  letter-spacing: normal;
+}
+
+.container-content {
+  margin-inline: auto;
+  max-width: var(--content-max, 1280px);
+  padding-inline: 1rem;
+}
+
+@media (min-width: 768px) {
+  .container-content {
+    padding-inline: 1.5rem;
+  }
+}
+
+@media (min-width: 1280px) {
+  .container-content {
+    padding-inline: 2rem;
+  }
+}
+
+.code-block {
+  direction: ltr;
+  text-align: left;
+}
+
+/* Scroll reveal: JS adds .reveal on mount only, so no-JS keeps content visible. */
+.reveal {
+  opacity: 0;
+  transform: translateY(16px);
+  transition:
+    opacity 0.55s ease,
+    transform 0.55s ease;
+  transition-delay: var(--reveal-delay, 0ms);
+}
+
+.reveal.is-visible {
+  opacity: 1;
+  transform: none;
+}
+
+.lift {
+  transition:
+    transform 0.25s ease,
+    border-color 0.25s ease;
+}
+
+.lift:hover,
+.lift:focus-within {
+  transform: translateY(-3px);
+  border-color: color-mix(in oklab, var(--color-accent) 35%, transparent);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+  .lift,
+  .lift:hover,
+  .lift:focus-within {
+    transform: none;
+    transition: none;
+  }
+}
+
+/* ---------------------------------------------------------------------------
+   Reference-derived layer (Pier Gorelli study).
+   Principles only: hairline rules, mono metadata, statement fill, command
+   palette, oversized wordmark. Tokens only — no raw colours.
+   --------------------------------------------------------------------------- */
+
+/* Header sits over the hero and condenses once the page scrolls. */
+.site-header {
+  border-bottom: 1px solid var(--color-border);
+  background: var(--color-background);
+}
+
+/* The circuit motif is an identity element, not a texture: keep it quiet in
+   light mode so it never competes with the display type. */
+html[data-theme="light"] .hero-circuit {
+  opacity: 0.38;
+}
+
+/* Wide figures scroll horizontally instead of shrinking their labels. */
+.hero-chart-scroll {
+  max-width: 100%;
+  min-width: 0;
+  overflow-x: auto;
+  scrollbar-width: thin;
+}
+
+.hero-chart {
+  width: 100%;
+}
+
+@media (max-width: 40rem) {
+  .hero-chart {
+    min-width: 34rem;
+  }
+}
+
+/* Nav label roll: the label lifts and a duplicate settles in its place. */
+.nav-roll-label {
+  position: relative;
+  display: inline-block;
+  overflow: hidden;
+}
+
+.nav-roll-label > span {
+  display: inline-block;
+  transition: transform 0.4s cubic-bezier(0.76, 0, 0.24, 1);
+}
+
+.nav-roll-label::after {
+  content: attr(data-label);
+  position: absolute;
+  inset-inline: 0;
+  top: 0;
+  transform: translateY(110%);
+  transition: transform 0.4s cubic-bezier(0.76, 0, 0.24, 1);
+}
+
+.nav-roll:hover .nav-roll-label > span,
+.nav-roll:focus-visible .nav-roll-label > span {
+  transform: translateY(-110%);
+}
+
+.nav-roll:hover .nav-roll-label::after,
+.nav-roll:focus-visible .nav-roll-label::after {
+  transform: translateY(0);
+}
+
+/* Editorial statement: an outline copy under a solid copy that fills on scroll. */
+.statement {
+  position: relative;
+  display: block;
+}
+
+.statement-outline {
+  position: absolute;
+  inset: 0;
+  color: transparent;
+  -webkit-text-stroke: 1px var(--color-secondary-text);
+  pointer-events: none;
+}
+
+.statement-solid {
+  position: relative;
+  display: block;
+  clip-path: inset(0 0 calc((1 - var(--statement-fill, 1)) * 100%) 0);
+}
+
+/* Command palette. */
+.palette-dialog {
+  width: min(640px, calc(100vw - 2rem));
+  max-height: 80vh;
+  margin: auto;
+  padding: 0;
+  border: 1px solid var(--color-border);
+  border-radius: 0;
+  background: var(--color-surface);
+  color: var(--color-primary-text);
+  box-shadow: var(--shadow-elevated);
+}
+
+.palette-dialog::backdrop {
+  background: rgb(0 0 0 / 0.45);
+  backdrop-filter: blur(3px);
+}
+
+/* Oversized wordmark closes the page. */
+.footer-wordmark {
+  overflow: hidden;
+  font-size: clamp(3.5rem, 16vw, 13rem);
+  font-weight: 700;
+  line-height: 0.82;
+  letter-spacing: -0.045em;
+  color: var(--color-primary-text);
+  opacity: 0.75;
+  white-space: nowrap;
+  user-select: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .nav-roll-label > span,
+  .nav-roll-label::after {
+    transition: none;
+  }
+
+  .statement-solid {
+    clip-path: none;
+  }
+}
+
+@theme inline {
+  --color-brand: var(--brand, oklch(0.72 0.2 352.53));
+  --color-brand-light: var(--brand-light, oklch(0.78 0.15 352.53));
+  --color-brand-lighter: var(--brand-lighter, oklch(0.85 0.1 352.53));
+  --color-brand-secondary: var(--brand-secondary, oklch(0.66 0.21 354.31));
+  --color-btn-drop: var(--btn-drop, rgb(0 0 0 / 0.4));
+  --color-btn-sheen: var(--btn-sheen, rgb(255 255 255 / 0.2));
+  --color-destructive-edge: var(--destructive-edge, #f61418);
+  --color-destructive-fg: var(--destructive-fg, #fff);
+  --color-destructive-hover: var(--destructive-hover, color-mix(in oklab, var(--color-destructive) 85%, black));
+  --color-destructive-top: var(--destructive-top, #fd4b4e);
+  --color-on-brand: var(--on-brand, #fff);
+  --color-amber: var(--amber);
+  --color-amber-fg: var(--amber-fg);
+  --color-amber-hover: var(--amber-hover);
+  --color-blue: var(--blue);
+  --color-blue-fg: var(--blue-fg);
+  --color-blue-hover: var(--blue-hover);
+  --color-green: var(--green);
+  --color-green-fg: var(--green-fg);
+  --color-green-hover: var(--green-hover);
+  --color-thumb: var(--thumb);
+  --color-smooth-50: var(--smooth-50);
+  --color-smooth-100: var(--smooth-100);
+  --color-smooth-200: var(--smooth-200);
+  --color-smooth-300: var(--smooth-300);
+  --color-smooth-400: var(--smooth-400);
+  --color-smooth-500: var(--smooth-500);
+  --color-smooth-600: var(--smooth-600);
+  --color-smooth-700: var(--smooth-700);
+  --color-smooth-800: var(--smooth-800);
+  --color-smooth-900: var(--smooth-900);
+  --color-smooth-950: var(--smooth-950);
+  --color-smooth-1000: var(--smooth-1000);
+  --color-color-destructive-hover: var(--color-destructive-hover);
+}
+
+.dark {
+  --amber: oklch(0.8 0.15 75);
+  --amber-fg: oklch(0.2 0 0);
+  --amber-hover: oklch(0.85 0.14 72);
+  --blue: oklch(0.66 0.18 256);
+  --blue-fg: #fff;
+  --blue-hover: oklch(0.72 0.16 256);
+  --green: oklch(0.73 0.16 152);
+  --green-fg: oklch(0.2 0 0);
+  --green-hover: oklch(0.79 0.15 152);
+  --thumb: #fff;
+  --smooth-50: oklch(0.2 0 0);
+  --smooth-100: oklch(0.235 0 0);
+  --smooth-200: oklch(0.275 0 0);
+  --smooth-300: oklch(0.315 0 0);
+  --smooth-400: oklch(0.36 0 0);
+  --smooth-500: oklch(0.41 0 0);
+  --smooth-600: oklch(0.47 0 0);
+  --smooth-700: oklch(0.55 0 0);
+  --smooth-800: oklch(0.66 0 0);
+  --smooth-900: oklch(0.74 0 0);
+  --smooth-950: oklch(0.85 0 0);
+  --smooth-1000: oklch(0.96 0 0);
+}
+
+@utility focus-ring {
+  &:focus-visible {
+    @apply ring-[3px] ring-ring/80;
+  }
+}
+
+@utility focus-ring-within {
+  &:has(:focus-visible) {
+    @apply ring-[3px] ring-ring/80;
+  }
+}
+
+@utility state-transition {
+    @apply transition-[background-color,border-color,color,box-shadow] duration-150 ease-out motion-reduce:transition-none;
+}

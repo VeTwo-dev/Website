@@ -7,7 +7,10 @@ import { SMOOTH_SCROLL_CONFIG, resolveNativeTop } from "./smooth-scroll";
  * exactly the shape the function aims at (scrollHeight/innerHeight/rects).
  */
 beforeAll(() => {
-  (globalThis as Record<string, unknown>).window = { innerHeight: 800, scrollY: 0 };
+  (globalThis as Record<string, unknown>).window = {
+    innerHeight: 800,
+    scrollY: 0,
+  };
   (globalThis as Record<string, unknown>).document = {
     documentElement: { scrollHeight: 3000 },
     // No createElement/querySelector: these tests only exercise numeric,

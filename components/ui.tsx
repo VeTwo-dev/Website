@@ -261,8 +261,12 @@ export function PageIntro({
         <p className="font-mono text-[11px] text-secondary">
           <span className="text-mint">{eyebrow}</span>
         </p>
-        <h1 className="text-balance text-display mt-6 max-w-4xl font-bold">{title}</h1>
-        <p className="mt-6 max-w-2xl text-pretty text-lg text-secondary">{lead}</p>
+        <h1 className="text-balance text-display mt-6 max-w-4xl font-bold">
+          {title}
+        </h1>
+        <p className="mt-6 max-w-2xl text-pretty text-lg text-secondary">
+          {lead}
+        </p>
         {children}
       </div>
     </section>
@@ -282,7 +286,9 @@ export function CtaBand({
   return (
     <section className="border-t border-border">
       <div className="container-content py-20 sm:py-24">
-        <h2 className="max-w-3xl text-balance text-3xl font-semibold sm:text-4xl">{title}</h2>
+        <h2 className="max-w-3xl text-balance text-3xl font-semibold sm:text-4xl">
+          {title}
+        </h2>
         <p className="mt-4 max-w-xl text-pretty text-secondary">{lead}</p>
         <div className="mt-8 flex flex-wrap items-center gap-3">{children}</div>
       </div>

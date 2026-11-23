@@ -6,12 +6,13 @@ na_heuristics: 7,10
 p0_count: 0
 p1_count: 2
 p2_count: 3
-target_identity: "file:/media/DATA/Programming/Projects/VeTwo/Vet-Projects/Website/app/[locale]/page.tsx"
-target_fingerprint: "sha256:3d982ef391675bf402e555e580f89854a97469c36ba1c40aec5e496faaeeee68"
+target_identity: 'file:/media/DATA/Programming/Projects/VeTwo/Vet-Projects/Website/app/[locale]/page.tsx'
+target_fingerprint: 'sha256:3d982ef391675bf402e555e580f89854a97469c36ba1c40aec5e496faaeeee68'
 target_path: /media/DATA/Programming/Projects/VeTwo/Vet-Projects/Website/app/[locale]/page.tsx
 timestamp: 2026-10-17T14-04-24Z
 slug: app-locale-page-tsx
 ---
+
 # Impeccable Critique — VeTwo homepage
 
 Method: ⚠️ DEGRADED: single-context (no sub-agent/Task tool exposed in this session)
@@ -20,19 +21,19 @@ Evidence: source read, production build (`bun run build`) served via `next start
 
 ## Design Health Score
 
-| # | Heuristic | Score | Key Issue |
-|---|-----------|-------|-----------|
-| 1 | Visibility of System Status | 3 | Sticky header, working JS-free mobile disclosure, smooth anchors — but no active/current-section indication while scrolling, and the language switch never shows the active locale. |
-| 2 | Match System / Real World | 3 | Domain language is precise (dimensional exponents, manifest-verified, mono identifiers); the hero "note" is meta editorial policy ("No fabricated stats") that reads as internal copy. |
-| 3 | User Control and Freedom | 3 | Static page, no traps, clear escapes; no back-to-top and nav is anchor-only. |
-| 4 | Consistency and Standards | 4 | Cohesive tokens, typography, and surfaces. Header GitHub CTA re-declares the primary recipe instead of the `Button` component (invisible to users). |
-| 5 | Error Prevention | 3 | No input surfaces; external links carry `rel=noreferrer`. Nothing error-prone to guard. |
-| 6 | Recognition Rather Than Recall | 3 | Clear nav and labels; but linking the ecosystem edges back to the featured project cards requires recall, and chart node names are truncated. |
-| 7 | Flexibility and Efficiency | n/a | Static marketing surface; no accelerators apply. |
-| 8 | Aesthetic and Minimalist Design | 2 | Restrained and premium overall, but the 5-line hero headline monopolizes the first viewport, and the same large concentric-circle placeholder repeats three times. |
-| 9 | Error Recovery | 3 | No error states on this surface; 404 handled elsewhere. |
-| 10 | Help and Documentation | n/a | Docs live off this surface; no in-page help is expected. |
-| **Total** | | **24/32** | **Good (75%)** |
+| #         | Heuristic                       | Score     | Key Issue                                                                                                                                                                              |
+| --------- | ------------------------------- | --------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| 1         | Visibility of System Status     | 3         | Sticky header, working JS-free mobile disclosure, smooth anchors — but no active/current-section indication while scrolling, and the language switch never shows the active locale.    |
+| 2         | Match System / Real World       | 3         | Domain language is precise (dimensional exponents, manifest-verified, mono identifiers); the hero "note" is meta editorial policy ("No fabricated stats") that reads as internal copy. |
+| 3         | User Control and Freedom        | 3         | Static page, no traps, clear escapes; no back-to-top and nav is anchor-only.                                                                                                           |
+| 4         | Consistency and Standards       | 4         | Cohesive tokens, typography, and surfaces. Header GitHub CTA re-declares the primary recipe instead of the `Button` component (invisible to users).                                    |
+| 5         | Error Prevention                | 3         | No input surfaces; external links carry `rel=noreferrer`. Nothing error-prone to guard.                                                                                                |
+| 6         | Recognition Rather Than Recall  | 3         | Clear nav and labels; but linking the ecosystem edges back to the featured project cards requires recall, and chart node names are truncated.                                          |
+| 7         | Flexibility and Efficiency      | n/a       | Static marketing surface; no accelerators apply.                                                                                                                                       |
+| 8         | Aesthetic and Minimalist Design | 2         | Restrained and premium overall, but the 5-line hero headline monopolizes the first viewport, and the same large concentric-circle placeholder repeats three times.                     |
+| 9         | Error Recovery                  | 3         | No error states on this surface; 404 handled elsewhere.                                                                                                                                |
+| 10        | Help and Documentation          | n/a       | Docs live off this surface; no in-page help is expected.                                                                                                                               |
+| **Total** |                                 | **24/32** | **Good (75%)**                                                                                                                                                                         |
 
 ## Design Specificity Verdict
 
@@ -86,7 +87,7 @@ A restrained, credible, well-engineered homepage that clearly means to be taken 
 
 ## Persona Red Flags
 
-**Jordan (First-Timer — veterinarian/producer/student):** The hero leads with "Open-source veterinary technology" then a five-line slogan; the stats bar says "verified dependencies 3" with no plain-language gloss and no way to learn what "verified" means. "Manifest-verified dependency" appears in the ecosystem list as body copy. The hero note explains the *site's* editorial policy instead of the *product's* purpose. Jordan cannot answer "what does VeTwo actually do for me?" from the first screen and will bounce before reaching the project descriptions.
+**Jordan (First-Timer — veterinarian/producer/student):** The hero leads with "Open-source veterinary technology" then a five-line slogan; the stats bar says "verified dependencies 3" with no plain-language gloss and no way to learn what "verified" means. "Manifest-verified dependency" appears in the ecosystem list as body copy. The hero note explains the _site's_ editorial policy instead of the _product's_ purpose. Jordan cannot answer "what does VeTwo actually do for me?" from the first screen and will bounce before reaching the project descriptions.
 
 **Riley (Stress Tester):** The homepage has no forms/empty states to break and holds up at 320px with no overflow — but the core credibility claim is unverifiable here: "verified dependencies 3" links nowhere, the chart node names truncate ("VeTwo-Market-P…"), and the ecosystem edges (`create-vetwo-pack → whisnew ^1.8.0`) are presented without a link to the source manifest. An inquisitive user hits a dead end exactly where the evidence promise is made.
 
@@ -103,6 +104,6 @@ A restrained, credible, well-engineered homepage that clearly means to be taken 
 
 ## Questions to Consider
 
-- What if the units/dependency diagram — the one thing no generic SaaS page could show — were made the *hero* and the headline were its caption?
+- What if the units/dependency diagram — the one thing no generic SaaS page could show — were made the _hero_ and the headline were its caption?
 - Does the homepage need three full-width diagram sections, or would two (one real chart, one proof list) make the real visual louder?
 - What would a plain-language "VeTwo in one sentence" line above the stats do for a first-time veterinarian?

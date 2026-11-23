@@ -56,7 +56,11 @@ export function Statement({
   }, [outline]);
 
   return (
-    <div ref={ref} className={`statement ${className}`} style={{ "--statement-fill": "1" } as React.CSSProperties}>
+    <div
+      ref={ref}
+      className={`statement ${className}`}
+      style={{ "--statement-fill": "1" } as React.CSSProperties}
+    >
       {outline ? (
         <span className="statement-outline" aria-hidden="true">
           {text}

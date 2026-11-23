@@ -19,7 +19,13 @@ export type PaletteItem = {
   action?: "toggle-theme";
 };
 
-export function CommandPalette({ locale, items }: { locale: Locale; items: PaletteItem[] }) {
+export function CommandPalette({
+  locale,
+  items,
+}: {
+  locale: Locale;
+  items: PaletteItem[];
+}) {
   const t = getDict(locale);
   const dialogRef = useRef<HTMLDialogElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
@@ -30,7 +36,9 @@ export function CommandPalette({ locale, items }: { locale: Locale; items: Palet
   const filtered = useMemo(() => {
     const q = query.trim().toLowerCase();
     if (!q) return items;
-    return items.filter((item) => `${item.label} ${item.hint ?? ""}`.toLowerCase().includes(q));
+    return items.filter((item) =>
+      `${item.label} ${item.hint ?? ""}`.toLowerCase().includes(q),
+    );
   }, [items, query]);
 
   const groups = useMemo(() => {
@@ -95,7 +103,9 @@ export function CommandPalette({ locale, items }: { locale: Locale; items: Palet
           onKeyDown={(event) => {
             if (event.key === "ArrowDown") {
               event.preventDefault();
-              const next = filtered.length ? (activeIndex + 1) % filtered.length : 0;
+              const next = filtered.length
+                ? (activeIndex + 1) % filtered.length
+                : 0;
               setActiveIndex(next);
               linksRef.current[next]?.focus();
             }
@@ -119,11 +129,15 @@ export function CommandPalette({ locale, items }: { locale: Locale; items: Palet
 
       <div className="max-h-[min(60vh,420px)] overflow-y-auto p-2">
         {groups.length === 0 ? (
-          <p className="px-3 py-6 text-center text-sm text-secondary">{t.palette.noResults}</p>
+          <p className="px-3 py-6 text-center text-sm text-secondary">
+            {t.palette.noResults}
+          </p>
         ) : (
           groups.map((group) => (
             <div key={group.key} className="mb-2 last:mb-0">
-              <p className="px-3 py-2 font-mono text-[11px] text-secondary">{group.label}</p>
+              <p className="px-3 py-2 font-mono text-[11px] text-secondary">
+                {group.label}
+              </p>
               <ul className="flex flex-col gap-1">
                 {group.items.map((item) => {
                   flatIndex += 1;
@@ -142,14 +156,17 @@ export function CommandPalette({ locale, items }: { locale: Locale; items: Palet
                           dialogRef.current?.close();
                           if (item.action === "toggle-theme") {
                             const root = document.documentElement;
-                            const next = root.dataset.theme === "light" ? "dark" : "light";
+                            const next =
+                              root.dataset.theme === "light" ? "dark" : "light";
                             root.setAttribute("data-theme", next);
                             try {
                               localStorage.setItem("theme", next);
                             } catch {
                               /* storage unavailable */
                             }
-                            window.dispatchEvent(new Event("vetwo-theme-change"));
+                            window.dispatchEvent(
+                              new Event("vetwo-theme-change"),
+                            );
                             return;
                           }
                           if (item.external) {
@@ -160,11 +177,15 @@ export function CommandPalette({ locale, items }: { locale: Locale; items: Palet
                         }}
                         onFocus={() => setActiveIndex(index)}
                         onKeyDown={(event) => {
-                          if (event.key === "ArrowDown" || event.key === "ArrowUp") {
+                          if (
+                            event.key === "ArrowDown" ||
+                            event.key === "ArrowUp"
+                          ) {
                             event.preventDefault();
                             const delta = event.key === "ArrowDown" ? 1 : -1;
                             const next = filtered.length
-                              ? (activeIndex + delta + filtered.length) % filtered.length
+                              ? (activeIndex + delta + filtered.length) %
+                                filtered.length
                               : 0;
                             setActiveIndex(next);
                             linksRef.current[next]?.focus();
@@ -192,7 +213,9 @@ export function CommandPalette({ locale, items }: { locale: Locale; items: Palet
         )}
       </div>
 
-      <p className="border-t border-border px-4 py-2 font-mono text-[11px] text-secondary">{t.palette.hint}</p>
+      <p className="border-t border-border px-4 py-2 font-mono text-[11px] text-secondary">
+        {t.palette.hint}
+      </p>
     </dialog>
   );
 }

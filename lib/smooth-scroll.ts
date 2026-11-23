@@ -99,15 +99,22 @@ export type ScrollToOptions = {
  */
 export function resolveNativeTop(target: ScrollTarget, offset: number): number {
   if (typeof target === "number" && !Number.isFinite(target)) {
-    return clampScroll(document.documentElement.scrollHeight - window.innerHeight);
+    return clampScroll(
+      document.documentElement.scrollHeight - window.innerHeight,
+    );
   }
   if (typeof target === "number") return clampScroll(target + offset);
   if (target === "top") return clampScroll(offset);
-  if (target === "bottom") return clampScroll(document.documentElement.scrollHeight - window.innerHeight);
+  if (target === "bottom")
+    return clampScroll(
+      document.documentElement.scrollHeight - window.innerHeight,
+    );
   const element: Element | null =
     typeof target === "string" ? document.querySelector(target) : target;
   if (!element) return clampScroll(0);
-  return clampScroll(element.getBoundingClientRect().top + window.scrollY + offset);
+  return clampScroll(
+    element.getBoundingClientRect().top + window.scrollY + offset,
+  );
 }
 
 function clampScroll(value: number): number {

@@ -26,14 +26,16 @@ export const VERIFIED_EDGES: GraphEdge[] = [
     to: "units",
     kind: "runtime",
     range: "^0.0.1",
-    evidence: "nutrition-units/package.json dependencies + README domain-layer statement",
+    evidence:
+      "nutrition-units/package.json dependencies + README domain-layer statement",
   },
   {
     from: "marketplace-fetch-pack",
     to: "repo-fetch",
     kind: "runtime",
     range: "^1.0.0",
-    evidence: "marketplace-fetch-pack/package.json dependencies (@vetwo/repo-fetch)",
+    evidence:
+      "marketplace-fetch-pack/package.json dependencies (@vetwo/repo-fetch)",
   },
   {
     from: "create-vetwo-pack",
@@ -47,7 +49,8 @@ export const VERIFIED_EDGES: GraphEdge[] = [
     to: "nutrition-units",
     kind: "conceptual",
     range: null,
-    evidence: "Org profile lists Feed-Formulation as the nutrition application layer; no manifest dependency observed",
+    evidence:
+      "Org profile lists Feed-Formulation as the nutrition application layer; no manifest dependency observed",
   },
 ];
 
@@ -82,11 +85,14 @@ export function buildGraph(): { nodes: GraphNode[]; edges: GraphEdge[] } {
   const slugs = new Set(PROJECTS.map((p) => p.slug));
   for (const e of VERIFIED_EDGES) {
     if (!slugs.has(e.from) || !slugs.has(e.to)) {
-      throw new Error(`graph edge references unknown slug: ${e.from} -> ${e.to}`);
+      throw new Error(
+        `graph edge references unknown slug: ${e.from} -> ${e.to}`,
+      );
     }
   }
   const seen = new Set(VERIFIED_EDGES.map((e) => `${e.from}>${e.to}`));
-  if (seen.size !== VERIFIED_EDGES.length) throw new Error("duplicate graph edge");
+  if (seen.size !== VERIFIED_EDGES.length)
+    throw new Error("duplicate graph edge");
   const nodes: GraphNode[] = PROJECTS.map((p) => ({
     slug: p.slug,
     name: p.name,
@@ -146,9 +152,15 @@ export function layoutGraph(
   const layerIds = [...layers.keys()].sort((a, b) => a - b);
   layerIds.forEach((id, col) => {
     const list = layers.get(id) ?? [];
-    const x = layerIds.length === 1 ? width / 2 : 90 + (col * (width - 180)) / (layerIds.length - 1);
+    const x =
+      layerIds.length === 1
+        ? width / 2
+        : 90 + (col * (width - 180)) / (layerIds.length - 1);
     list.forEach((n, row) => {
-      const y = list.length === 1 ? height / 2 : 60 + (row * (height - 120)) / (list.length - 1);
+      const y =
+        list.length === 1
+          ? height / 2
+          : 60 + (row * (height - 120)) / (list.length - 1);
       positions.set(n.slug, { x, y });
     });
   });

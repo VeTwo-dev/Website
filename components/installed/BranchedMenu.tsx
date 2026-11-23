@@ -1,7 +1,15 @@
-'use client';
+"use client";
 
-import React, { isValidElement, useLayoutEffect, useRef, useState, type CSSProperties, type ReactNode } from 'react';
-import { HugeiconsIcon, type IconSvgElement } from '@hugeicons/react';
+import React, {
+  isValidElement,
+  useEffect,
+  useLayoutEffect,
+  useRef,
+  useState,
+  type CSSProperties,
+  type ReactNode,
+} from "react";
+import { HugeiconsIcon, type IconSvgElement } from "@hugeicons/react";
 import {
   CursorPointer01Icon,
   Download04Icon,
@@ -10,8 +18,8 @@ import {
   PaintBoardIcon,
   Rocket01Icon,
   Settings02Icon,
-  TextFontIcon
-} from '@hugeicons/core-free-icons';
+  TextFontIcon,
+} from "@hugeicons/core-free-icons";
 export interface BranchedMenuChild {
   value: string;
   label: string;
@@ -28,7 +36,10 @@ export interface BranchedMenuProps {
   items?: BranchedMenuItem[];
   defaultOpen?: number | number[];
   defaultActive?: string;
-  onSelect?: (value: string, item: BranchedMenuChild | BranchedMenuItem) => void;
+  onSelect?: (
+    value: string,
+    item: BranchedMenuChild | BranchedMenuItem,
+  ) => void;
   onToggle?: (index: number, open: boolean) => void;
   color?: string;
   accentColor?: string;
@@ -47,40 +58,45 @@ export interface BranchedMenuProps {
 
 const DEFAULT_ITEMS: BranchedMenuItem[] = [
   {
-    label: 'Getting started',
+    label: "Getting started",
     children: [
-      { value: 'install', label: 'Installation', icon: Download04Icon },
-      { value: 'quick', label: 'Quick start', icon: Rocket01Icon },
-      { value: 'config', label: 'Configuration', icon: Settings02Icon },
-      { value: 'theming', label: 'Theming', icon: PaintBoardIcon }
-    ]
+      { value: "install", label: "Installation", icon: Download04Icon },
+      { value: "quick", label: "Quick start", icon: Rocket01Icon },
+      { value: "config", label: "Configuration", icon: Settings02Icon },
+      { value: "theming", label: "Theming", icon: PaintBoardIcon },
+    ],
   },
   {
-    label: 'Components',
+    label: "Components",
     children: [
-      { value: 'buttons', label: 'Buttons', icon: CursorPointer01Icon },
-      { value: 'typography', label: 'Typography', icon: TextFontIcon },
-      { value: 'overlays', label: 'Overlays', icon: Layers01Icon },
-      { value: 'toasts', label: 'Toasts', icon: Notification03Icon }
-    ]
-  }
+      { value: "buttons", label: "Buttons", icon: CursorPointer01Icon },
+      { value: "typography", label: "Typography", icon: TextFontIcon },
+      { value: "overlays", label: "Overlays", icon: Layers01Icon },
+      { value: "toasts", label: "Toasts", icon: Notification03Icon },
+    ],
+  },
 ];
 const PAD = 6;
 const MARK = 16;
 
 const renderIcon = (icon: ReactNode | IconSvgElement) =>
-  isValidElement(icon) ? icon : <HugeiconsIcon icon={icon as IconSvgElement} size={16} strokeWidth={1.8} />;
-const toSet = (open: number | number[]) => new Set(Array.isArray(open) ? open : open >= 0 ? [open] : []);
+  isValidElement(icon) ? (
+    icon
+  ) : (
+    <HugeiconsIcon icon={icon as IconSvgElement} size={16} strokeWidth={1.8} />
+  );
+const toSet = (open: number | number[]) =>
+  new Set(Array.isArray(open) ? open : open >= 0 ? [open] : []);
 
 const BranchedMenu: React.FC<BranchedMenuProps> = ({
   items = DEFAULT_ITEMS,
   defaultOpen = 0,
-  defaultActive = '',
+  defaultActive = "",
   onSelect,
   onToggle,
-  color = '#f5f5f5',
-  accentColor = '#f5f5f5',
-  lineColor = '#3f3f46',
+  color = "#f5f5f5",
+  accentColor = "#f5f5f5",
+  lineColor = "#3f3f46",
   width = 240,
   rowHeight = 36,
   indent = 40,
@@ -90,21 +106,30 @@ const BranchedMenu: React.FC<BranchedMenuProps> = ({
   fontSize = 14,
   drawDuration = 400,
   foldDuration = 300,
-  className = ''
+  className = "",
 }) => {
   const [open, setOpen] = useState<Set<number>>(() => toSet(defaultOpen));
   const [active, setActive] = useState(() => {
     if (defaultActive) return defaultActive;
-    const first = items.find((it, i) => it.children && toSet(defaultOpen).has(i));
-    return first?.children?.[0]?.value ?? '';
+    const first = items.find(
+      (it, i) => it.children && toSet(defaultOpen).has(i),
+    );
+    return first?.children?.[0]?.value ?? "";
   });
   const navRef = useRef<HTMLElement>(null);
   const heads = useRef<(HTMLButtonElement | null)[]>([]);
   const markerRef = useRef<HTMLSpanElement>(null);
-  const latest = useRef<{ onSelect?: BranchedMenuProps['onSelect']; onToggle?: BranchedMenuProps['onToggle'] }>({});
-  latest.current = { onSelect, onToggle };
+  const latest = useRef<{
+    onSelect?: BranchedMenuProps["onSelect"];
+    onToggle?: BranchedMenuProps["onToggle"];
+  }>({});
+  useEffect(() => {
+    latest.current = { onSelect, onToggle };
+  }, [onSelect, onToggle]);
 
-  const activeSection = items.findIndex(it => it.children?.some(kid => kid.value === active));
+  const activeSection = items.findIndex((it) =>
+    it.children?.some((kid) => kid.value === active),
+  );
   const markerShown = activeSection >= 0 && open.has(activeSection);
   useLayoutEffect(() => {
     const place = (glide: boolean) => {
@@ -112,12 +137,12 @@ const BranchedMenu: React.FC<BranchedMenuProps> = ({
       const el = heads.current[activeSection];
       if (!m) return;
       const on = markerShown && el;
-      if (!glide) m.style.transition = 'none';
+      if (!glide) m.style.transition = "none";
       if (on) m.style.top = `${el.offsetTop + (el.offsetHeight - MARK) / 2}px`;
-      m.toggleAttribute('data-on', Boolean(on));
+      m.toggleAttribute("data-on", Boolean(on));
       if (!glide) {
         void m.offsetHeight;
-        m.style.transition = '';
+        m.style.transition = "";
       }
     };
     place(true);
@@ -133,12 +158,15 @@ const BranchedMenu: React.FC<BranchedMenuProps> = ({
     return () => ro.disconnect();
   }, [activeSection, markerShown, items, fontSize, rowHeight]);
 
-  const select = (value: string, item: BranchedMenuChild | BranchedMenuItem) => {
+  const select = (
+    value: string,
+    item: BranchedMenuChild | BranchedMenuItem,
+  ) => {
     setActive(value);
     latest.current.onSelect?.(value, item);
   };
   const toggle = (i: number) => {
-    setOpen(prev => {
+    setOpen((prev) => {
       const next = new Set(prev);
       const isOpen = !next.has(i);
       if (isOpen) next.add(i);
@@ -151,27 +179,30 @@ const BranchedMenu: React.FC<BranchedMenuProps> = ({
   const r = Math.min(radius, rowHeight / 2 - 2);
   const endX = indent - 8;
   const rowY = (k: number) => PAD + k * rowHeight + rowHeight / 2;
-  const branch = (k: number) => `M ${trunk} ${rowY(k) - r} A ${r} ${r} 0 0 0 ${trunk + r} ${rowY(k)} H ${endX}`;
-  const reach = (k: number) => `M ${trunk} 0 V ${rowY(k) - r} A ${r} ${r} 0 0 0 ${trunk + r} ${rowY(k)} H ${endX}`;
-  const length = (k: number) => rowY(k) - r + (Math.PI * r) / 2 + (endX - trunk - r);
+  const branch = (k: number) =>
+    `M ${trunk} ${rowY(k) - r} A ${r} ${r} 0 0 0 ${trunk + r} ${rowY(k)} H ${endX}`;
+  const reach = (k: number) =>
+    `M ${trunk} 0 V ${rowY(k) - r} A ${r} ${r} 0 0 0 ${trunk + r} ${rowY(k)} H ${endX}`;
+  const length = (k: number) =>
+    rowY(k) - r + (Math.PI * r) / 2 + (endX - trunk - r);
 
   return (
     <nav
       ref={navRef}
-      className={`relative flex w-fit max-w-[min(var(--bm-w),100%)] flex-col pl-3.5 leading-[1.2] [color:var(--bm-ink)] [font-family:inherit] [font-size:var(--bm-font)] before:absolute before:top-2 before:bottom-0 before:left-0 before:w-0.5 before:rounded-[1px] before:[background:linear-gradient(to_bottom,var(--bm-line)_0%,var(--bm-line)_55%,transparent_100%)] before:content-['']${className ? ` ${className}` : ''}`}
+      className={`relative flex w-fit max-w-[min(var(--bm-w),100%)] flex-col pl-3.5 leading-[1.2] [color:var(--bm-ink)] [font-family:inherit] [font-size:var(--bm-font)] before:absolute before:top-2 before:bottom-0 before:left-0 before:w-0.5 before:rounded-[1px] before:[background:linear-gradient(to_bottom,var(--bm-line)_0%,var(--bm-line)_55%,transparent_100%)] before:content-['']${className ? ` ${className}` : ""}`}
       style={
         {
-          '--bm-w': `${width}px`,
-          '--bm-ink': color,
-          '--bm-accent': accentColor,
-          '--bm-line': lineColor,
-          '--bm-font': `${fontSize}px`,
-          '--bm-row': `${rowHeight}px`,
-          '--bm-indent': `${indent}px`,
-          '--bm-line-w': lineWidth,
-          '--bm-draw': `${drawDuration}ms`,
-          '--bm-muted': `color-mix(in srgb, ${color} 55%, transparent)`,
-          '--bm-fold': `${foldDuration}ms`
+          "--bm-w": `${width}px`,
+          "--bm-ink": color,
+          "--bm-accent": accentColor,
+          "--bm-line": lineColor,
+          "--bm-font": `${fontSize}px`,
+          "--bm-row": `${rowHeight}px`,
+          "--bm-indent": `${indent}px`,
+          "--bm-line-w": lineWidth,
+          "--bm-draw": `${drawDuration}ms`,
+          "--bm-muted": `color-mix(in srgb, ${color} 55%, transparent)`,
+          "--bm-fold": `${foldDuration}ms`,
         } as CSSProperties
       }
     >
@@ -190,17 +221,17 @@ const BranchedMenu: React.FC<BranchedMenuProps> = ({
           <div
             key={item.value ?? item.label}
             className="group/section flex flex-col"
-            data-open={isOpen ? '' : undefined}
+            data-open={isOpen ? "" : undefined}
           >
             <button
-              ref={el => {
+              ref={(el) => {
                 heads.current[i] = el;
               }}
               type="button"
               className="m-0 block cursor-pointer border-0 bg-transparent py-[9px] text-left font-medium outline-none [color:var(--bm-muted)] [font-family:inherit] [font-size:calc(var(--bm-font)+1px)] [-webkit-tap-highlight-color:transparent] [transition:color_200ms_ease] group-data-[open]/section:[color:var(--bm-ink)] data-[active]:[color:var(--bm-ink)] hover:[color:var(--bm-ink)]"
               aria-expanded={kids ? isOpen : undefined}
-              aria-current={leafActive ? 'true' : undefined}
-              data-active={leafActive ? '' : undefined}
+              aria-current={leafActive ? "true" : undefined}
+              data-active={leafActive ? "" : undefined}
               onClick={() => (kids ? toggle(i) : select(leafValue, item))}
             >
               {item.label}
@@ -208,7 +239,10 @@ const BranchedMenu: React.FC<BranchedMenuProps> = ({
             {kids ? (
               <div className="grid [grid-template-rows:0fr] [transition:grid-template-rows_var(--bm-fold)_cubic-bezier(0.23,1,0.32,1)] group-data-[open]/section:[grid-template-rows:1fr] motion-reduce:transition-none">
                 <div className="min-h-0 overflow-hidden">
-                  <div className="relative box-border py-1.5" style={{ height: bodyH }}>
+                  <div
+                    className="relative box-border py-1.5"
+                    style={{ height: bodyH }}
+                  >
                     <svg
                       className="pointer-events-none absolute top-0 left-0 overflow-visible opacity-0 [transition:opacity_200ms_ease] group-data-[open]/section:opacity-100 group-data-[open]/section:[transition:opacity_250ms_ease_100ms]"
                       width={indent}
@@ -233,23 +267,27 @@ const BranchedMenu: React.FC<BranchedMenuProps> = ({
                           d={reach(k)}
                           style={{
                             strokeDasharray: length(k),
-                            strokeDashoffset: kid.value === active ? 0 : length(k)
+                            strokeDashoffset:
+                              kid.value === active ? 0 : length(k),
                           }}
                         />
                       ))}
                     </svg>
-                    {kids.map(kid => (
+                    {kids.map((kid) => (
                       <button
                         key={kid.value}
                         type="button"
                         className="m-0 box-border flex w-full cursor-pointer items-center gap-2 border-0 bg-transparent py-0 pr-0 text-left outline-none [height:var(--bm-row)] [padding-left:var(--bm-indent)] [color:var(--bm-muted)] [font-family:inherit] [-webkit-tap-highlight-color:transparent] [transition:color_200ms_ease] hover:[color:var(--bm-ink)] data-[active]:font-medium data-[active]:[color:var(--bm-accent)]"
-                        aria-current={kid.value === active ? 'true' : undefined}
-                        data-active={kid.value === active ? '' : undefined}
+                        aria-current={kid.value === active ? "true" : undefined}
+                        data-active={kid.value === active ? "" : undefined}
                         tabIndex={isOpen ? 0 : -1}
                         onClick={() => select(kid.value, kid)}
                       >
                         {kid.icon ? (
-                          <span className="inline-flex flex-none" aria-hidden="true">
+                          <span
+                            className="inline-flex flex-none"
+                            aria-hidden="true"
+                          >
                             {renderIcon(kid.icon)}
                           </span>
                         ) : null}

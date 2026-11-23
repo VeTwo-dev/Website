@@ -18,14 +18,35 @@ export function HeroChart({ label }: { label: string }) {
   const short = (s: string) => (s.length > 15 ? `${s.slice(0, 14)}…` : s);
 
   return (
-    <svg viewBox={`0 0 ${W} ${H}`} className="hero-chart w-full [direction:ltr]" role="img" aria-label={label}>
+    <svg
+      viewBox={`0 0 ${W} ${H}`}
+      className="hero-chart w-full [direction:ltr]"
+      role="img"
+      aria-label={label}
+    >
       <defs>
-        <pattern id="hero-grid" width="32" height="32" patternUnits="userSpaceOnUse">
-          <path d="M 32 0 L 0 0 0 32" fill="none" className="stroke-border" strokeWidth="1" />
+        <pattern
+          id="hero-grid"
+          width="32"
+          height="32"
+          patternUnits="userSpaceOnUse"
+        >
+          <path
+            d="M 32 0 L 0 0 0 32"
+            fill="none"
+            className="stroke-border"
+            strokeWidth="1"
+          />
         </pattern>
         <radialGradient id="hero-glow" cx="62%" cy="38%" r="60%">
-          <stop offset="0%" style={{ stopColor: "var(--color-accent)", stopOpacity: 0.14 }} />
-          <stop offset="100%" style={{ stopColor: "var(--color-accent)", stopOpacity: 0 }} />
+          <stop
+            offset="0%"
+            style={{ stopColor: "var(--color-accent)", stopOpacity: 0.14 }}
+          />
+          <stop
+            offset="100%"
+            style={{ stopColor: "var(--color-accent)", stopOpacity: 0 }}
+          />
         </radialGradient>
       </defs>
       <rect width={W} height={H} fill="url(#hero-grid)" />
@@ -33,10 +54,30 @@ export function HeroChart({ label }: { label: string }) {
       {DIMENSIONS.map((d, i) => {
         const y = 40 + i * 72;
         return (
-          <g key={d} fontFamily="monospace" fontSize="10" className="fill-secondary">
-            <line x1={8} y1={y} x2={ox - 14} y2={y} className="stroke-input" strokeWidth="1" />
-            <circle cx={ox - 8} cy={y} r="2.5" className="fill-accent" opacity="0.7" />
-            <text x={8} y={y - 6}>{d}</text>
+          <g
+            key={d}
+            fontFamily="monospace"
+            fontSize="10"
+            className="fill-secondary"
+          >
+            <line
+              x1={8}
+              y1={y}
+              x2={ox - 14}
+              y2={y}
+              className="stroke-input"
+              strokeWidth="1"
+            />
+            <circle
+              cx={ox - 8}
+              cy={y}
+              r="2.5"
+              className="fill-accent"
+              opacity="0.7"
+            />
+            <text x={8} y={y - 6}>
+              {d}
+            </text>
           </g>
         );
       })}
@@ -48,9 +89,15 @@ export function HeroChart({ label }: { label: string }) {
           <line
             key={`${e.from}>${e.to}`}
             data-hero-edge
-            x1={a.x + ox} y1={a.y + oy} x2={b.x + ox} y2={b.y + oy}
-            className="stroke-accent" strokeWidth="1.6" opacity="0.8"
-          />        );
+            x1={a.x + ox}
+            y1={a.y + oy}
+            x2={b.x + ox}
+            y2={b.y + oy}
+            className="stroke-accent"
+            strokeWidth="1.6"
+            opacity="0.8"
+          />
+        );
       })}
       {VERIFIED_EDGES.filter((e) => e.kind === "conceptual").map((e) => {
         const a = pos.get(e.from);
@@ -59,8 +106,14 @@ export function HeroChart({ label }: { label: string }) {
         return (
           <line
             key={`${e.from}>${e.to}`}
-            x1={a.x + ox} y1={a.y + oy} x2={b.x + ox} y2={b.y + oy}
-            className="stroke-secondary" strokeWidth="1.2" strokeDasharray="5 5" opacity="0.7"
+            x1={a.x + ox}
+            y1={a.y + oy}
+            x2={b.x + ox}
+            y2={b.y + oy}
+            className="stroke-secondary"
+            strokeWidth="1.2"
+            strokeDasharray="5 5"
+            opacity="0.7"
           />
         );
       })}
@@ -72,11 +125,32 @@ export function HeroChart({ label }: { label: string }) {
           <g key={n.slug} data-hero-node>
             <title>{`${n.name} — ${n.category}, ${n.kind}`}</title>
             {published ? (
-              <circle cx={p.x + ox} cy={p.y + oy} r="7" className="fill-elevated stroke-accent" strokeWidth="1.6" />
+              <circle
+                cx={p.x + ox}
+                cy={p.y + oy}
+                r="7"
+                className="fill-elevated stroke-accent"
+                strokeWidth="1.6"
+              />
             ) : (
-              <rect x={p.x + ox - 6} y={p.y + oy - 6} width="12" height="12" rx="2.5" className="fill-elevated stroke-secondary" strokeWidth="1.4" />
+              <rect
+                x={p.x + ox - 6}
+                y={p.y + oy - 6}
+                width="12"
+                height="12"
+                rx="2.5"
+                className="fill-elevated stroke-secondary"
+                strokeWidth="1.4"
+              />
             )}
-            <text x={p.x + ox} y={p.y + oy + 22} textAnchor="middle" fontSize="10" className="fill-primary" fontFamily="monospace">
+            <text
+              x={p.x + ox}
+              y={p.y + oy + 22}
+              textAnchor="middle"
+              fontSize="10"
+              className="fill-primary"
+              fontFamily="monospace"
+            >
               {short(n.name)}
             </text>
           </g>

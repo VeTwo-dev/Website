@@ -1,0 +1,793 @@
+{
+ "preloader": [
+  {
+   "t": 868,
+   "pre": {
+    "display": "block",
+    "opacity": "1",
+    "vis": "visible",
+    "cls": "preloader"
+   },
+   "bodyCls": "frame",
+   "htmlCls": "js",
+   "heroOp": "1",
+   "scrollLocked": false
+  },
+  {
+   "t": 2061,
+   "pre": {
+    "display": "grid",
+    "opacity": "1",
+    "vis": "visible",
+    "cls": "preloader"
+   },
+   "bodyCls": "frame",
+   "htmlCls": "js",
+   "heroOp": "1",
+   "scrollLocked": false
+  },
+  {
+   "t": 2290,
+   "pre": {
+    "display": "grid",
+    "opacity": "1",
+    "vis": "visible",
+    "cls": "preloader"
+   },
+   "bodyCls": "frame",
+   "htmlCls": "js",
+   "heroOp": "1",
+   "scrollLocked": false
+  },
+  {
+   "t": 2813,
+   "pre": {
+    "display": "grid",
+    "opacity": "1",
+    "vis": "visible",
+    "cls": "preloader"
+   },
+   "bodyCls": "frame",
+   "htmlCls": "js",
+   "heroOp": "1",
+   "scrollLocked": false
+  },
+  {
+   "t": 3012,
+   "pre": {
+    "display": "grid",
+    "opacity": "1",
+    "vis": "visible",
+    "cls": "preloader"
+   },
+   "bodyCls": "frame",
+   "htmlCls": "js",
+   "heroOp": "1",
+   "scrollLocked": false
+  },
+  {
+   "t": 3303,
+   "pre": {
+    "display": "grid",
+    "opacity": "1",
+    "vis": "visible",
+    "cls": "preloader"
+   },
+   "bodyCls": "frame",
+   "htmlCls": "js lenis has-cursor fill-js motion-ready",
+   "heroOp": "1",
+   "scrollLocked": false
+  },
+  {
+   "t": 3477,
+   "pre": {
+    "display": "grid",
+    "opacity": "1",
+    "vis": "hidden",
+    "cls": "preloader"
+   },
+   "bodyCls": "frame",
+   "htmlCls": "js lenis has-cursor fill-js motion-ready",
+   "heroOp": "1",
+   "scrollLocked": false
+  },
+  {
+   "t": 4053,
+   "pre": {
+    "display": "grid",
+    "opacity": "1",
+    "vis": "hidden",
+    "cls": "preloader"
+   },
+   "bodyCls": "frame",
+   "htmlCls": "js lenis has-cursor fill-js motion-ready",
+   "heroOp": "1",
+   "scrollLocked": false
+  },
+  {
+   "t": 4229,
+   "pre": {
+    "display": "grid",
+    "opacity": "1",
+    "vis": "hidden",
+    "cls": "preloader"
+   },
+   "bodyCls": "frame",
+   "htmlCls": "js lenis has-cursor fill-js motion-ready",
+   "heroOp": "1",
+   "scrollLocked": false
+  },
+  {
+   "t": 4402,
+   "pre": {
+    "display": "grid",
+    "opacity": "1",
+    "vis": "hidden",
+    "cls": "preloader"
+   },
+   "bodyCls": "frame",
+   "htmlCls": "js lenis has-cursor fill-js motion-ready",
+   "heroOp": "1",
+   "scrollLocked": false
+  },
+  {
+   "t": 4597,
+   "pre": {
+    "display": "grid",
+    "opacity": "1",
+    "vis": "hidden",
+    "cls": "preloader"
+   },
+   "bodyCls": "frame",
+   "htmlCls": "js lenis has-cursor fill-js motion-ready",
+   "heroOp": "1",
+   "scrollLocked": false
+  },
+  {
+   "t": 4761,
+   "pre": {
+    "display": "grid",
+    "opacity": "1",
+    "vis": "hidden",
+    "cls": "preloader"
+   },
+   "bodyCls": "frame",
+   "htmlCls": "js lenis has-cursor fill-js motion-ready",
+   "heroOp": "1",
+   "scrollLocked": false
+  },
+  {
+   "t": 4928,
+   "pre": {
+    "display": "grid",
+    "opacity": "1",
+    "vis": "hidden",
+    "cls": "preloader"
+   },
+   "bodyCls": "frame",
+   "htmlCls": "js lenis has-cursor fill-js motion-ready",
+   "heroOp": "1",
+   "scrollLocked": false
+  },
+  {
+   "t": 5104,
+   "pre": {
+    "display": "grid",
+    "opacity": "1",
+    "vis": "hidden",
+    "cls": "preloader"
+   },
+   "bodyCls": "frame",
+   "htmlCls": "js lenis has-cursor fill-js motion-ready",
+   "heroOp": "1",
+   "scrollLocked": false
+  },
+  {
+   "t": 5282,
+   "pre": {
+    "display": "grid",
+    "opacity": "1",
+    "vis": "hidden",
+    "cls": "preloader"
+   },
+   "bodyCls": "frame",
+   "htmlCls": "js lenis has-cursor fill-js motion-ready",
+   "heroOp": "1",
+   "scrollLocked": false
+  },
+  {
+   "t": 5455,
+   "pre": {
+    "display": "grid",
+    "opacity": "1",
+    "vis": "hidden",
+    "cls": "preloader"
+   },
+   "bodyCls": "frame",
+   "htmlCls": "js lenis has-cursor fill-js motion-ready",
+   "heroOp": "1",
+   "scrollLocked": false
+  },
+  {
+   "t": 5648,
+   "pre": {
+    "display": "grid",
+    "opacity": "1",
+    "vis": "hidden",
+    "cls": "preloader"
+   },
+   "bodyCls": "frame",
+   "htmlCls": "js lenis has-cursor fill-js motion-ready",
+   "heroOp": "1",
+   "scrollLocked": false
+  },
+  {
+   "t": 5817,
+   "pre": {
+    "display": "grid",
+    "opacity": "1",
+    "vis": "hidden",
+    "cls": "preloader"
+   },
+   "bodyCls": "frame",
+   "htmlCls": "js lenis has-cursor fill-js motion-ready",
+   "heroOp": "1",
+   "scrollLocked": false
+  },
+  {
+   "t": 5983,
+   "pre": {
+    "display": "grid",
+    "opacity": "1",
+    "vis": "hidden",
+    "cls": "preloader"
+   },
+   "bodyCls": "frame",
+   "htmlCls": "js lenis has-cursor fill-js motion-ready",
+   "heroOp": "1",
+   "scrollLocked": false
+  },
+  {
+   "t": 6151,
+   "pre": {
+    "display": "grid",
+    "opacity": "1",
+    "vis": "hidden",
+    "cls": "preloader"
+   },
+   "bodyCls": "frame",
+   "htmlCls": "js lenis has-cursor fill-js motion-ready",
+   "heroOp": "1",
+   "scrollLocked": false
+  },
+  {
+   "t": 6327,
+   "pre": {
+    "display": "grid",
+    "opacity": "1",
+    "vis": "hidden",
+    "cls": "preloader"
+   },
+   "bodyCls": "frame",
+   "htmlCls": "js lenis has-cursor fill-js motion-ready",
+   "heroOp": "1",
+   "scrollLocked": false
+  },
+  {
+   "t": 6511,
+   "pre": {
+    "display": "grid",
+    "opacity": "1",
+    "vis": "hidden",
+    "cls": "preloader"
+   },
+   "bodyCls": "frame",
+   "htmlCls": "js lenis has-cursor fill-js motion-ready",
+   "heroOp": "1",
+   "scrollLocked": false
+  },
+  {
+   "t": 6690,
+   "pre": {
+    "display": "grid",
+    "opacity": "1",
+    "vis": "hidden",
+    "cls": "preloader"
+   },
+   "bodyCls": "frame",
+   "htmlCls": "js lenis has-cursor fill-js motion-ready",
+   "heroOp": "1",
+   "scrollLocked": false
+  },
+  {
+   "t": 6919,
+   "pre": {
+    "display": "grid",
+    "opacity": "1",
+    "vis": "hidden",
+    "cls": "preloader"
+   },
+   "bodyCls": "frame",
+   "htmlCls": "js lenis has-cursor fill-js motion-ready",
+   "heroOp": "1",
+   "scrollLocked": false
+  },
+  {
+   "t": 7112,
+   "pre": {
+    "display": "grid",
+    "opacity": "1",
+    "vis": "hidden",
+    "cls": "preloader"
+   },
+   "bodyCls": "frame",
+   "htmlCls": "js lenis has-cursor fill-js motion-ready",
+   "heroOp": "1",
+   "scrollLocked": false
+  },
+  {
+   "t": 7269,
+   "pre": {
+    "display": "grid",
+    "opacity": "1",
+    "vis": "hidden",
+    "cls": "preloader"
+   },
+   "bodyCls": "frame",
+   "htmlCls": "js lenis has-cursor fill-js motion-ready",
+   "heroOp": "1",
+   "scrollLocked": false
+  },
+  {
+   "t": 7429,
+   "pre": {
+    "display": "grid",
+    "opacity": "1",
+    "vis": "hidden",
+    "cls": "preloader"
+   },
+   "bodyCls": "frame",
+   "htmlCls": "js lenis has-cursor fill-js motion-ready",
+   "heroOp": "1",
+   "scrollLocked": false
+  },
+  {
+   "t": 7592,
+   "pre": {
+    "display": "grid",
+    "opacity": "1",
+    "vis": "hidden",
+    "cls": "preloader"
+   },
+   "bodyCls": "frame",
+   "htmlCls": "js lenis has-cursor fill-js motion-ready",
+   "heroOp": "1",
+   "scrollLocked": false
+  },
+  {
+   "t": 7761,
+   "pre": {
+    "display": "grid",
+    "opacity": "1",
+    "vis": "hidden",
+    "cls": "preloader"
+   },
+   "bodyCls": "frame",
+   "htmlCls": "js lenis has-cursor fill-js motion-ready",
+   "heroOp": "1",
+   "scrollLocked": false
+  },
+  {
+   "t": 7926,
+   "pre": {
+    "display": "grid",
+    "opacity": "1",
+    "vis": "hidden",
+    "cls": "preloader"
+   },
+   "bodyCls": "frame",
+   "htmlCls": "js lenis has-cursor fill-js motion-ready",
+   "heroOp": "1",
+   "scrollLocked": false
+  },
+  {
+   "t": 8098,
+   "pre": {
+    "display": "grid",
+    "opacity": "1",
+    "vis": "hidden",
+    "cls": "preloader"
+   },
+   "bodyCls": "frame",
+   "htmlCls": "js lenis has-cursor fill-js motion-ready",
+   "heroOp": "1",
+   "scrollLocked": false
+  },
+  {
+   "t": 8260,
+   "pre": {
+    "display": "grid",
+    "opacity": "1",
+    "vis": "hidden",
+    "cls": "preloader"
+   },
+   "bodyCls": "frame",
+   "htmlCls": "js lenis has-cursor fill-js motion-ready",
+   "heroOp": "1",
+   "scrollLocked": false
+  },
+  {
+   "t": 8459,
+   "pre": {
+    "display": "grid",
+    "opacity": "1",
+    "vis": "hidden",
+    "cls": "preloader"
+   },
+   "bodyCls": "frame",
+   "htmlCls": "js lenis has-cursor fill-js motion-ready",
+   "heroOp": "1",
+   "scrollLocked": false
+  },
+  {
+   "t": 8633,
+   "pre": {
+    "display": "grid",
+    "opacity": "1",
+    "vis": "hidden",
+    "cls": "preloader"
+   },
+   "bodyCls": "frame",
+   "htmlCls": "js lenis has-cursor fill-js motion-ready",
+   "heroOp": "1",
+   "scrollLocked": false
+  },
+  {
+   "t": 8793,
+   "pre": {
+    "display": "grid",
+    "opacity": "1",
+    "vis": "hidden",
+    "cls": "preloader"
+   },
+   "bodyCls": "frame",
+   "htmlCls": "js lenis has-cursor fill-js motion-ready",
+   "heroOp": "1",
+   "scrollLocked": false
+  },
+  {
+   "t": 8954,
+   "pre": {
+    "display": "grid",
+    "opacity": "1",
+    "vis": "hidden",
+    "cls": "preloader"
+   },
+   "bodyCls": "frame",
+   "htmlCls": "js lenis has-cursor fill-js motion-ready",
+   "heroOp": "1",
+   "scrollLocked": false
+  },
+  {
+   "t": 9147,
+   "pre": {
+    "display": "grid",
+    "opacity": "1",
+    "vis": "hidden",
+    "cls": "preloader"
+   },
+   "bodyCls": "frame",
+   "htmlCls": "js lenis has-cursor fill-js motion-ready",
+   "heroOp": "1",
+   "scrollLocked": false
+  },
+  {
+   "t": 9316,
+   "pre": {
+    "display": "grid",
+    "opacity": "1",
+    "vis": "hidden",
+    "cls": "preloader"
+   },
+   "bodyCls": "frame",
+   "htmlCls": "js lenis has-cursor fill-js motion-ready",
+   "heroOp": "1",
+   "scrollLocked": false
+  },
+  {
+   "t": 9497,
+   "pre": {
+    "display": "grid",
+    "opacity": "1",
+    "vis": "hidden",
+    "cls": "preloader"
+   },
+   "bodyCls": "frame",
+   "htmlCls": "js lenis has-cursor fill-js motion-ready",
+   "heroOp": "1",
+   "scrollLocked": false
+  },
+  {
+   "t": 9660,
+   "pre": {
+    "display": "grid",
+    "opacity": "1",
+    "vis": "hidden",
+    "cls": "preloader"
+   },
+   "bodyCls": "frame",
+   "htmlCls": "js lenis has-cursor fill-js motion-ready",
+   "heroOp": "1",
+   "scrollLocked": false
+  }
+ ],
+ "annotations": [],
+ "controls": [
+  {
+   "tag": "BUTTON",
+   "text": "",
+   "aria": "Toggle light / dark theme",
+   "title": null,
+   "cls": "tool"
+  },
+  {
+   "tag": "BUTTON",
+   "text": "",
+   "aria": "Change accent colour",
+   "title": null,
+   "cls": "tool"
+  },
+  {
+   "tag": "BUTTON",
+   "text": "⌘K",
+   "aria": "Open command palette (⌘K)",
+   "title": null,
+   "cls": "tool tool--kbd note"
+  },
+  {
+   "tag": "BUTTON",
+   "text": "Menu",
+   "aria": "Open menu",
+   "title": null,
+   "cls": "tool tool--menu note"
+  },
+  {
+   "tag": "BUTTON",
+   "text": "Next slide →",
+   "aria": null,
+   "title": null,
+   "cls": "btn btn--ghost"
+  },
+  {
+   "tag": "BUTTON",
+   "text": "Rename another ↻",
+   "aria": null,
+   "title": null,
+   "cls": "btn btn--ghost"
+  }
+ ],
+ "kbd": [
+  "⌘K",
+  "WordPress · GSAP · Lenis",
+  "Manufacturer · WordPress",
+  "→ file name · alt · caption",
+  "alt ✓ · caption ✓",
+  "alt ✓ · caption ✓",
+  "alt ✓ · caption ✓",
+  "alt",
+  "WordPress",
+  "Creating a custom n8n Node for WordPress: managing Custom Post Types"
+ ],
+ "paletteLight": {
+  "--bg": "#f4f4f0",
+  "--bg-raised": "#ecece6",
+  "--ink": "#0e0e0d",
+  "--muted": "#65655f",
+  "--line": "#0e0e0d24",
+  "--accent": "#2f5bff",
+  "--accent-ink": "#fff",
+  "--font-sans": "\"Geist Variable\", ui-sans-serif, system-ui, sans-serif",
+  "--dur-1": ".4s",
+  "--ease-out": "cubic-bezier(.25, 1, .5, 1)"
+ },
+ "paletteDark": {
+  "--bg": "#0b0b0c",
+  "--bg-raised": "#151517",
+  "--ink": "#edede7",
+  "--muted": "#8b8b85",
+  "--line": "#edede71f",
+  "--accent": "#5b7cff",
+  "--accent-ink": "#0e0e0d",
+  "--font-sans": "\"Geist Variable\", ui-sans-serif, system-ui, sans-serif",
+  "--dur-1": ".4s",
+  "--ease-out": "cubic-bezier(.25, 1, .5, 1)"
+ },
+ "htmlAfterToggle": "js lenis has-cursor fill-js motion-ready | data-theme=dark",
+ "navHover": {
+  "navBefore": {
+   "color": "rgb(237, 237, 231)",
+   "td": "0s",
+   "label": "02Services"
+  },
+  "navAfter": {
+   "color": "rgb(237, 237, 231)"
+  }
+ },
+ "btnHover": {
+  "btnBefore": {
+   "bg": "rgb(237, 237, 231)",
+   "color": "rgb(11, 11, 12)",
+   "border": "rgb(11, 11, 12)",
+   "td": "0.4s"
+  },
+  "btnAfter": {
+   "bg": "rgb(237, 237, 231)",
+   "color": "rgb(11, 11, 12)",
+   "border": "rgb(11, 11, 12)",
+   "transform": "matrix(1, 0, 0, 1, -0.0004, 0)"
+  }
+ },
+ "focusSeq": [
+  {
+   "tag": "BUTTON",
+   "text": "",
+   "aria": "Change accent colour",
+   "outline": "2px solid rgb(91, 124, 255)",
+   "boxShadow": "rgba(237, 237, 231, 0.3) 0px 0px 0px 1px inset"
+  },
+  {
+   "tag": "BUTTON",
+   "text": "⌘K",
+   "aria": "Open command palette (⌘K)",
+   "outline": "2px solid rgb(91, 124, 255)",
+   "boxShadow": "rgba(237, 237, 231, 0.3) 0px 0px 0px 1px inset"
+  },
+  {
+   "tag": "A",
+   "text": "Let's talk",
+   "aria": null,
+   "outline": "2px solid rgb(91, 124, 255)",
+   "boxShadow": "none"
+  },
+  {
+   "tag": "A",
+   "text": "Send me the hard part →",
+   "aria": null,
+   "outline": "2px solid rgb(91, 124, 255)",
+   "boxShadow": "none"
+  },
+  {
+   "tag": "A",
+   "text": "See the work",
+   "aria": null,
+   "outline": "2px solid rgb(91, 124, 255)",
+   "boxShadow": "rgba(237, 237, 231, 0.3) 0px 0px 0px 1px inset"
+  },
+  {
+   "tag": "BUTTON",
+   "text": "Next slide →",
+   "aria": null,
+   "outline": "2px solid rgb(91, 124, 255)",
+   "boxShadow": "rgba(237, 237, 231, 0.3) 0px 0px 0px 1px inset"
+  },
+  {
+   "tag": "BUTTON",
+   "text": "Rename another ↻",
+   "aria": null,
+   "outline": "2px solid rgb(91, 124, 255)",
+   "boxShadow": "rgba(237, 237, 231, 0.3) 0px 0px 0px 1px inset"
+  },
+  {
+   "tag": "A",
+   "text": "piergorelli.com, redesigned",
+   "aria": null,
+   "outline": "2px solid rgb(91, 124, 255)",
+   "boxShadow": "none"
+  }
+ ],
+ "fillState": [
+  {
+   "tag": "HTML",
+   "cls": "js has-cursor fill-js motion-ready lenis",
+   "d": "1/none",
+   "attr": ""
+  },
+  {
+   "tag": "SPAN",
+   "cls": "hd-rule__fill",
+   "d": "1/matrix(1, 0, 0, 1, -1255.5, 0)",
+   "attr": ""
+  },
+  {
+   "tag": "rect",
+   "cls": "[object SVGAnimatedString]",
+   "d": "1/none",
+   "attr": ""
+  },
+  {
+   "tag": "A",
+   "cls": "service__link grid-12",
+   "d": "1/none",
+   "attr": ""
+  },
+  {
+   "tag": "A",
+   "cls": "service__link grid-12",
+   "d": "1/none",
+   "attr": ""
+  },
+  {
+   "tag": "A",
+   "cls": "service__link grid-12",
+   "d": "1/none",
+   "attr": ""
+  }
+ ],
+ "reducedMotion": {
+  "htmlCls": "js motion-ready",
+  "pre": "none",
+  "heroChildren": [
+   "1",
+   "1",
+   "1",
+   "1"
+  ],
+  "animations": [
+   {
+    "cls": "preloader",
+    "name": "lift",
+    "dur": "1e-05s",
+    "iter": "1"
+   },
+   {
+    "cls": "[object SVGAnimatedString]",
+    "name": "plot",
+    "dur": "1e-05s",
+    "iter": "1"
+   },
+   {
+    "cls": "[object SVGAnimatedString]",
+    "name": "plot",
+    "dur": "1e-05s",
+    "iter": "1"
+   },
+   {
+    "cls": "[object SVGAnimatedString]",
+    "name": "pop",
+    "dur": "1e-05s",
+    "iter": "1"
+   },
+   {
+    "cls": "preloader__count",
+    "name": "count",
+    "dur": "1e-05s",
+    "iter": "1"
+   },
+   {
+    "cls": "site-header wrap",
+    "name": "hd-compact",
+    "dur": "1e-05s",
+    "iter": "1"
+   },
+   {
+    "cls": "hd-rule",
+    "name": "hd-draw",
+    "dur": "1e-05s",
+    "iter": "1"
+   },
+   {
+    "cls": "hd-rule__fill",
+    "name": "hd-progress",
+    "dur": "1e-05s",
+    "iter": "1"
+   },
+   {
+    "cls": "hd-rule__tag note",
+    "name": "hd-tag",
+    "dur": "1e-05s",
+    "iter": "1"
+   }
+  ],
+  "cursor": "absent"
+ }
+}

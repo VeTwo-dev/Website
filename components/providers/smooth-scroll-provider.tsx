@@ -1,12 +1,13 @@
 "use client";
 
+import { createContext, useContext, useEffect, type ReactNode } from "react";
 import {
-  createContext,
-  useContext,
-  useEffect,
-  type ReactNode,
-} from "react";
-import { SMOOTH_SCROLL_CONFIG, resolveNativeTop, type ScrollState, type ScrollTarget, type ScrollToOptions } from "@/lib/smooth-scroll";
+  SMOOTH_SCROLL_CONFIG,
+  resolveNativeTop,
+  type ScrollState,
+  type ScrollTarget,
+  type ScrollToOptions,
+} from "@/lib/smooth-scroll";
 
 /**
  * Global Lenis smooth-scroll provider.
@@ -106,9 +107,17 @@ function snapshot(): ScrollState {
       direction: lenis.direction,
     };
   }
-  const max = (document.documentElement?.scrollHeight ?? window.innerHeight) - window.innerHeight;
+  const max =
+    (document.documentElement?.scrollHeight ?? window.innerHeight) -
+    window.innerHeight;
   const scroll = window.scrollY;
-  return { scroll, limit: Math.max(0, max), progress: max > 0 ? Math.min(1, Math.max(0, scroll / max)) : 0, velocity: 0, direction: 0 };
+  return {
+    scroll,
+    limit: Math.max(0, max),
+    progress: max > 0 ? Math.min(1, Math.max(0, scroll / max)) : 0,
+    velocity: 0,
+    direction: 0,
+  };
 }
 
 function dispatch(): void {
@@ -142,11 +151,17 @@ const scrollApi: ScrollApi = {
     if (lenis) {
       // Lenis natively handles numbers, elements, selectors, and the
       // "top"/"bottom" literals (verified against the installed version).
-      lenis.scrollTo(target as number | string | Element, { offset, immediate: options.immediate ?? false });
+      lenis.scrollTo(target as number | string | Element, {
+        offset,
+        immediate: options.immediate ?? false,
+      });
       return;
     }
     if (typeof window === "undefined") return;
-    window.scrollTo({ top: resolveNativeTop(target, offset), behavior: "auto" });
+    window.scrollTo({
+      top: resolveNativeTop(target, offset),
+      behavior: "auto",
+    });
   },
   scrollToTop(options) {
     scrollApi.scrollTo(0, options);
@@ -185,11 +200,12 @@ export function SmoothScrollProvider({ children }: { children: ReactNode }) {
 
     void (async () => {
       try {
-        const [{ default: Lenis }, gsapModule, scrollTriggerModule] = await Promise.all([
-          import("lenis"),
-          import("gsap"),
-          import("gsap/ScrollTrigger"),
-        ]);
+        const [{ default: Lenis }, gsapModule, scrollTriggerModule] =
+          await Promise.all([
+            import("lenis"),
+            import("gsap"),
+            import("gsap/ScrollTrigger"),
+          ]);
         if (cancelled) return;
 
         // Reap a stray instance from a hot reload before creating ours.
@@ -249,7 +265,11 @@ export function SmoothScrollProvider({ children }: { children: ReactNode }) {
     // Mount-only: the provider owns the singleton for the whole app tree.
   }, []);
 
-  return <ScrollContext.Provider value={scrollApi}>{children}</ScrollContext.Provider>;
+  return (
+    <ScrollContext.Provider value={scrollApi}>
+      {children}
+    </ScrollContext.Provider>
+  );
 }
 
 /**

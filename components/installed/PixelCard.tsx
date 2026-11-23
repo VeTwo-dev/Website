@@ -1,49 +1,56 @@
-'use client';
+"use client";
 
-import { useEffect, useRef, useState, type CSSProperties, type FocusEvent, type ReactNode } from 'react';
+import {
+  useEffect,
+  useRef,
+  useState,
+  type CSSProperties,
+  type FocusEvent,
+  type ReactNode,
+} from "react";
 
 const CARD =
-  'group relative grid place-items-center w-[300px] h-[400px] overflow-hidden rounded-[var(--pixel-card-radius,24px)] isolate outline-none select-none [-webkit-tap-highlight-color:transparent] [&>:not(canvas):not([data-rim])]:relative [&>:not(canvas):not([data-rim])]:z-[1]';
+  "group relative grid place-items-center w-[300px] h-[400px] overflow-hidden rounded-[var(--pixel-card-radius,24px)] isolate outline-none select-none [-webkit-tap-highlight-color:transparent] [&>:not(canvas):not([data-rim])]:relative [&>:not(canvas):not([data-rim])]:z-[1]";
 
 const SURFACE: Record<Tone, string> = {
-  dark: 'bg-[linear-gradient(180deg,#17151c_0%,#0f0e13_100%)] shadow-[0_24px_48px_-24px_rgba(0,0,0,0.85),0_8px_18px_-10px_rgba(0,0,0,0.6)] focus-visible:shadow-[0_24px_48px_-24px_rgba(0,0,0,0.85),0_8px_18px_-10px_rgba(0,0,0,0.6),0_0_0_3px_rgba(127,127,140,0.45)]',
+  dark: "bg-[linear-gradient(180deg,#17151c_0%,#0f0e13_100%)] shadow-[0_24px_48px_-24px_rgba(0,0,0,0.85),0_8px_18px_-10px_rgba(0,0,0,0.6)] focus-visible:shadow-[0_24px_48px_-24px_rgba(0,0,0,0.85),0_8px_18px_-10px_rgba(0,0,0,0.6),0_0_0_3px_rgba(127,127,140,0.45)]",
   light:
-    'bg-[linear-gradient(180deg,#ffffff_0%,#f6f6f8_100%)] shadow-[0_24px_48px_-26px_rgba(24,24,27,0.32),0_8px_18px_-12px_rgba(24,24,27,0.18)] focus-visible:shadow-[0_24px_48px_-26px_rgba(24,24,27,0.32),0_8px_18px_-12px_rgba(24,24,27,0.18),0_0_0_3px_rgba(127,127,140,0.45)]'
+    "bg-[linear-gradient(180deg,#ffffff_0%,#f6f6f8_100%)] shadow-[0_24px_48px_-26px_rgba(24,24,27,0.32),0_8px_18px_-12px_rgba(24,24,27,0.18)] focus-visible:shadow-[0_24px_48px_-26px_rgba(24,24,27,0.32),0_8px_18px_-12px_rgba(24,24,27,0.18),0_0_0_3px_rgba(127,127,140,0.45)]",
 };
 
 const RIM: Record<Tone, string> = {
-  dark: 'pointer-events-none absolute inset-0 z-[2] rounded-[inherit] transition-shadow duration-[260ms] shadow-[inset_0_0_0_1px_rgba(255,255,255,0.08),inset_0_1px_0_rgba(255,255,255,0.06)] group-data-[active]:shadow-[inset_0_0_0_1px_rgba(255,255,255,0.16),inset_0_1px_0_rgba(255,255,255,0.06)]',
+  dark: "pointer-events-none absolute inset-0 z-[2] rounded-[inherit] transition-shadow duration-[260ms] shadow-[inset_0_0_0_1px_rgba(255,255,255,0.08),inset_0_1px_0_rgba(255,255,255,0.06)] group-data-[active]:shadow-[inset_0_0_0_1px_rgba(255,255,255,0.16),inset_0_1px_0_rgba(255,255,255,0.06)]",
   light:
-    'pointer-events-none absolute inset-0 z-[2] rounded-[inherit] transition-shadow duration-[260ms] shadow-[inset_0_0_0_1px_rgba(24,24,27,0.08),inset_0_1px_0_rgba(255,255,255,1)] group-data-[active]:shadow-[inset_0_0_0_1px_rgba(24,24,27,0.16),inset_0_1px_0_rgba(255,255,255,1)]'
+    "pointer-events-none absolute inset-0 z-[2] rounded-[inherit] transition-shadow duration-[260ms] shadow-[inset_0_0_0_1px_rgba(24,24,27,0.08),inset_0_1px_0_rgba(255,255,255,1)] group-data-[active]:shadow-[inset_0_0_0_1px_rgba(24,24,27,0.16),inset_0_1px_0_rgba(255,255,255,1)]",
 };
 
 export interface PixelCardProps {
-  variant?: 'default' | 'blue' | 'yellow' | 'pink';
+  variant?: "default" | "blue" | "yellow" | "pink";
   colors?: string | string[];
   gap?: number;
   speed?: number;
   pixelSize?: number;
-  shape?: 'square' | 'circle' | 'diamond';
-  origin?: 'center' | 'pointer';
+  shape?: "square" | "circle" | "diamond";
+  origin?: "center" | "pointer";
   revealDuration?: number;
   spotlight?: number;
   glow?: number;
   glowColor?: string;
   opacity?: number;
   fade?: number;
-  trigger?: 'hover' | 'click' | 'always';
+  trigger?: "hover" | "click" | "always";
   clickPulse?: boolean;
   intro?: boolean;
   introDelay?: number;
   noFocus?: boolean;
-  theme?: 'dark' | 'light';
+  theme?: "dark" | "light";
   radius?: number;
   className?: string;
   style?: CSSProperties;
   children?: ReactNode;
 }
 
-type Tone = 'dark' | 'light';
+type Tone = "dark" | "light";
 
 interface VariantConfig {
   gap: number;
@@ -90,39 +97,52 @@ const VARIANTS: Record<string, VariantConfig> = {
   default: {
     gap: 5,
     speed: 35,
-    colors: { dark: ['#f8fafc', '#f1f5f9', '#cbd5e1'], light: ['#18181b', '#52525b', '#a1a1aa'] },
-    glow: { dark: '#cbd5e1', light: '#71717a' },
-    noFocus: false
+    colors: {
+      dark: ["#f8fafc", "#f1f5f9", "#cbd5e1"],
+      light: ["#18181b", "#52525b", "#a1a1aa"],
+    },
+    glow: { dark: "#cbd5e1", light: "#71717a" },
+    noFocus: false,
   },
   blue: {
     gap: 10,
     speed: 25,
-    colors: { dark: ['#e0f2fe', '#7dd3fc', '#0ea5e9'], light: ['#0c4a6e', '#0369a1', '#0284c7'] },
-    glow: { dark: '#0ea5e9', light: '#0284c7' },
-    noFocus: false
+    colors: {
+      dark: ["#e0f2fe", "#7dd3fc", "#0ea5e9"],
+      light: ["#0c4a6e", "#0369a1", "#0284c7"],
+    },
+    glow: { dark: "#0ea5e9", light: "#0284c7" },
+    noFocus: false,
   },
   yellow: {
     gap: 3,
     speed: 20,
-    colors: { dark: ['#fef08a', '#fde047', '#eab308'], light: ['#713f12', '#a16207', '#ca8a04'] },
-    glow: { dark: '#eab308', light: '#ca8a04' },
-    noFocus: false
+    colors: {
+      dark: ["#fef08a", "#fde047", "#eab308"],
+      light: ["#713f12", "#a16207", "#ca8a04"],
+    },
+    glow: { dark: "#eab308", light: "#ca8a04" },
+    noFocus: false,
   },
   pink: {
     gap: 6,
     speed: 80,
-    colors: { dark: ['#fecdd3', '#fda4af', '#e11d48'], light: ['#831843', '#be123c', '#e11d48'] },
-    glow: { dark: '#e11d48', light: '#be123c' },
-    noFocus: true
-  }
+    colors: {
+      dark: ["#fecdd3", "#fda4af", "#e11d48"],
+      light: ["#831843", "#be123c", "#e11d48"],
+    },
+    glow: { dark: "#e11d48", light: "#be123c" },
+    noFocus: true,
+  },
 };
 
 const SHAPES: Record<string, number> = { square: 0, circle: 1, diamond: 2 };
-const TRIGGERS = ['hover', 'click', 'always'];
+const TRIGGERS = ["hover", "click", "always"];
 const APPEAR = 0.26;
 const EXIT = 0.22;
 
-const clamp = (value: number, min: number, max: number) => Math.min(Math.max(value, min), max);
+const clamp = (value: number, min: number, max: number) =>
+  Math.min(Math.max(value, min), max);
 
 const smoothstep = (edge0: number, edge1: number, value: number) => {
   const t = clamp((value - edge0) / (edge1 - edge0), 0, 1);
@@ -136,21 +156,23 @@ const easeOutBack = (t: number) => {
 };
 
 const toList = (value: string | string[] | undefined): string[] =>
-  (Array.isArray(value) ? value : String(value ?? '').split(',')).map(color => color.trim()).filter(Boolean);
+  (Array.isArray(value) ? value : String(value ?? "").split(","))
+    .map((color) => color.trim())
+    .filter(Boolean);
 
 const toRgb = (() => {
   let context: CanvasRenderingContext2D | null = null;
   return (color: string): number[] => {
-    if (typeof document === 'undefined') return [255, 255, 255];
+    if (typeof document === "undefined") return [255, 255, 255];
     if (!context) {
-      const canvas = document.createElement('canvas');
+      const canvas = document.createElement("canvas");
       canvas.width = 1;
       canvas.height = 1;
-      context = canvas.getContext('2d', { willReadFrequently: true });
+      context = canvas.getContext("2d", { willReadFrequently: true });
     }
     if (!context) return [255, 255, 255];
     context.clearRect(0, 0, 1, 1);
-    context.fillStyle = '#fff';
+    context.fillStyle = "#fff";
     context.fillStyle = color;
     context.fillRect(0, 0, 1, 1);
     const [r, g, b] = context.getImageData(0, 0, 1, 1).data;
@@ -159,29 +181,29 @@ const toRgb = (() => {
 })();
 
 export default function PixelCard({
-  variant = 'default',
+  variant = "default",
   colors,
   gap,
   speed,
   pixelSize = 2,
-  shape = 'square',
-  origin = 'center',
+  shape = "square",
+  origin = "center",
   revealDuration = 600,
   spotlight = 0.5,
   glow = 0.5,
   glowColor,
   opacity = 1,
   fade = 0,
-  trigger = 'hover',
+  trigger = "hover",
   clickPulse = true,
   intro = true,
   introDelay = 0,
   noFocus,
-  theme = 'dark',
+  theme = "dark",
   radius = 24,
-  className = '',
+  className = "",
   style,
-  children
+  children,
 }: PixelCardProps) {
   const containerRef = useRef<HTMLDivElement>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
@@ -189,12 +211,12 @@ export default function PixelCard({
   const settingsRef = useRef<Settings>(null as unknown as Settings);
   const [active, setActive] = useState(false);
 
-  const tone: Tone = theme === 'light' ? 'light' : 'dark';
+  const tone: Tone = theme === "light" ? "light" : "dark";
   const preset = VARIANTS[variant] || VARIANTS.default;
   const palette = colors ? toList(colors) : preset.colors[tone];
   const focusOff = noFocus ?? preset.noFocus;
 
-  settingsRef.current = {
+  const settingsValue: Settings = {
     colors: palette.length ? palette : preset.colors[tone],
     gap: Math.max(2, Number(gap ?? preset.gap) || preset.gap),
     speed: clamp(Number(speed ?? preset.speed) || 0, 0, 100),
@@ -207,19 +229,23 @@ export default function PixelCard({
     glowColor: toRgb(glowColor || preset.glow[tone]),
     opacity: clamp(opacity, 0, 1),
     fade: clamp(fade, 0, 1),
-    trigger: TRIGGERS.includes(trigger) ? trigger : 'hover',
+    trigger: TRIGGERS.includes(trigger) ? trigger : "hover",
     clickPulse,
     intro,
-    introDelay: Math.max(0, introDelay)
+    introDelay: Math.max(0, introDelay),
   };
+  useEffect(() => {
+    settingsRef.current = settingsValue;
+  }, [settingsValue]);
 
   useEffect(() => {
     const container = containerRef.current;
     const canvas = canvasRef.current;
     if (!container || !canvas) return undefined;
-    const ctx = canvas.getContext('2d');
+    const ctx = canvas.getContext("2d");
     if (!ctx) return undefined;
-    const reduce = window.matchMedia?.('(prefers-reduced-motion: reduce)').matches ?? false;
+    const reduce =
+      window.matchMedia?.("(prefers-reduced-motion: reduce)").matches ?? false;
 
     const state = {
       alive: true,
@@ -230,7 +256,7 @@ export default function PixelCard({
       width: 0,
       height: 0,
       ratio: 1,
-      key: '',
+      key: "",
       count: 0,
       x: new Float32Array(0),
       y: new Float32Array(0),
@@ -242,8 +268,8 @@ export default function PixelCard({
       presence: new Float32Array(0),
       delay: new Float32Array(0),
       mask: new Float32Array(0),
-      maskKey: '',
-      mode: '',
+      maskKey: "",
+      mode: "",
       active: false,
       changedAt: 0,
       originX: 0,
@@ -260,7 +286,7 @@ export default function PixelCard({
       pulses: [] as Pulse[],
       dt: 1 / 60,
       releaseAt: -1,
-      introAt: -1
+      introAt: -1,
     };
 
     const build = () => {
@@ -269,7 +295,14 @@ export default function PixelCard({
       const width = Math.max(1, Math.round(rect.width));
       const height = Math.max(1, Math.round(rect.height));
       const ratio = Math.min(window.devicePixelRatio || 1, 2);
-      const key = [width, height, ratio, s.gap, s.pixelSize, s.colors.join(',')].join('|');
+      const key = [
+        width,
+        height,
+        ratio,
+        s.gap,
+        s.pixelSize,
+        s.colors.join(","),
+      ].join("|");
       if (key === state.key) return;
       state.key = key;
       state.width = width;
@@ -304,7 +337,8 @@ export default function PixelCard({
           state.phase[i] = Math.random() * Math.PI * 2;
           state.rate[i] = 0.55 + Math.random() * 0.9;
           state.jitter[i] = Math.random();
-          if (previous.length) state.presence[i] = previous[Math.min(i, previous.length - 1)];
+          if (previous.length)
+            state.presence[i] = previous[Math.min(i, previous.length - 1)];
           i++;
         }
       }
@@ -317,11 +351,16 @@ export default function PixelCard({
       const span = s.revealDuration / 1000;
       let far = 1;
       for (let i = 0; i < state.count; i++) {
-        far = Math.max(far, Math.hypot(state.x[i] - state.originX, state.y[i] - state.originY));
+        far = Math.max(
+          far,
+          Math.hypot(state.x[i] - state.originX, state.y[i] - state.originY),
+        );
       }
       state.maxDistance = far;
       for (let i = 0; i < state.count; i++) {
-        const distance = Math.hypot(state.x[i] - state.originX, state.y[i] - state.originY) / far;
+        const distance =
+          Math.hypot(state.x[i] - state.originX, state.y[i] - state.originY) /
+          far;
         state.delay[i] = state.active
           ? distance * span * 0.82 + state.jitter[i] * span * 0.18
           : (1 - distance) * span * 0.45 + state.jitter[i] * span * 0.1;
@@ -334,7 +373,8 @@ export default function PixelCard({
       state.active = value;
       state.changedAt = state.time;
       if (value) {
-        const usePointer = s.origin === 'pointer' && x !== undefined && y !== undefined;
+        const usePointer =
+          s.origin === "pointer" && x !== undefined && y !== undefined;
         state.originX = usePointer ? x : state.width / 2;
         state.originY = usePointer ? y : state.height / 2;
       }
@@ -356,7 +396,12 @@ export default function PixelCard({
         const near = Math.min(width, height) * 0.05;
         const far = Math.min(width, height) * 0.42;
         for (let i = 0; i < state.count; i++) {
-          const edge = Math.min(state.x[i], width - state.x[i], state.y[i], height - state.y[i]);
+          const edge = Math.min(
+            state.x[i],
+            width - state.x[i],
+            state.y[i],
+            height - state.y[i],
+          );
           const t = clamp((edge - near) / (far - near), 0, 1);
           state.mask[i] = 1 - s.fade * t * t * t * (t * (t * 6 - 15) + 10);
         }
@@ -371,8 +416,10 @@ export default function PixelCard({
         const ready = elapsed >= state.delay[i] || reduce;
         const target = state.active ? (ready ? 1 : 0) : ready ? 0 : current;
         if (reduce) state.presence[i] = target;
-        else if (target > current) state.presence[i] = Math.min(1, current + appearStep);
-        else if (target < current) state.presence[i] = Math.max(0, current - exitStep);
+        else if (target > current)
+          state.presence[i] = Math.min(1, current + appearStep);
+        else if (target < current)
+          state.presence[i] = Math.max(0, current - exitStep);
         presenceSum += state.presence[i];
       }
       const presenceAvg = state.count ? presenceSum / state.count : 0;
@@ -383,9 +430,13 @@ export default function PixelCard({
         const cy = state.spotPower > 0.01 ? state.spotY : state.originY;
         const reach = Math.max(width, height) * 0.85;
         const gradient = ctx.createRadialGradient(cx, cy, 0, cx, cy, reach);
-        const strength = s.glow * s.opacity * 0.32 * Math.min(1, presenceAvg * 1.4);
+        const strength =
+          s.glow * s.opacity * 0.32 * Math.min(1, presenceAvg * 1.4);
         gradient.addColorStop(0, `rgba(${r}, ${g}, ${b}, ${strength})`);
-        gradient.addColorStop(0.45, `rgba(${r}, ${g}, ${b}, ${strength * 0.35})`);
+        gradient.addColorStop(
+          0.45,
+          `rgba(${r}, ${g}, ${b}, ${strength * 0.35})`,
+        );
         gradient.addColorStop(1, `rgba(${r}, ${g}, ${b}, 0)`);
         ctx.fillStyle = gradient;
         ctx.fillRect(0, 0, width, height);
@@ -408,16 +459,25 @@ export default function PixelCard({
           let size = state.size[i];
           let alpha = 0.5 + presence * 0.38;
           if (twinkle) {
-            const wave = Math.sin(state.phase[i] + state.time * frequency * state.rate[i]);
+            const wave = Math.sin(
+              state.phase[i] + state.time * frequency * state.rate[i],
+            );
             size *= 0.62 + 0.38 * wave;
-            alpha += 0.12 * wave + (state.jitter[i] > 0.92 ? 0.35 * Math.max(0, wave) : 0);
+            alpha +=
+              0.12 * wave +
+              (state.jitter[i] > 0.92 ? 0.35 * Math.max(0, wave) : 0);
           }
           size *= easeOutBack(presence);
-          const flash = presence < 1 && state.active ? Math.sin(presence * Math.PI) : 0;
+          const flash =
+            presence < 1 && state.active ? Math.sin(presence * Math.PI) : 0;
           size *= 1 + flash * 0.9;
           alpha += flash * 0.6;
           if (spotStrength > 0.001) {
-            const near = smoothstep(spotRadius, 0, Math.hypot(x - state.spotX, y - state.spotY));
+            const near = smoothstep(
+              spotRadius,
+              0,
+              Math.hypot(x - state.spotX, y - state.spotY),
+            );
             size *= 1 + spotStrength * near * near * 2.4;
             alpha += spotStrength * near * 0.45;
           }
@@ -425,7 +485,8 @@ export default function PixelCard({
           if (alpha <= 0.004) continue;
           for (let p = 0; p < pulses.length; p++) {
             const pulse = pulses[p];
-            const band = (Math.hypot(x - pulse.x, y - pulse.y) - pulse.radius) / 26;
+            const band =
+              (Math.hypot(x - pulse.x, y - pulse.y) - pulse.radius) / 26;
             const wave = Math.exp(-band * band) * pulse.power;
             size *= 1 + wave * 1.4;
             alpha = Math.min(1, alpha + wave * 0.5);
@@ -458,7 +519,9 @@ export default function PixelCard({
       state.raf = 0;
       if (!state.alive) return;
       const s = settingsRef.current;
-      const dt = state.last ? Math.min(0.05, (now - state.last) / 1000) : 1 / 60;
+      const dt = state.last
+        ? Math.min(0.05, (now - state.last) / 1000)
+        : 1 / 60;
       state.last = now;
       state.dt = dt;
       state.time += dt;
@@ -468,26 +531,38 @@ export default function PixelCard({
         state.introAt = -1;
         if (!state.active) {
           setActiveState(true);
-          if (state.mode !== 'always') state.releaseAt = state.time + s.revealDuration / 1000 + 0.7;
+          if (state.mode !== "always")
+            state.releaseAt = state.time + s.revealDuration / 1000 + 0.7;
         }
       }
 
-      if (state.releaseAt >= 0 && state.time >= state.releaseAt && !state.hovering && state.mode !== 'always') {
+      if (
+        state.releaseAt >= 0 &&
+        state.time >= state.releaseAt &&
+        !state.hovering &&
+        state.mode !== "always"
+      ) {
         state.releaseAt = -1;
         setActiveState(false);
       }
 
       const want = state.hovering && !reduce ? 1 : 0;
-      state.spotPower += (want - state.spotPower) * (1 - Math.exp(-(want ? 6 : 3) * dt));
+      state.spotPower +=
+        (want - state.spotPower) * (1 - Math.exp(-(want ? 6 : 3) * dt));
       const stiffness = 120;
       const damping = 2 * Math.sqrt(stiffness) * 0.9;
-      state.spotVX += (stiffness * (state.pointerX - state.spotX) - damping * state.spotVX) * dt;
-      state.spotVY += (stiffness * (state.pointerY - state.spotY) - damping * state.spotVY) * dt;
+      state.spotVX +=
+        (stiffness * (state.pointerX - state.spotX) - damping * state.spotVX) *
+        dt;
+      state.spotVY +=
+        (stiffness * (state.pointerY - state.spotY) - damping * state.spotVY) *
+        dt;
       state.spotX += state.spotVX * dt;
       state.spotY += state.spotVY * dt;
 
-      const pulseSpeed = state.maxDistance / Math.max(0.35, (s.revealDuration / 1000) * 0.9);
-      state.pulses = state.pulses.filter(pulse => {
+      const pulseSpeed =
+        state.maxDistance / Math.max(0.35, (s.revealDuration / 1000) * 0.9);
+      state.pulses = state.pulses.filter((pulse) => {
         pulse.radius += pulseSpeed * dt;
         pulse.power = Math.max(0, 1 - pulse.radius / (state.maxDistance + 40));
         return pulse.power > 0;
@@ -506,7 +581,8 @@ export default function PixelCard({
     };
 
     const wake = () => {
-      if (!state.raf && state.alive && state.visible) state.raf = requestAnimationFrame(frame);
+      if (!state.raf && state.alive && state.visible)
+        state.raf = requestAnimationFrame(frame);
     };
 
     const local = (event: PointerEvent) => {
@@ -516,7 +592,7 @@ export default function PixelCard({
 
     const onEnter = (event: PointerEvent) => {
       const [x, y] = local(event);
-      state.hovering = event.pointerType !== 'touch';
+      state.hovering = event.pointerType !== "touch";
       state.pointerX = x;
       state.pointerY = y;
       if (state.spotPower < 0.01) {
@@ -525,7 +601,7 @@ export default function PixelCard({
         state.spotVX = 0;
         state.spotVY = 0;
       }
-      if (state.mode === 'hover') {
+      if (state.mode === "hover") {
         state.releaseAt = -1;
         state.introAt = -1;
         setActiveState(true, x, y);
@@ -542,8 +618,8 @@ export default function PixelCard({
 
     const onLeave = (event: PointerEvent) => {
       state.hovering = false;
-      if (state.mode === 'hover') {
-        if (event.pointerType === 'touch') state.releaseAt = state.time + 1.2;
+      if (state.mode === "hover") {
+        if (event.pointerType === "touch") state.releaseAt = state.time + 1.2;
         else setActiveState(false);
       }
       wake();
@@ -551,7 +627,7 @@ export default function PixelCard({
 
     const onDown = (event: PointerEvent) => {
       const [x, y] = local(event);
-      if (state.mode === 'click') {
+      if (state.mode === "click") {
         state.introAt = -1;
         state.releaseAt = -1;
         setActiveState(!state.active, x, y);
@@ -565,24 +641,31 @@ export default function PixelCard({
     };
 
     const onOutside = (event: PointerEvent) => {
-      if (state.mode === 'click' && state.active && !container.contains(event.target as Node)) setActiveState(false);
+      if (
+        state.mode === "click" &&
+        state.active &&
+        !container.contains(event.target as Node)
+      )
+        setActiveState(false);
     };
 
     const onKey = (event: KeyboardEvent) => {
-      if (state.mode !== 'click' || event.target !== container) return;
-      if (event.key !== 'Enter' && event.key !== ' ') return;
+      if (state.mode !== "click" || event.target !== container) return;
+      if (event.key !== "Enter" && event.key !== " ") return;
       event.preventDefault();
       setActiveState(!state.active);
     };
 
     const onFocus = (event: FocusEvent<HTMLDivElement>) => {
-      if (event.currentTarget.contains(event.relatedTarget as Node | null)) return;
-      if (state.mode === 'hover') setActiveState(true);
+      if (event.currentTarget.contains(event.relatedTarget as Node | null))
+        return;
+      if (state.mode === "hover") setActiveState(true);
     };
 
     const onBlur = (event: FocusEvent<HTMLDivElement>) => {
-      if (event.currentTarget.contains(event.relatedTarget as Node | null)) return;
-      if (state.mode === 'hover' && !state.hovering) setActiveState(false);
+      if (event.currentTarget.contains(event.relatedTarget as Node | null))
+        return;
+      if (state.mode === "hover" && !state.hovering) setActiveState(false);
     };
 
     const sync = () => {
@@ -591,20 +674,20 @@ export default function PixelCard({
       const previous = state.mode;
       state.mode = mode;
       if (!previous) return;
-      if (mode === 'always') {
+      if (mode === "always") {
         state.releaseAt = -1;
         setActiveState(true);
-      } else if (previous === 'always' && !state.hovering) {
+      } else if (previous === "always" && !state.hovering) {
         setActiveState(false);
       }
     };
 
-    container.addEventListener('pointerenter', onEnter);
-    container.addEventListener('pointermove', onMove);
-    container.addEventListener('pointerleave', onLeave);
-    container.addEventListener('pointerdown', onDown);
-    container.addEventListener('keydown', onKey);
-    document.addEventListener('pointerdown', onOutside);
+    container.addEventListener("pointerenter", onEnter);
+    container.addEventListener("pointermove", onMove);
+    container.addEventListener("pointerleave", onLeave);
+    container.addEventListener("pointerdown", onDown);
+    container.addEventListener("keydown", onKey);
+    document.addEventListener("pointerdown", onOutside);
 
     const resizeObserver = new ResizeObserver(() => {
       build();
@@ -613,10 +696,14 @@ export default function PixelCard({
     resizeObserver.observe(container);
 
     let introStarted = false;
-    const visibility = new IntersectionObserver(entries => {
-      state.visible = entries.some(entry => entry.isIntersecting);
+    const visibility = new IntersectionObserver((entries) => {
+      state.visible = entries.some((entry) => entry.isIntersecting);
       const s = settingsRef.current;
-      if (state.visible && !introStarted && (s.trigger === 'always' || (s.intro && !reduce))) {
+      if (
+        state.visible &&
+        !introStarted &&
+        (s.trigger === "always" || (s.intro && !reduce))
+      ) {
         introStarted = true;
         build();
         state.introAt = state.time + s.introDelay / 1000;
@@ -640,12 +727,12 @@ export default function PixelCard({
       cancelAnimationFrame(state.raf);
       resizeObserver.disconnect();
       visibility.disconnect();
-      container.removeEventListener('pointerenter', onEnter);
-      container.removeEventListener('pointermove', onMove);
-      container.removeEventListener('pointerleave', onLeave);
-      container.removeEventListener('pointerdown', onDown);
-      container.removeEventListener('keydown', onKey);
-      document.removeEventListener('pointerdown', onOutside);
+      container.removeEventListener("pointerenter", onEnter);
+      container.removeEventListener("pointermove", onMove);
+      container.removeEventListener("pointerleave", onLeave);
+      container.removeEventListener("pointerdown", onDown);
+      container.removeEventListener("keydown", onKey);
+      document.removeEventListener("pointerdown", onOutside);
       engineRef.current = null;
     };
   }, []);
@@ -661,9 +748,15 @@ export default function PixelCard({
       className={`${CARD} ${SURFACE[tone]} ${className}`.trim()}
       data-theme={tone}
       data-active={active || undefined}
-      style={{ '--pixel-card-radius': `${radius}px`, ...style } as CSSProperties}
-      onFocus={focusOff ? undefined : event => engineRef.current?.onFocus(event)}
-      onBlur={focusOff ? undefined : event => engineRef.current?.onBlur(event)}
+      style={
+        { "--pixel-card-radius": `${radius}px`, ...style } as CSSProperties
+      }
+      onFocus={
+        focusOff ? undefined : (event) => engineRef.current?.onFocus(event)
+      }
+      onBlur={
+        focusOff ? undefined : (event) => engineRef.current?.onBlur(event)
+      }
       tabIndex={focusOff ? -1 : 0}
     >
       <canvas

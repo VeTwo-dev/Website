@@ -28,7 +28,10 @@ describe("catalog boundary (static editorial source)", () => {
   });
 
   it("filters by category/status and sorts by name", async () => {
-    const asc = await listPublicProjectsPaged("", 50, 1, { category: "DeveloperTool", sort: "name_asc" });
+    const asc = await listPublicProjectsPaged("", 50, 1, {
+      category: "DeveloperTool",
+      sort: "name_asc",
+    });
     expect(asc.items.length).toBeGreaterThan(0);
     expect(asc.items.every((i) => i.category === "DeveloperTool")).toBe(true);
     const names = asc.items.map((i) => i.name);
@@ -37,7 +40,17 @@ describe("catalog boundary (static editorial source)", () => {
 
   it("exposes only allow-listed public fields", () => {
     expect([...PUBLIC_FIELD_ALLOW_LIST].sort()).toEqual(
-      ["slug", "name", "description", "category", "status", "technologies", "repository", "source", "updatedAt"].sort(),
+      [
+        "slug",
+        "name",
+        "description",
+        "category",
+        "status",
+        "technologies",
+        "repository",
+        "source",
+        "updatedAt",
+      ].sort(),
     );
     expect(PUBLIC_FIELD_ALLOW_LIST).not.toContain("_id");
   });

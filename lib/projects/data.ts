@@ -12,11 +12,13 @@ export const PROJECTS: Project[] = [
   {
     slug: "units",
     name: "units",
-    description: "Dependency-free scientific unit & dimensional-analysis engine for TypeScript.",
+    description:
+      "Dependency-free scientific unit & dimensional-analysis engine for TypeScript.",
     descriptionAr: "محرك وحدات وتحليل أبعاد علمي لـ TypeScript بدون اعتماديات.",
     category: "Scientific",
     status: "Active",
-    statusReason: "Listed as featured core engine on the org profile; repo exists and is public.",
+    statusReason:
+      "Listed as featured core engine on the org profile; repo exists and is public.",
     technologies: ["TypeScript"],
     repository: "https://github.com/VeTwo-dev/units",
     docs: null,
@@ -37,11 +39,13 @@ export const PROJECTS: Project[] = [
   {
     slug: "nutrition-units",
     name: "nutrition-units",
-    description: "Nutrition & feed-formulation calculation rules built on @vetwo/units.",
+    description:
+      "Nutrition & feed-formulation calculation rules built on @vetwo/units.",
     descriptionAr: "قواعد حسابات التغذية وتركيب الأعلاف مبنية على @vetwo/units.",
     category: "Calculator",
     status: "Active",
-    statusReason: "Listed as domain layer on the org profile; repo exists and is public.",
+    statusReason:
+      "Listed as domain layer on the org profile; repo exists and is public.",
     technologies: ["TypeScript"],
     repository: "https://github.com/VeTwo-dev/nutrition-units",
     docs: null,
@@ -62,11 +66,13 @@ export const PROJECTS: Project[] = [
   {
     slug: "feed-formulation",
     name: "Feed-Formulation",
-    description: "Application layer for veterinary feed formulation and nutrition optimization.",
+    description:
+      "Application layer for veterinary feed formulation and nutrition optimization.",
     descriptionAr: "طبقة تطبيقية لتركيب الأعلاف البيطرية وتحسين التغذية.",
     category: "VetTech",
     status: "Active",
-    statusReason: "Listed under Applications on the org profile; repo exists and is public.",
+    statusReason:
+      "Listed under Applications on the org profile; repo exists and is public.",
     technologies: ["TypeScript", "Next.js"],
     repository: "https://github.com/VeTwo-dev/Feed-Formulation",
     docs: null,
@@ -82,11 +88,13 @@ export const PROJECTS: Project[] = [
   {
     slug: "whichenv",
     name: "whichenv",
-    description: "Project intelligence engine for JavaScript & TypeScript ecosystems.",
+    description:
+      "Project intelligence engine for JavaScript & TypeScript ecosystems.",
     descriptionAr: "محرك استخبارات المشاريع لمنظومتي JavaScript و TypeScript.",
     category: "DeveloperTool",
     status: "Unknown",
-    statusReason: "Repo exists and is public; release maturity not verified — status withheld.",
+    statusReason:
+      "Repo exists and is public; release maturity not verified — status withheld.",
     technologies: ["TypeScript"],
     repository: "https://github.com/VeTwo-dev/whichenv",
     docs: null,
@@ -107,11 +115,13 @@ export const PROJECTS: Project[] = [
   {
     slug: "repo-fetch",
     name: "Repo-Fetch",
-    description: "Downloads selected files and folders from Git repositories without full clone.",
+    description:
+      "Downloads selected files and folders from Git repositories without full clone.",
     descriptionAr: "يُنزّل ملفات ومجلدات محددة من مستودعات Git دون استنساخ كامل.",
     category: "DeveloperTool",
     status: "Unknown",
-    statusReason: "Repo exists and is public; release maturity not verified — status withheld.",
+    statusReason:
+      "Repo exists and is public; release maturity not verified — status withheld.",
     technologies: ["TypeScript"],
     repository: "https://github.com/VeTwo-dev/Repo-Fetch",
     docs: null,
@@ -201,7 +211,8 @@ export const PROJECTS: Project[] = [
   {
     slug: "docs",
     name: "Docs",
-    description: "Documentation generator for JavaScript & TypeScript projects.",
+    description:
+      "Documentation generator for JavaScript & TypeScript projects.",
     descriptionAr: "مولّد توثيق لمشاريع JavaScript و TypeScript.",
     category: "Documentation",
     status: "Unknown",
@@ -301,7 +312,11 @@ export function getProject(slug: string): Project | undefined {
   return PROJECTS.find((p) => p.slug === slug);
 }
 
-export function searchProjects(q: string, category = "all", status = "all"): Project[] {
+export function searchProjects(
+  q: string,
+  category = "all",
+  status = "all",
+): Project[] {
   const needle = q.trim().toLowerCase();
   return PROJECTS.filter((p) => {
     if (category !== "all" && p.category !== category) return false;

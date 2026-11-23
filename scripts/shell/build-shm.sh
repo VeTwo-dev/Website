@@ -37,6 +37,7 @@ ln -sfn "$SHM" .next
 #    worker resolves next/dist/compiled/* relative to .next).
 ln -sfn "$ROOT/node_modules" "$SHM/node_modules"
 
-# 4. Build
-bun run build -- --webpack
+# 4. Build (NODE_PATH makes next/dist/compiled/* resolvable without a
+#    node_modules inside .next).
+pnpm exec next build -- --webpack
 echo "BUILD_OK"

@@ -1,4 +1,4 @@
-@import "tailwindcss";
+@import 'tailwindcss';
 
 @custom-variant dark (&:is(.dark *));
 
@@ -35,7 +35,10 @@ html {
   scroll-behavior: smooth;
 }
 
-html[lang="ar"], body[lang="ar"], html[dir="rtl"], body[dir="rtl"] {
+html[lang='ar'],
+body[lang='ar'],
+html[dir='rtl'],
+body[dir='rtl'] {
   direction: rtl;
 }
 
@@ -79,7 +82,7 @@ html[lang="ar"], body[lang="ar"], html[dir="rtl"], body[dir="rtl"] {
 
 body {
   background: var(--color-background, #000000);
-  color: var(--color-primary-text, #ECFDF5);
+  color: var(--color-primary-text, #ecfdf5);
   font-family: var(--font-sans, system-ui, sans-serif);
 }
 
@@ -96,7 +99,7 @@ body {
 }
 
 :focus-visible {
-  outline: var(--focus-width, 2px) solid var(--focus-ring, #10B981);
+  outline: var(--focus-width, 2px) solid var(--focus-ring, #10b981);
   outline-offset: var(--focus-offset, 2px);
   border-radius: 4px;
 }
@@ -209,13 +212,12 @@ body {
 
 /* Header sits over the hero and condenses once the page scrolls. */
 .site-header {
-  border-bottom: 1px solid var(--color-border);
-  background: var(--color-background);
+  border-bottom: 1px solid transparent;
 }
 
 /* The circuit motif is an identity element, not a texture: keep it quiet in
    light mode so it never competes with the display type. */
-html[data-theme="light"] .hero-circuit {
+html[data-theme='light'] .hero-circuit {
   opacity: 0.38;
 }
 
@@ -339,7 +341,10 @@ html[data-theme="light"] .hero-circuit {
   --color-btn-sheen: var(--btn-sheen, rgb(255 255 255 / 0.2));
   --color-destructive-edge: var(--destructive-edge, #f61418);
   --color-destructive-fg: var(--destructive-fg, #fff);
-  --color-destructive-hover: var(--destructive-hover, color-mix(in oklab, var(--color-destructive) 85%, black));
+  --color-destructive-hover: var(
+    --destructive-hover,
+    color-mix(in oklab, var(--color-destructive) 85%, black)
+  );
   --color-destructive-top: var(--destructive-top, #fd4b4e);
   --color-on-brand: var(--on-brand, #fff);
   --color-amber: var(--amber);
@@ -405,5 +410,38 @@ html[data-theme="light"] .hero-circuit {
 }
 
 @utility state-transition {
-    @apply transition-[background-color,border-color,color,box-shadow] duration-150 ease-out motion-reduce:transition-none;
+  @apply transition-[background-color,border-color,color,box-shadow] duration-150 ease-out motion-reduce:transition-none;
+}
+
+/* VeTwo official typography system — consumes @vetwo/fonts */
+@import '../packages/vetwo-fonts/css/index.css';
+
+:root {
+  --font-cairo: var(--vetwo-font-header);
+  --font-almarai: var(--vetwo-font-second);
+  --font-jetbrains-mono: var(--vetwo-font-code);
+}
+
+html[lang='ar'] h1,
+html[lang='ar'] h2,
+html[lang='ar'] h3,
+html[lang='ar'] h4,
+html[lang='ar'] h5,
+html[lang='ar'] h6,
+html:not([lang='ar']) h1,
+html:not([lang='ar']) h2,
+html:not([lang='ar']) h3,
+html:not([lang='ar']) h4,
+html:not([lang='ar']) h5,
+html:not([lang='ar']) h6 {
+  font-family: var(--vetwo-font-header);
+}
+html body {
+  font-family: var(--vetwo-font-second);
+}
+code,
+pre,
+kbd,
+samp {
+  font-family: var(--vetwo-font-code);
 }

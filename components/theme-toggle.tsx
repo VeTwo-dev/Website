@@ -1,7 +1,9 @@
 "use client";
 
 import { useSyncExternalStore } from "react";
-import ThemeToggleBase, { type ThemeToggleValue } from "./smoothui/theme-toggle";
+import ThemeToggleBase, {
+  type ThemeToggleValue,
+} from "./smoothui/theme-toggle";
 import type { Locale } from "@/lib/i18n/config";
 import { getDict } from "@/lib/i18n/dict";
 

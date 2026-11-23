@@ -1,0 +1,155 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "name": "@vetwo/design-tokens",
+  "version": "1.1.0",
+  "description": "Single source of truth for VeTwo website design tokens",
+  "color": {
+    "background": "#000000",
+    "surface": "#121A16",
+    "elevated": "#18231E",
+    "primaryText": "#ECFDF5",
+    "secondaryText": "#9CA3AF",
+    "secondaryGreen": "#6EE7B7",
+    "accent": "#10B981",
+    "alternateAccent": "#1F9D55",
+    "success": "#10B981",
+    "warning": "#F59E0B",
+    "danger": "#EF4444",
+    "info": "#06B6D4",
+    "border": "rgba(255, 255, 255, 0.10)",
+    "input": "rgba(255, 255, 255, 0.15)",
+    "onAccent": "#04110B"
+  },
+  "colorLight": {
+    "background": "#F2FBF7",
+    "surface": "#FFFFFF",
+    "elevated": "#EAF6F0",
+    "primaryText": "#0A0F0D",
+    "secondaryText": "#4B5563",
+    "secondaryGreen": "#0B7A50",
+    "accent": "#0E9F6E",
+    "alternateAccent": "#0B7A50",
+    "success": "#0E9F6E",
+    "warning": "#B45309",
+    "danger": "#DC2626",
+    "info": "#0E7490",
+    "border": "rgba(10, 15, 13, 0.12)",
+    "input": "rgba(10, 15, 13, 0.18)",
+    "onAccent": "#04110B"
+  },
+  "contrastNotes": {
+    "primaryTextOnBackground": "Measured ~17.9:1 (AAA pass). Verify with tooling after render.",
+    "secondaryTextOnBackground": "Measured ~7.0:1 (AA pass, near AAA boundary). Do not use below 12px.",
+    "accentOnBackground": "Accent alone is NOT sufficient for text; pair with primary text or use for large graphics only.",
+    "policy": "Never communicate status through color alone; always include icon + text label."
+  },
+  "font": {
+    "sans": "Inter",
+    "arabic": "PNU",
+    "display": "Inter",
+    "mono": "Roboto Mono",
+    "monoNote": "Roboto Mono via next/font/google (weights 400/500/600); variable --font-roboto-mono. PNU unchanged for Arabic.",
+    "displayNote": "Headings use Inter (font-display role). Audiowide files remain on disk, unreferenced.",
+    "weights": [
+      400,
+      500,
+      600,
+      700
+    ],
+    "weightSources": {
+      "Inter": "next/font/google, weights 400/500/600/700, latin subset, display swap; fetched at build, self-hosted at runtime",
+      "Roboto Mono": "next/font/google, weights 400/500/600, latin subset, display swap; fetched at build, self-hosted at runtime",
+      "PNU": "static files only: Light=300, Regular=400, Medium=500, Bold=700; weight 600 renders as 700 per CSS fallback rules"
+    },
+    "stacks": {
+      "sans": [
+        "var(--font-inter)",
+        "PNU",
+        "system-ui",
+        "sans-serif"
+      ],
+      "arabic": [
+        "PNU",
+        "system-ui",
+        "sans-serif"
+      ],
+      "display": [
+        "var(--font-inter)",
+        "PNU",
+        "system-ui",
+        "sans-serif"
+      ],
+      "mono": [
+        "var(--font-roboto-mono)",
+        "ui-monospace",
+        "monospace"
+      ]
+    },
+    "scalePx": [
+      12,
+      14,
+      16,
+      20,
+      24,
+      30,
+      36,
+      44,
+      52
+    ],
+    "trackingRule": "Never apply letter-spacing (tracking-*) to Arabic text; Tailwind tracking utilities are Latin-only.",
+    "strategy": "Self-hosted local @font-face from public/fonts with font-display: swap. Remote fonts and Google Fonts are prohibited."
+  },
+  "layout": {
+    "contentMaxWidth": 1280,
+    "readingMaxWidth": 840,
+    "grid": {
+      "mobile": {
+        "columns": 4,
+        "margin": 16,
+        "gutter": 16
+      },
+      "tablet": {
+        "columns": 8,
+        "margin": 24,
+        "gutter": 24
+      },
+      "desktop": {
+        "columns": 12,
+        "margin": 32,
+        "gutter": 24
+      }
+    },
+    "spacing": [
+      4,
+      8,
+      12,
+      16,
+      24,
+      32,
+      48,
+      64
+    ],
+    "radius": {
+      "control": 8,
+      "card": 16
+    },
+    "radiusNote": "Restrained Neon-inspired treatment (was 14/22): compact controls, minimal card chrome. Larger radii only where usability requires.",
+    "border": {
+      "subtle": "rgba(255, 255, 255, 0.08)",
+      "subtleLight": "rgba(10, 15, 13, 0.08)"
+    },
+    "shadow": {
+      "card": "0 1px 2px rgba(0, 0, 0, 0.4)",
+      "elevated": "0 8px 24px rgba(0, 0, 0, 0.45)"
+    },
+    "focus": {
+      "ring": "#10B981",
+      "width": 2,
+      "offset": 2
+    },
+    "transition": {
+      "fast": 150,
+      "base": 250
+    }
+  }
+}

@@ -17,7 +17,11 @@ function pruneExpired(now: number): void {
   }
 }
 
-export function rateLimit(key: string, limit: number, windowMs: number): {
+export function rateLimit(
+  key: string,
+  limit: number,
+  windowMs: number,
+): {
   allowed: boolean;
   remaining: number;
   resetAfterMs: number;
@@ -33,7 +37,11 @@ export function rateLimit(key: string, limit: number, windowMs: number): {
     return { allowed: false, remaining: 0, resetAfterMs: entry.resetAt - now };
   }
   entry.count += 1;
-  return { allowed: true, remaining: limit - entry.count, resetAfterMs: entry.resetAt - now };
+  return {
+    allowed: true,
+    remaining: limit - entry.count,
+    resetAfterMs: entry.resetAt - now,
+  };
 }
 
 /** Test-only introspection (bucket count). */

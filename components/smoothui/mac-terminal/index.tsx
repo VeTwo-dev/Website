@@ -120,7 +120,7 @@ const createMachine = (): Machine => ({
 
 const getLineToneClass = (
   type: TerminalLineType,
-  styles: ThemeStyle
+  styles: ThemeStyle,
 ): string => {
   switch (type) {
     case "error":
@@ -160,21 +160,33 @@ export default function MacTerminal({
   const loopRef = useRef(loop);
   const onCompleteRef = useRef(onComplete);
   const typingSpeedRef = useRef(
-    typingSpeed > 0 ? typingSpeed : DEFAULT_TYPING_SPEED
+    typingSpeed > 0 ? typingSpeed : DEFAULT_TYPING_SPEED,
   );
   const calledOnCompleteRef = useRef(false);
 
-  linesRef.current = lines;
-  loopRef.current = loop;
-  onCompleteRef.current = onComplete;
-  typingSpeedRef.current = typingSpeed > 0 ? typingSpeed : DEFAULT_TYPING_SPEED;
+  const linesValue = lines;
+  const loopValue = loop;
+  const onCompleteValue = onComplete;
+  const typingSpeedValue = typingSpeed > 0 ? typingSpeed : DEFAULT_TYPING_SPEED;
+  useEffect(() => {
+    linesRef.current = linesValue;
+    loopRef.current = loopValue;
+    onCompleteRef.current = onCompleteValue;
+    typingSpeedRef.current = typingSpeedValue;
+  }, [linesValue, loopValue, onCompleteValue, typingSpeedValue]);
 
   const [completedLines, setCompletedLines] = useState<TerminalLine[]>([]);
   const [typingDraft, setTypingDraft] = useState<TypingDraft | null>(null);
   const [hasStarted, setHasStarted] = useState(autoPlay);
   const [isInView, setIsInView] = useState(false);
   const [isPageVisible, setIsPageVisible] = useState(true);
-  const [systemPrefersDark, setSystemPrefersDark] = useState(true);
+  const initialSystemPrefersDark =
+    theme === "auto" && typeof window !== "undefined"
+      ? window.matchMedia("(prefers-color-scheme: dark)").matches
+      : true;
+  const [systemPrefersDark, setSystemPrefersDark] = useState(
+    initialSystemPrefersDark,
+  );
 
   const isInteractive = !(autoPlay || hasStarted || shouldReduceMotion);
   const resolvedTheme: "dark" | "light" =
@@ -194,7 +206,7 @@ export default function MacTerminal({
       ([entry]) => {
         setIsInView(entry?.isIntersecting ?? false);
       },
-      { threshold: INTERSECTION_THRESHOLD }
+      { threshold: INTERSECTION_THRESHOLD },
     );
 
     observer.observe(node);
@@ -218,7 +230,6 @@ export default function MacTerminal({
     }
 
     const mediaQuery = window.matchMedia("(prefers-color-scheme: dark)");
-    setSystemPrefersDark(mediaQuery.matches);
 
     const handleChange = (event: MediaQueryListEvent) => {
       setSystemPrefersDark(event.matches);
@@ -236,10 +247,10 @@ export default function MacTerminal({
     if (!shouldReduceMotion) {
       return;
     }
-
-    setCompletedLines(lines);
-    setTypingDraft(null);
-
+    setTimeout(() => {
+      setCompletedLines(lines);
+      setTypingDraft(null);
+    }, 0);
     if (!calledOnCompleteRef.current) {
       calledOnCompleteRef.current = true;
       onComplete?.();
@@ -305,7 +316,7 @@ export default function MacTerminal({
       const msPerChar = 1000 / typingSpeedRef.current;
       const charsToShow = Math.min(
         line.text.length,
-        Math.floor(machine.phaseElapsed / msPerChar)
+        Math.floor(machine.phaseElapsed / msPerChar),
       );
       setTypingDraft({ chars: charsToShow, line });
 
@@ -347,7 +358,7 @@ export default function MacTerminal({
         handleActivate();
       }
     },
-    [handleActivate, isInteractive]
+    [handleActivate, isInteractive],
   );
 
   const showIdleHint =
@@ -361,7 +372,7 @@ export default function MacTerminal({
         styles.border,
         isInteractive &&
           "cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2",
-        className
+        className,
       )}
       onClick={isInteractive ? handleActivate : undefined}
       onKeyDown={isInteractive ? handleKeyDown : undefined}
@@ -373,7 +384,7 @@ export default function MacTerminal({
         className={cn(
           "flex items-center gap-3 border-b px-4 py-2.5",
           styles.chrome,
-          styles.border
+          styles.border,
         )}
       >
         {showTrafficLights ? (
@@ -386,7 +397,7 @@ export default function MacTerminal({
                 aria-label="Close terminal"
                 className={cn(
                   TRAFFIC_LIGHT_CLASS,
-                  "bg-[#ff5f57] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500"
+                  "bg-[#ff5f57] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500",
                 )}
                 onClick={(event) => {
                   event.stopPropagation();
@@ -405,7 +416,7 @@ export default function MacTerminal({
                 aria-label="Minimize terminal"
                 className={cn(
                   TRAFFIC_LIGHT_CLASS,
-                  "bg-[#febc2e] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500"
+                  "bg-[#febc2e] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500",
                 )}
                 onClick={(event) => {
                   event.stopPropagation();
@@ -428,7 +439,7 @@ export default function MacTerminal({
         <p
           className={cn(
             "flex-1 truncate text-center font-medium text-xs",
-            styles.title
+            styles.title,
           )}
         >
           {title}
@@ -441,7 +452,7 @@ export default function MacTerminal({
       <div
         className={cn(
           "overflow-y-auto px-4 py-3 font-mono text-xs leading-relaxed sm:text-sm",
-          styles.body
+          styles.body,
         )}
         ref={scrollRef}
         style={{ maxHeight: resolvedMaxHeight }}
@@ -473,7 +484,7 @@ export default function MacTerminal({
                   aria-hidden="true"
                   className={cn(
                     "mac-terminal-caret ml-0.5 inline-block h-[1em] w-[0.55em] translate-y-[0.15em] align-middle",
-                    styles.caret
+                    styles.caret,
                   )}
                 />
               </span>

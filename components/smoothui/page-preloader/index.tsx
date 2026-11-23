@@ -73,7 +73,7 @@ const seededOrder = (count: number, seed: number): number[] => {
 
 const getExitDurationMs = (
   variant: PagePreloaderVariant,
-  columns: number
+  columns: number,
 ): number => {
   switch (variant) {
     case "stairs":
@@ -240,7 +240,7 @@ const WordsVariant = ({
       aria-hidden="true"
       className={cn(
         "absolute inset-0 flex items-center justify-center overflow-hidden",
-        background
+        background,
       )}
       initial={false}
       transition={
@@ -327,7 +327,7 @@ const PagePreloader = ({
     }
     const timer = setTimeout(
       () => setStage("exiting"),
-      shouldReduceMotion ? 0 : duration
+      shouldReduceMotion ? 0 : duration,
     );
     return () => clearTimeout(timer);
   }, [duration, isControlled, shouldReduceMotion, stage]);
@@ -378,7 +378,7 @@ const PagePreloader = ({
       className={cn(
         "overflow-hidden",
         container ? "absolute inset-0 z-40" : "fixed inset-0 z-[100]",
-        className
+        className,
       )}
       role="status"
     >

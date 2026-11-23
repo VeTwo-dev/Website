@@ -1,0 +1,28 @@
+# Bazel build for @vetwo/fonts (Phase B, Batch 5).
+#
+# Font package with TypeScript source, CSS, and font files.
+# No build scripts or tests - filegroup only.
+
+load("@npm//:defs.bzl", "npm_link_all_packages")
+
+npm_link_all_packages()
+
+filegroup(
+    name = "package",
+    srcs = glob([
+        "src/**/*",
+        "css/**/*",
+        "fonts/**/*",
+    ]) + ["package.json"],
+    visibility = ["//visibility:public"],
+)
+
+load("@aspect_rules_js//npm:defs.bzl", "npm_package")
+
+npm_package(
+    name = "pkg",
+    srcs = [":package"],
+    package = "@vetwo/fonts",
+    version = "0.1.0",
+    visibility = ["//visibility:public"],
+)

@@ -1,0 +1,187 @@
+{
+ "rules": [],
+ "heroPseudo": {
+  "before": {
+   "content": "none",
+   "top": "auto",
+   "left": "auto",
+   "font": "18px \"Geist Variable\"",
+   "color": "rgb(14, 14, 13)",
+   "border": "0px solid",
+   "bg": "rgba(0, 0, 0, 0)"
+  },
+  "after": {
+   "content": "none",
+   "top": "auto",
+   "left": "auto",
+   "font": "18px \"Geist Variable\"",
+   "color": "rgb(14, 14, 13)",
+   "border": "0px solid",
+   "bg": "rgba(0, 0, 0, 0)"
+  }
+ },
+ "wfPseudo": {
+  "before": {
+   "content": "none",
+   "top": "auto",
+   "left": "auto",
+   "font": "18px \"Geist Variable\"",
+   "color": "rgb(14, 14, 13)",
+   "border": "0px solid",
+   "bg": "rgba(0, 0, 0, 0)"
+  },
+  "after": {
+   "content": "none",
+   "top": "auto",
+   "left": "auto",
+   "font": "18px \"Geist Variable\"",
+   "color": "rgb(14, 14, 13)",
+   "border": "0px solid",
+   "bg": "rgba(0, 0, 0, 0)"
+  }
+ },
+ "annot": [
+  {
+   "tag": "SPAN",
+   "cls": "nav__label",
+   "text": "Work",
+   "after": "\"Work\" / \"\"",
+   "before": "none"
+  },
+  {
+   "tag": "SPAN",
+   "cls": "nav__label",
+   "text": "Services",
+   "after": "\"Services\" / \"\"",
+   "before": "none"
+  },
+  {
+   "tag": "SPAN",
+   "cls": "nav__label",
+   "text": "About",
+   "after": "\"About\" / \"\"",
+   "before": "none"
+  },
+  {
+   "tag": "SPAN",
+   "cls": "nav__label",
+   "text": "Blog",
+   "after": "\"Blog\" / \"\"",
+   "before": "none"
+  },
+  {
+   "tag": "SPAN",
+   "cls": "bp__label note",
+   "text": "h1.human · 1386×153",
+   "after": "none",
+   "before": "none"
+  },
+  {
+   "tag": "SPAN",
+   "cls": "bp__label note",
+   "text": "h1.machine · 1132×200",
+   "after": "none",
+   "before": "none"
+  },
+  {
+   "tag": "SPAN",
+   "cls": "bp__label note",
+   "text": "p.lead · 586×70",
+   "after": "none",
+   "before": "none"
+  },
+  {
+   "tag": "SPAN",
+   "cls": "bp__label note",
+   "text": "nav.cta · 381×52",
+   "after": "none",
+   "before": "none"
+  },
+  {
+   "tag": "DIV",
+   "cls": "wf-row",
+   "text": "Keep the idea.Keep the idea.↤ ",
+   "after": "none",
+   "before": "none"
+  },
+  {
+   "tag": "P",
+   "cls": "wf-line h1",
+   "text": "Keep the idea.Keep the idea.",
+   "after": "none",
+   "before": "none"
+  },
+  {
+   "tag": "SPAN",
+   "cls": "wf-solid",
+   "text": "Keep the idea.",
+   "after": "none",
+   "before": "none"
+  },
+  {
+   "tag": "SPAN",
+   "cls": "wf-solid__inner",
+   "text": "Keep the idea.",
+   "after": "none",
+   "before": "none"
+  },
+  {
+   "tag": "SPAN",
+   "cls": "wf-dim note",
+   "text": "↤ 12 col ↦",
+   "after": "none",
+   "before": "none"
+  },
+  {
+   "tag": "DIV",
+   "cls": "wf-row",
+   "text": "Change what getsChange what ge",
+   "after": "none",
+   "before": "none"
+  },
+  {
+   "tag": "P",
+   "cls": "wf-line h1",
+   "text": "Change what getsChange what ge",
+   "after": "none",
+   "before": "none"
+  },
+  {
+   "tag": "SPAN",
+   "cls": "wf-solid",
+   "text": "Change what gets",
+   "after": "none",
+   "before": "none"
+  },
+  {
+   "tag": "SPAN",
+   "cls": "wf-solid__inner",
+   "text": "Change what gets",
+   "after": "none",
+   "before": "none"
+  },
+  {
+   "tag": "SPAN",
+   "cls": "wf-dim note",
+   "text": "font-size: var(--step-4)",
+   "after": "none",
+   "before": "none"
+  },
+  {
+   "tag": "DIV",
+   "cls": "wf-row",
+   "text": "in its way.in its way.ls −0.05",
+   "after": "none",
+   "before": "none"
+  },
+  {
+   "tag": "P",
+   "cls": "wf-line h1",
+   "text": "in its way.in its way.",
+   "after": "none",
+   "before": "none"
+  }
+ ],
+ "heroCls": "hero wrap",
+ "wfCls": "section wrap manifesto"
+}

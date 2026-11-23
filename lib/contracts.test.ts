@@ -11,7 +11,11 @@ const ARTICLE_SLUGS = new Set(ARTICLES.map((a) => a.slug));
 
 describe("cross-system slug contracts", () => {
   it("every npm mapping, repo mapping, and resource link resolves to a real project", () => {
-    for (const slug of [...Object.keys(NPM_PACKAGE_MAP), ...editorialRepoMap().keys(), ...Object.keys(DOC_RESOURCES)]) {
+    for (const slug of [
+      ...Object.keys(NPM_PACKAGE_MAP),
+      ...editorialRepoMap().keys(),
+      ...Object.keys(DOC_RESOURCES),
+    ]) {
       expect(SLUGS.has(slug), slug).toBe(true);
     }
     for (const docs of Object.values(DOC_RESOURCES)) {

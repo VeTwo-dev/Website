@@ -58,7 +58,8 @@ const en = {
       lead: "Four layers, one scientific stack: unit math, nutrition rules, developer tooling, and the applications on top.",
       statement: "Small packages. Explicit units. No silent rounding.",
       layersTitle: "Four layers",
-      layersSub: "Each layer has one job, one repository, and an explicit contract.",
+      layersSub:
+        "Each layer has one job, one repository, and an explicit contract.",
       layers: [
         {
           title: "Scientific units",
@@ -90,13 +91,15 @@ const en = {
         "Formulas publish only when validated",
       ],
       cta: "Explore the ecosystem",
-      ctaSub: "From units to applications — every link leads back to the source.",
+      ctaSub:
+        "From units to applications — every link leads back to the source.",
     },
     about: {
       eyebrow: "About",
       title: "Veterinary medicine, written like software.",
       lead: "VeTwo sits where clinical knowledge meets typed, tested, open-source engineering.",
-      statement: "Clinical and nutritional knowledge should compile — or fail loudly.",
+      statement:
+        "Clinical and nutritional knowledge should compile — or fail loudly.",
       positionsTitle: "Positions",
       sections: [
         {
@@ -123,7 +126,8 @@ const en = {
       eyebrow: "Engineering notes",
       title: "Written from the source.",
       lead: "Documentation reviewed against the repositories — never drafted from memory.",
-      notice: "No dated articles are published yet. These notes are the technical index; new writing will appear here.",
+      notice:
+        "No dated articles are published yet. These notes are the technical index; new writing will appear here.",
       readNote: "Last reviewed",
       back: "All notes",
       stability: "Stability",
@@ -136,11 +140,14 @@ const en = {
     featured: "Featured projects",
     featuredSub: "Small packages. Clear responsibilities. One ecosystem.",
     architecture: "From units to applications",
-    architectureSub: "Scientific correctness → usable software. Editorial diagram of the real layering.",
+    architectureSub:
+      "Scientific correctness → usable software. Editorial diagram of the real layering.",
     oss: "Open source, protected identity",
-    ossSub: "Code is reusable under its license. The VeTwo name and horse-head artwork are protected brand assets.",
+    ossSub:
+      "Code is reusable under its license. The VeTwo name and horse-head artwork are protected brand assets.",
     status: "How to read this site",
-    statusSub: "Static means editorial. Cached means retrieved earlier with a timestamp. Simulated means illustrative demo — never live hardware.",
+    statusSub:
+      "Static means editorial. Cached means retrieved earlier with a timestamp. Simulated means illustrative demo — never live hardware.",
   },
   home: {
     projects: "documented projects",
@@ -156,11 +163,13 @@ const en = {
     p3t: "Tools keep the ecosystem consistent",
     p3d: "whichenv inspects projects, Repo-Fetch retrieves files, Docs generates references, the registry distributes resources.",
     preview: "Ecosystem preview",
-    previewSub: "Manifest-verified package dependencies. Conceptual links are labeled as such.",
+    previewSub:
+      "Manifest-verified package dependencies. Conceptual links are labeled as such.",
     dev: "Build with VeTwo",
     devSub: "Guides, packages, and source — everything verified.",
     closing: "Start from the source",
-    closingSub: "Explore the catalog, read a quickstart, or open a repository. Every number on this page comes from the catalog itself.",
+    closingSub:
+      "Explore the catalog, read a quickstart, or open a repository. Every number on this page comes from the catalog itself.",
     menu: "Menu",
     close: "Close",
   },
@@ -189,7 +198,8 @@ const en = {
   },
   footer: {
     tagline: "Open-source solutions for animal healthcare.",
-    rights: "All rights reserved. Code under its repository license; brand assets protected.",
+    rights:
+      "All rights reserved. Code under its repository license; brand assets protected.",
     contact: "Contact",
     brandPolicy: "Brand policy",
     security: "Security",
@@ -294,7 +304,8 @@ const ar: Dict = {
       eyebrow: "عن فيتو",
       title: "الطب البيطري، مكتوبًا كالبرمجيات.",
       lead: "تجلس VeTwo حيث تلتقي المعرفة السريرية بالهندسة المكتوبة والمُختبرة ومفتوحة المصدر.",
-      statement: "المعرفة السريرية والتغذوية يجب أن تُترجم إلى كود — أو تفشل بصوت عالٍ.",
+      statement:
+        "المعرفة السريرية والتغذوية يجب أن تُترجم إلى كود — أو تفشل بصوت عالٍ.",
       positionsTitle: "المواقف",
       sections: [
         {
@@ -321,7 +332,8 @@ const ar: Dict = {
       eyebrow: "ملاحظات هندسية",
       title: "مكتوبة من المصدر.",
       lead: "توثيق مُراجَع مقابل المستودعات — لا من الذاكرة.",
-      notice: "لا توجد مقالات مؤرخة بعد. هذه الملاحظات هي الفهرس التقني، وستظهر الكتابات الجديدة هنا.",
+      notice:
+        "لا توجد مقالات مؤرخة بعد. هذه الملاحظات هي الفهرس التقني، وستظهر الكتابات الجديدة هنا.",
       readNote: "آخر مراجعة",
       back: "كل الملاحظات",
       stability: "الاستقرار",
@@ -334,11 +346,14 @@ const ar: Dict = {
     featured: "مشاريع مختارة",
     featuredSub: "حزم صغيرة. مسؤوليات واضحة. منظومة واحدة.",
     architecture: "من الوحدات إلى التطبيقات",
-    architectureSub: "من الدقة العلمية إلى برمجيات قابلة للاستخدام. مخطط تحريري للطبقات الحقيقية.",
+    architectureSub:
+      "من الدقة العلمية إلى برمجيات قابلة للاستخدام. مخطط تحريري للطبقات الحقيقية.",
     oss: "مصدر مفتوح وهوية محمية",
-    ossSub: "الكود قابل لإعادة الاستخدام بموجب ترخيصه. اسم VeTwo وشعار رأس الحصان أصول علامة محمية.",
+    ossSub:
+      "الكود قابل لإعادة الاستخدام بموجب ترخيصه. اسم VeTwo وشعار رأس الحصان أصول علامة محمية.",
     status: "كيف تقرأ هذا الموقع",
-    statusSub: "ثابت يعني تحريري. مخزّن مؤقتًا يعني تم جلبه سابقًا مع طابع زمني. محاكى يعني عرضًا توضيحيًا — وليس عتادًا حيًا.",
+    statusSub:
+      "ثابت يعني تحريري. مخزّن مؤقتًا يعني تم جلبه سابقًا مع طابع زمني. محاكى يعني عرضًا توضيحيًا — وليس عتادًا حيًا.",
   },
   common: {
     viewRepo: "المستودع",
@@ -365,7 +380,8 @@ const ar: Dict = {
   },
   footer: {
     tagline: "حلول مفتوحة المصدر لصحة الحيوان.",
-    rights: "جميع الحقوق محفوظة. الكود بموجب ترخيص مستودعه؛ وأصول العلامة محمية.",
+    rights:
+      "جميع الحقوق محفوظة. الكود بموجب ترخيص مستودعه؛ وأصول العلامة محمية.",
     contact: "تواصل",
     brandPolicy: "سياسة العلامة",
     security: "الأمان",
@@ -384,11 +400,13 @@ const ar: Dict = {
     p3t: "الأدوات تحافظ على اتساق المنظومة",
     p3d: "يفحص whichenv المشاريع ويجلب Repo-Fetch الملفات ويولّد Docs المراجع ويوزّع السجل الموارد.",
     preview: "لمحة عن المنظومة",
-    previewSub: "اعتماديات الحزم المثبتة من الملفات. الروابط المفاهيمية موسومة بذلك.",
+    previewSub:
+      "اعتماديات الحزم المثبتة من الملفات. الروابط المفاهيمية موسومة بذلك.",
     dev: "ابنِ مع VeTwo",
     devSub: "أدلة وحزم ومصدر — كلها موثّقة.",
     closing: "ابدأ من المصدر",
-    closingSub: "استكشف الدليل أو اقرأ دليل البدء السريع أو افتح مستودعًا. كل رقم في هذه الصفحة من الدليل نفسه.",
+    closingSub:
+      "استكشف الدليل أو اقرأ دليل البدء السريع أو افتح مستودعًا. كل رقم في هذه الصفحة من الدليل نفسه.",
     menu: "القائمة",
     close: "إغلاق",
   },

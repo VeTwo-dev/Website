@@ -26,9 +26,13 @@ describe("GET /api/v1/public/packages", () => {
         }),
       ),
     );
-    const res = await GET(new Request("https://vetwo.dev/api/v1/public/packages"));
+    const res = await GET(
+      new Request("https://vetwo.dev/api/v1/public/packages"),
+    );
     expect(res.status).toBe(200);
-    expect(res.headers.get("Cache-Control")).toContain(`max-age=${CACHE_TTL_SECONDS}`);
+    expect(res.headers.get("Cache-Control")).toContain(
+      `max-age=${CACHE_TTL_SECONDS}`,
+    );
     const body = await res.json();
     expect(body.meta.count).toBe(body.data.length);
     expect(body.data.length).toBeGreaterThan(0);

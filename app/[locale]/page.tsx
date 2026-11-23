@@ -3,7 +3,7 @@ import { headers } from "next/headers";
 import { ArrowRight } from "lucide-react";
 import { isLocale, DEFAULT_LOCALE } from "@/lib/i18n/config";
 import { getDict } from "@/lib/i18n/dict";
-import { localeAlternates } from "@/lib/seo/alternates";
+import { pageMetadata } from "@/lib/seo/page-meta";
 import { PROJECTS, getProject } from "@/lib/projects/data";
 import { NPM_PACKAGE_MAP } from "@/lib/external/npm";
 import { VERIFIED_EDGES } from "@/lib/ecosystem/graph";
@@ -22,12 +22,26 @@ import { Statement } from "@/components/statement";
 import { HeroMotion } from "@/components/hero-motion";
 import { VeTwoCircuitBackground } from "@/components/Logo/src";
 
-export const metadata: Metadata = {
-  title: "VeTwo — Open-Source Solutions for Animal Healthcare",
-  description:
-    "Revolutionizing Veterinary care through Engineering & Code. Open-source VetTech, scientific tooling, and developer infrastructure.",
-  alternates: localeAlternates(""),
-};
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}): Promise<Metadata> {
+  const { locale: raw } = await params;
+  const locale = isLocale(raw) ? raw : DEFAULT_LOCALE;
+  const isArabic = locale === "ar";
+  return pageMetadata({
+    locale,
+    path: "",
+    absoluteTitle: true,
+    title: isArabic
+      ? "VeTwo — حلول مفتوحة المصدر لصحة الحيوان"
+      : "VeTwo — Open-Source Solutions for Animal Healthcare",
+    description: isArabic
+      ? "نُحدث ثورة في الرعاية البيطرية عبر الهندسة والبرمجة. تبني VeTwo أدوات مفتوحة المصدر صغيرة ومركّزة وآمنة نوعيًا لصحة الحيوان والتغذية والبنية التحتية للمطورين."
+      : "Revolutionizing Veterinary care through Engineering & Code. Open-source VetTech, scientific tooling, and developer infrastructure.",
+  });
+}
 
 const GITHUB_URL = "https://github.com/VeTwo-dev";
 
@@ -74,7 +88,10 @@ export default async function LocaleHomePage({
       />
 
       {/* HERO */}
-      <section data-hero-root className="relative isolate scroll-mt-24 overflow-hidden border-b border-border">
+      <section
+        data-hero-root
+        className="relative isolate scroll-mt-24 overflow-hidden border-b border-border"
+      >
         <HeroMotion />
         <VeTwoCircuitBackground
           className="hero-circuit"
@@ -101,10 +118,16 @@ export default async function LocaleHomePage({
               <span aria-hidden="true"> · </span>
               {t.hero.badge}
             </p>
-            <h1 data-hero className="text-balance text-display mt-6 max-w-2xl font-bold">
+            <h1
+              data-hero
+              className="text-balance text-display mt-6 max-w-2xl font-bold"
+            >
               {t.hero.title}
             </h1>
-            <p data-hero className="mt-5 max-w-xl text-pretty text-lg text-secondary">
+            <p
+              data-hero
+              className="mt-5 max-w-xl text-pretty text-lg text-secondary"
+            >
               {t.hero.subtitle}
             </p>
             <div data-hero className="mt-8 flex flex-wrap items-center gap-3">

@@ -6,7 +6,11 @@
  * - Analytics failure must never break the site (proved by try/catch + no-op fallback).
  */
 
-export type AnalyticsEvent = "cta_ecosystem" | "cta_docs" | "project_search" | "project_view";
+export type AnalyticsEvent =
+  | "cta_ecosystem"
+  | "cta_docs"
+  | "project_search"
+  | "project_view";
 
 const PLAUSIBLE_DOMAIN = process.env.NEXT_PUBLIC_PLAUSIBLE_DOMAIN ?? "";
 const PLAUSIBLE_SRC =
@@ -21,9 +25,14 @@ export function analyticsConfig() {
 }
 
 /** Client-safe no-op-safe event sender. Never throws. */
-export function trackEvent(_event: AnalyticsEvent, _props?: Record<string, string>): void {
+export function trackEvent(
+  _event: AnalyticsEvent,
+  _props?: Record<string, string>,
+): void {
   try {
-    const w = window as unknown as { plausible?: (e: string, o?: unknown) => void };
+    const w = window as unknown as {
+      plausible?: (e: string, o?: unknown) => void;
+    };
     if (typeof w.plausible === "function") {
       w.plausible(_event, _props ? { props: _props } : undefined);
     }

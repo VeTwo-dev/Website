@@ -43,7 +43,7 @@ export default function GitHubStarsAnimation({
   maxAvatars = AVATAR_COUNT,
 }: GitHubStarsAnimationProps) {
   const [stargazers, setStargazers] = useState<Stargazer[]>(
-    providedStargazers || []
+    providedStargazers || [],
   );
   const [starCount, setStarCount] = useState(providedStarCount || 0);
   const [displayCount, setDisplayCount] = useState(0);
@@ -59,9 +59,11 @@ export default function GitHubStarsAnimation({
   // Fetch stargazers and star count
   useEffect(() => {
     if (providedStargazers && providedStarCount !== undefined) {
-      setStargazers(providedStargazers);
-      setStarCount(providedStarCount);
-      setIsLoading(false);
+      setTimeout(() => {
+        setStargazers(providedStargazers);
+        setStarCount(providedStarCount);
+        setIsLoading(false);
+      }, 0);
       return;
     }
 
@@ -73,7 +75,7 @@ export default function GitHubStarsAnimation({
         // Try to fetch from custom API endpoint first
         if (apiEndpoint) {
           const response = await fetch(
-            `${apiEndpoint}?owner=${owner}&repo=${repo}`
+            `${apiEndpoint}?owner=${owner}&repo=${repo}`,
           );
           if (response.ok) {
             const data = await response.json();
@@ -99,7 +101,7 @@ export default function GitHubStarsAnimation({
           fetch(`https://api.github.com/repos/${owner}/${repo}`, { headers }),
           fetch(
             `https://api.github.com/repos/${owner}/${repo}/stargazers?per_page=${maxAvatars}`,
-            { headers }
+            { headers },
           ),
         ]);
 
@@ -144,7 +146,7 @@ export default function GitHubStarsAnimation({
   useEffect(() => {
     if (starCount === 0 || shouldReduceMotion) {
       if (shouldReduceMotion) {
-        setDisplayCount(starCount);
+        setTimeout(() => setDisplayCount(starCount), 0);
         countSpring.set(starCount);
       }
       return;
@@ -212,7 +214,7 @@ export default function GitHubStarsAnimation({
               aria-label={`${stargazer.login}'s GitHub profile`}
               className={cn(
                 "relative z-10 h-10 w-10 overflow-hidden rounded-full border-2 border-background bg-background transition-transform hover:z-20 hover:scale-110",
-                avatarClassName
+                avatarClassName,
               )}
               href={stargazer.html_url}
               initial={

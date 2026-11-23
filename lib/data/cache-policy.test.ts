@@ -9,7 +9,10 @@ import {
   PUBLIC_API_CACHE_CONTROL,
   createTtlCache,
 } from "./cache-policy";
-import { ERROR_TTL_MS as SERVICE_ERROR_TTL, META_TTL_MS } from "../external/service";
+import {
+  ERROR_TTL_MS as SERVICE_ERROR_TTL,
+  META_TTL_MS,
+} from "../external/service";
 
 describe("canonical cache policy", () => {
   it("defines a three-hour lifetime in one authoritative location", () => {
@@ -37,7 +40,9 @@ describe("createTtlCache", () => {
 
   it("reuses entries within the lifetime (no real sleeps)", () => {
     let now = 1_000_000;
-    const cache = createTtlCache<string, number>(CACHE_TTL_MS, { nowMs: () => now });
+    const cache = createTtlCache<string, number>(CACHE_TTL_MS, {
+      nowMs: () => now,
+    });
     cache.set("a", 1);
     expect(cache.get("a")).toBe(1);
     now += CACHE_TTL_MS - 1;
@@ -63,7 +68,9 @@ describe("createTtlCache", () => {
   });
 
   it("bounds retention under flood", () => {
-    const cache = createTtlCache<string, number>(CACHE_TTL_MS, { maxEntries: 5 });
+    const cache = createTtlCache<string, number>(CACHE_TTL_MS, {
+      maxEntries: 5,
+    });
     for (let i = 0; i < 50; i++) cache.set(`k${i}`, i);
     expect(cache.size()).toBeLessThanOrEqual(5);
     expect(cache.size()).toBeLessThanOrEqual(MAX_CACHE_ENTRIES);

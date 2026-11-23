@@ -50,7 +50,7 @@ const HoverExpand = ({
 
   useEffect(() => {
     const mediaQuery = window.matchMedia("(hover: hover) and (pointer: fine)");
-    setIsHoverDevice(mediaQuery.matches);
+    setTimeout(() => setIsHoverDevice(mediaQuery.matches), 0);
 
     const handleChange = (event: MediaQueryListEvent) => {
       setIsHoverDevice(event.matches);
@@ -67,10 +67,7 @@ const HoverExpand = ({
     onActiveIndexChange?.(index);
   };
 
-  const handleKeyDown = (
-    event: KeyboardEvent<HTMLButtonElement>,
-    index: number
-  ) => {
+  const handleKeyDown = (event: KeyboardEvent, index: number) => {
     const nextKey = isHorizontal ? "ArrowRight" : "ArrowDown";
     const prevKey = isHorizontal ? "ArrowLeft" : "ArrowUp";
 
@@ -93,7 +90,7 @@ const HoverExpand = ({
       className={cn(
         "flex w-full gap-2",
         isHorizontal ? "h-[360px] flex-row" : "h-[520px] flex-col",
-        className
+        className,
       )}
       role="group"
     >
@@ -115,13 +112,15 @@ const HoverExpand = ({
               }
             }}
             onFocus={() => setActive(index)}
-            onKeyDown={(event) => handleKeyDown(event, index)}
+            onKeyDown={(event: React.KeyboardEvent) =>
+              handleKeyDown(event, index)
+            }
             onMouseEnter={() => {
               if (isHoverDevice) {
                 setActive(index);
               }
             }}
-            ref={(el) => {
+            ref={(el: HTMLButtonElement | null) => {
               panelRefs.current[index] = el;
             }}
             style={{ flexBasis: 0 }}
@@ -162,7 +161,7 @@ const HoverExpand = ({
             >
               <div
                 className={cn(
-                  isHorizontal && !isActive && "origin-left whitespace-nowrap"
+                  isHorizontal && !isActive && "origin-left whitespace-nowrap",
                 )}
               >
                 <p className="font-semibold text-sm text-white">{item.title}</p>

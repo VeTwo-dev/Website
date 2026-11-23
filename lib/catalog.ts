@@ -63,14 +63,19 @@ export type PublicProjectPage = {
   total: number;
 };
 
-function toListItem(d: Record<string, unknown>, retrievedAt: string): PublicProjectListItem {
+function toListItem(
+  d: Record<string, unknown>,
+  retrievedAt: string,
+): PublicProjectListItem {
   return {
     slug: String(d.slug ?? ""),
     name: String(d.name ?? ""),
     description: String(d.description ?? ""),
     category: String(d.category ?? "Unknown"),
     status: String(d.status ?? "Unknown"),
-    technologies: Array.isArray(d.technologies) ? d.technologies.map(String).slice(0, 12) : [],
+    technologies: Array.isArray(d.technologies)
+      ? d.technologies.map(String).slice(0, 12)
+      : [],
     repository: String(d.repository ?? ""),
     source: String(d.source ?? "Editorial catalog"),
     updatedAt: String(d.updatedAt ?? retrievedAt),
@@ -95,20 +100,36 @@ export async function listPublicProjectsPaged(
   const safePage = Math.min(Math.max(page, 1), 100);
   const needle = q.trim().toLowerCase();
   const items = PROJECTS.filter((p) =>
-    needle ? [p.name, p.description].join(" ").toLowerCase().includes(needle) : true,
+    needle
+      ? [p.name, p.description].join(" ").toLowerCase().includes(needle)
+      : true,
   )
-    .filter((p) => !filters.category || filters.category === "all" || p.category === filters.category)
-    .filter((p) => !filters.status || filters.status === "all" || p.status === filters.status);
-  const sorted = items.slice().sort((a, b) =>
-    filters.sort === "name_desc"
-      ? b.name.localeCompare(a.name)
-      : filters.sort === "name_asc"
-        ? a.name.localeCompare(b.name)
-        : a.slug.localeCompare(b.slug),
-  );
+    .filter(
+      (p) =>
+        !filters.category ||
+        filters.category === "all" ||
+        p.category === filters.category,
+    )
+    .filter(
+      (p) =>
+        !filters.status ||
+        filters.status === "all" ||
+        p.status === filters.status,
+    );
+  const sorted = items
+    .slice()
+    .sort((a, b) =>
+      filters.sort === "name_desc"
+        ? b.name.localeCompare(a.name)
+        : filters.sort === "name_asc"
+          ? a.name.localeCompare(b.name)
+          : a.slug.localeCompare(b.slug),
+    );
   const start = (safePage - 1) * safeLimit;
   return {
-    items: sorted.slice(start, start + safeLimit).map((p) => toListItem({ ...p }, retrievedAt)),
+    items: sorted
+      .slice(start, start + safeLimit)
+      .map((p) => toListItem({ ...p }, retrievedAt)),
     page: safePage,
     limit: safeLimit,
     total: sorted.length,
@@ -117,7 +138,10 @@ export async function listPublicProjectsPaged(
 }
 
 /** Backwards-compatible list shape used by existing callers. */
-export async function listPublicProjects(q = "", limit = 24): Promise<PublicProjectListItem[]> {
+export async function listPublicProjects(
+  q = "",
+  limit = 24,
+): Promise<PublicProjectListItem[]> {
   const page = await listPublicProjectsPaged(q, limit, 1);
   return page.items;
 }
@@ -145,10 +169,16 @@ function metaKey(slug: string, provider: ExternalProvider): string {
 }
 
 /** Read a cached external-meta snapshot. Null when absent or invalid. */
-export async function getExternalMeta(slug: string, provider: ExternalProvider): Promise<ExternalMetaRecord | null> {
+export async function getExternalMeta(
+  slug: string,
+  provider: ExternalProvider,
+): Promise<ExternalMetaRecord | null> {
   const record = metaStore.get(metaKey(slug, provider)) ?? null;
   if (!record) return null;
-  const parsed = ExternalMetaDocumentSchema.safeParse({ ...record, schemaVersion: 1 });
+  const parsed = ExternalMetaDocumentSchema.safeParse({
+    ...record,
+    schemaVersion: 1,
+  });
   if (!parsed.success) {
     metaStore.delete(metaKey(slug, provider));
     return null;
@@ -157,8 +187,13 @@ export async function getExternalMeta(slug: string, provider: ExternalProvider):
 }
 
 /** Persist an external-meta snapshot. Validates before writing. */
-export async function saveExternalMeta(record: ExternalMetaRecord): Promise<boolean> {
-  const parsed = ExternalMetaDocumentSchema.safeParse({ ...record, schemaVersion: 1 });
+export async function saveExternalMeta(
+  record: ExternalMetaRecord,
+): Promise<boolean> {
+  const parsed = ExternalMetaDocumentSchema.safeParse({
+    ...record,
+    schemaVersion: 1,
+  });
   if (!parsed.success) return false;
   metaStore.set(metaKey(record.slug, record.provider), {
     slug: parsed.data.slug,

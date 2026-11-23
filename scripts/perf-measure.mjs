@@ -32,7 +32,14 @@ const ROUTES = [
 ];
 
 const OBSERVER_SETUP = () => {
-  window.__perf = { lcp: 0, lcpEl: "", cls: 0, fcp: 0, maxEvent: 0, longTasks: 0 };
+  window.__perf = {
+    lcp: 0,
+    lcpEl: "",
+    cls: 0,
+    fcp: 0,
+    maxEvent: 0,
+    longTasks: 0,
+  };
   try {
     new PerformanceObserver((list) => {
       for (const e of list.getEntries()) {
@@ -64,7 +71,8 @@ const OBSERVER_SETUP = () => {
     }).observe({ type: "longtask", buffered: true });
     new PerformanceObserver((list) => {
       for (const e of list.getEntries()) {
-        if (e.duration > window.__perf.maxEvent) window.__perf.maxEvent = e.duration;
+        if (e.duration > window.__perf.maxEvent)
+          window.__perf.maxEvent = e.duration;
       }
     }).observe({ type: "event", buffered: true });
   } catch {
@@ -72,12 +80,17 @@ const OBSERVER_SETUP = () => {
   }
 };
 
-const browser = await puppeteer.launch({ args: ["--font-render-hinting=none"] });
+const browser = await puppeteer.launch({
+  args: ["--font-render-hinting=none"],
+});
 
 // discover one real article route
 {
   const page = await browser.newPage();
-  await page.goto(`${base}/en/blog`, { waitUntil: "networkidle2", timeout: 60000 });
+  await page.goto(`${base}/en/blog`, {
+    waitUntil: "networkidle2",
+    timeout: 60000,
+  });
   const href = await page.evaluate(() => {
     const a = document.querySelector('main a[href*="/blog/"]');
     return a ? new URL(a.href).pathname : null;
@@ -113,7 +126,7 @@ for (const [name, route] of ROUTES) {
   await new Promise((r) => setTimeout(r, 2500));
   const interact = await page
     .evaluate(() => {
-      const btn = document.querySelector('button[aria-pressed]');
+      const btn = document.querySelector("button[aria-pressed]");
       if (btn) btn.click();
       return Boolean(btn);
     })
@@ -158,10 +171,7 @@ for (const [name, route] of ROUTES) {
 }
 
 await browser.close();
-await writeFile(
-  `${outDir}/summary.json`,
-  JSON.stringify(summary, null, 2)
-);
+await writeFile(`${outDir}/summary.json`, JSON.stringify(summary, null, 2));
 console.table(
   summary.map((r) => ({
     route: r.route,
@@ -174,5 +184,5 @@ console.table(
     jsKB: Math.round((r.jsBytes ?? 0) / 1024),
     totalKB: Math.round((r.totalBytes ?? 0) / 1024),
     errors: r.consoleErrors.length,
-  }))
+  })),
 );

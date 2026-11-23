@@ -6,7 +6,15 @@ import { useEffect, useRef, type ReactNode } from "react";
  * Scroll reveal that degrades to fully visible content without JavaScript:
  * the `reveal` class is added only on mount, then removed on intersect.
  */
-export function Reveal({ children, className = "", delay = 0 }: { children: ReactNode; className?: string; delay?: number }) {
+export function Reveal({
+  children,
+  className = "",
+  delay = 0,
+}: {
+  children: ReactNode;
+  className?: string;
+  delay?: number;
+}) {
   const ref = useRef<HTMLDivElement>(null);
   useEffect(() => {
     const el = ref.current;
@@ -31,5 +39,9 @@ export function Reveal({ children, className = "", delay = 0 }: { children: Reac
     io.observe(el);
     return () => io.disconnect();
   }, [delay]);
-  return <div ref={ref} className={className}>{children}</div>;
+  return (
+    <div ref={ref} className={className}>
+      {children}
+    </div>
+  );
 }

@@ -1,4 +1,11 @@
-import { LoginForm } from "@/components/login-form"
+import type { Metadata } from "next";
+import { LoginForm } from "@/components/login-form";
+
+// Internal sign-in surface: never indexed or followed by search engines.
+export const metadata: Metadata = {
+  title: "Sign in",
+  robots: { index: false, follow: false },
+};
 
 export default function LoginPage() {
   return (
@@ -7,5 +14,5 @@ export default function LoginPage() {
         <LoginForm />
       </div>
     </div>
-  )
+  );
 }

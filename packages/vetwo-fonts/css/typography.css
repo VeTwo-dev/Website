@@ -1,0 +1,23 @@
+:root {
+  --vetwo-font-header: 'VeTwo Header', system-ui, sans-serif;
+  --vetwo-font-second: 'VeTwo Second', system-ui, sans-serif;
+  --vetwo-font-code: 'VeTwo Code', ui-monospace, monospace;
+  --vetwo-font-serif: 'VeTwo Serif', serif;
+}
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: var(--vetwo-font-header);
+}
+body {
+  font-family: var(--vetwo-font-second);
+}
+code,
+pre,
+kbd,
+samp {
+  font-family: var(--vetwo-font-code);
+}

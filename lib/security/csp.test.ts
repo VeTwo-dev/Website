@@ -11,7 +11,8 @@ describe("buildCsp", () => {
   });
   it("allows inline style attributes without loosening scripts", () => {
     const csp = buildCsp("n", false);
-    const scriptSrc = csp.split("; ").find((p) => p.startsWith("script-src")) ?? "";
+    const scriptSrc =
+      csp.split("; ").find((p) => p.startsWith("script-src")) ?? "";
     expect(scriptSrc).not.toContain("unsafe-inline");
     expect(scriptSrc).not.toContain("unsafe-eval");
     expect(csp).toContain("style-src 'self' 'unsafe-inline'");

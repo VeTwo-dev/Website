@@ -11,12 +11,16 @@ import { clientKey, rateLimit } from "@/lib/security/rate-limit";
  * from clients). Same provenance semantics as the detail route.
  */
 export async function GET(request: Request) {
-  const ip = request.headers.get("x-forwarded-for")?.split(",")[0]?.trim() ?? null;
+  const ip =
+    request.headers.get("x-forwarded-for")?.split(",")[0]?.trim() ?? null;
   const rl = rateLimit(clientKey(ip, "public-packages"), 100, 60_000);
   if (!rl.allowed) {
     return NextResponse.json(
       { error: "rate_limited", retryAfterMs: rl.resetAfterMs },
-      { status: 429, headers: { "Retry-After": String(Math.ceil(rl.resetAfterMs / 1000)) } },
+      {
+        status: 429,
+        headers: { "Retry-After": String(Math.ceil(rl.resetAfterMs / 1000)) },
+      },
     );
   }
   const slugs = Object.keys(NPM_PACKAGE_MAP);
@@ -34,7 +38,10 @@ export async function GET(request: Request) {
     }),
   );
   return NextResponse.json(
-    { data: items, meta: { count: items.length, retrievedAt: new Date().toISOString() } },
+    {
+      data: items,
+      meta: { count: items.length, retrievedAt: new Date().toISOString() },
+    },
     { headers: { "Cache-Control": PUBLIC_API_CACHE_CONTROL } },
   );
 }

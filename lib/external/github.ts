@@ -14,7 +14,10 @@ const GitHubRepoResponse = z.object({
   open_issues_count: z.number().int().nonnegative(),
   pushed_at: z.string().nullable().optional(),
   default_branch: z.string().max(100).nullable().optional(),
-  license: z.object({ spdx_id: z.string().max(40) }).nullable().optional(),
+  license: z
+    .object({ spdx_id: z.string().max(40) })
+    .nullable()
+    .optional(),
 });
 
 export type GitHubRepoMeta = {
@@ -36,23 +39,55 @@ export type FetchFailure =
   | { kind: "network" };
 
 /** Server-only fetch with timeout + size cap. `init` is fixed by the caller. */
-export async function fetchJsonCapped(url: string, init?: RequestInit): Promise<{ ok: true; json: unknown } | { ok: false; failure: FetchFailure; status?: number }> {
+export async function fetchJsonCapped(
+  url: string,
+  init?: RequestInit,
+): Promise<
+  | { ok: true; json: unknown }
+  | { ok: false; failure: FetchFailure; status?: number }
+> {
   let res: Response;
   try {
-    res = await fetch(url, { ...init, signal: AbortSignal.timeout(FETCH_TIMEOUT_MS) });
+    res = await fetch(url, {
+      ...init,
+      signal: AbortSignal.timeout(FETCH_TIMEOUT_MS),
+    });
   } catch (e) {
-    return { ok: false, failure: { kind: e instanceof Error && e.name === "TimeoutError" ? "timeout" : "network" } };
+    return {
+      ok: false,
+      failure: {
+        kind:
+          e instanceof Error && e.name === "TimeoutError"
+            ? "timeout"
+            : "network",
+      },
+    };
   }
-  if (res.status === 404) return { ok: false, failure: { kind: "http", status: 404 }, status: 404 };
-  if (res.status === 403 || res.status === 429) return { ok: false, failure: { kind: "http", status: res.status }, status: res.status };
-  if (!res.ok) return { ok: false, failure: { kind: "http", status: res.status }, status: res.status };
+  if (res.status === 404)
+    return { ok: false, failure: { kind: "http", status: 404 }, status: 404 };
+  if (res.status === 403 || res.status === 429)
+    return {
+      ok: false,
+      failure: { kind: "http", status: res.status },
+      status: res.status,
+    };
+  if (!res.ok)
+    return {
+      ok: false,
+      failure: { kind: "http", status: res.status },
+      status: res.status,
+    };
   const contentType = (res.headers.get("content-type") ?? "").toLowerCase();
-  if (!contentType.includes("application/json") && !contentType.includes("+json")) {
+  if (
+    !contentType.includes("application/json") &&
+    !contentType.includes("+json")
+  ) {
     return { ok: false, failure: { kind: "invalid" } };
   }
   try {
     const text = await res.text();
-    if (text.length > MAX_BODY_BYTES) return { ok: false, failure: { kind: "invalid" } };
+    if (text.length > MAX_BODY_BYTES)
+      return { ok: false, failure: { kind: "invalid" } };
     return { ok: true, json: JSON.parse(text) as unknown };
   } catch {
     return { ok: false, failure: { kind: "invalid" } };
@@ -71,18 +106,28 @@ function tokenHeader(): Record<string, string> {
  */
 export async function fetchGitHubRepoMeta(
   repo: string,
-): Promise<{ ok: true; meta: GitHubRepoMeta } | { ok: false; failure: FetchFailure }> {
-  if (!/^[A-Za-z0-9._-]{1,100}$/.test(repo)) return { ok: false, failure: { kind: "invalid" } };
+): Promise<
+  { ok: true; meta: GitHubRepoMeta } | { ok: false; failure: FetchFailure }
+> {
+  if (!/^[A-Za-z0-9._-]{1,100}$/.test(repo))
+    return { ok: false, failure: { kind: "invalid" } };
   const url = `https://api.github.com/repos/${GITHUB_OWNER}/${repo}`;
   const res = await fetchJsonCapped(url, {
-    headers: { Accept: "application/vnd.github+json", "User-Agent": "vetwo-website", ...tokenHeader() },
+    headers: {
+      Accept: "application/vnd.github+json",
+      "User-Agent": "vetwo-website",
+      ...tokenHeader(),
+    },
   });
   if (!res.ok) return res;
   const parsed = GitHubRepoResponse.safeParse(res.json);
   if (!parsed.success) return { ok: false, failure: { kind: "invalid" } };
   const r = parsed.data;
   if (r.private) return { ok: false, failure: { kind: "not_public" } };
-  const license = r.license?.spdx_id && r.license.spdx_id !== "NOASSERTION" ? r.license.spdx_id : null;
+  const license =
+    r.license?.spdx_id && r.license.spdx_id !== "NOASSERTION"
+      ? r.license.spdx_id
+      : null;
   return {
     ok: true,
     meta: {

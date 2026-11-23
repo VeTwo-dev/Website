@@ -7,7 +7,12 @@ import {
 
 const BUCKET = "assets";
 
-function getConfig(): { endpoint: string; region: string; accessKeyId: string; secretAccessKey: string } | null {
+function getConfig(): {
+  endpoint: string;
+  region: string;
+  accessKeyId: string;
+  secretAccessKey: string;
+} | null {
   const endpoint = process.env.AWS_ENDPOINT_URL_S3 ?? "";
   const region = process.env.AWS_REGION ?? "";
   const accessKeyId = process.env.AWS_ACCESS_KEY_ID ?? "";
@@ -27,7 +32,10 @@ export function getS3(): S3Client | null {
     g.__vetwoS3 = new S3Client({
       endpoint: cfg.endpoint,
       region: cfg.region,
-      credentials: { accessKeyId: cfg.accessKeyId, secretAccessKey: cfg.secretAccessKey },
+      credentials: {
+        accessKeyId: cfg.accessKeyId,
+        secretAccessKey: cfg.secretAccessKey,
+      },
       forcePathStyle: true,
     });
   }
@@ -47,7 +55,10 @@ export async function storageStatus(timeoutMs = 8000): Promise<StorageStatus> {
     await Promise.race([
       s3.send(new HeadBucketCommand({ Bucket: BUCKET })),
       new Promise<never>((_, reject) =>
-        setTimeout(() => reject(new Error("storage probe timed out")), timeoutMs),
+        setTimeout(
+          () => reject(new Error("storage probe timed out")),
+          timeoutMs,
+        ),
       ),
     ]);
     return { configured: true, connected: true };

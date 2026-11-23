@@ -1,0 +1,253 @@
+# Bazel build for @vetwo/website (Phase 7, Stage B).
+#
+# Preserves Bun 1.4 (`bun.lock`, `package.json`) as the authoritative package
+# manager for `bun install` and `bun run dev|build|lint|typecheck|test`, while
+# providing declared Bazel targets that orchestrate those same Bun scripts.
+#
+#   :typecheck  tsc --noEmit          == bun run typecheck
+#   :test       vitest run            == bun run test
+#   :lint       eslint .              == bun run lint (and lint:eslint)
+#   :build      next build --webpack  == bun run build
+#   :package    deployable .next tree == output of :build
+#   :dev        next dev              == bun run dev   (generated script)
+#   :run        next start            == bun run start (generated script, SSR)
+#
+# Bun remains the Website's runtime and package-manager owner; the Website stays
+# outside the root pnpm workspace. Bazel never rewrites bun.lock or package.json.
+#
+# Dependency-ownership note (declared but non-hermetic local access):
+#   * Bun's dependency tree is resolved by Bun from `bun.lock`; Bazel does not
+#     translate bun.lock and never reinstalls dependencies.
+#   * `npm_link_all_packages()` links the workspace packages Website imports into
+#     the Bazel sandbox so module resolution works. This reuses the already
+#     installed dependency store; it does not change Website's package manager or
+#     its lockfile.
+#   * Bun is not available as a Bazel-managed toolchain in this repository, and
+#     Bun cannot resolve workspace dependencies in the sandbox without a
+#     replicated node_modules tree. Website Bazel actions therefore execute the
+#     JS tooling through the repo's established hermetic Node.js toolchain
+#     (`vetwo_node_launcher` / `js_run_binary`, the same shared abstraction used
+#     by Packages/Docs and Packages/Deploy-Engine). Bun owns the lockfile and
+#     local workflows; this is a documented, intentional deviation from running
+#     every action on Bun itself.
+
+load("@npm//:defs.bzl", "npm_link_all_packages")
+load("//bazel/macros:bundle.bzl", "vetwo_bundle")
+load("//bazel/macros:lint.bzl", "vetwo_eslint")
+load("//bazel/macros:tests.bzl", "vetwo_vitest")
+load("//bazel/macros:typecheck.bzl", "vetwo_typecheck")
+
+# Creates this package's node_modules link tree (`:node_modules/<dep>`) so
+# dependencies resolve exactly as they do for `bun run <script>` inside this
+# workspace. Does not modify bun.lock or package.json.
+npm_link_all_packages()
+
+# --- Dependency sets ----------------------------------------------------------
+
+_WEBSITE_DEPS = [
+    ":node_modules/@aws-sdk/client-s3",
+    ":node_modules/@blobatar/react",
+    ":node_modules/@hugeicons/core-free-icons",
+    ":node_modules/@hugeicons/react",
+    ":node_modules/@neon/config",
+    ":node_modules/@neon/env",
+    ":node_modules/@neondatabase/serverless",
+    ":node_modules/@radix-ui/react-avatar",
+    ":node_modules/@radix-ui/react-label",
+    ":node_modules/@radix-ui/react-slot",
+    ":node_modules/@tailwindcss/postcss",
+    ":node_modules/@types/node",
+    ":node_modules/@types/opentype.js",
+    ":node_modules/@types/react",
+    ":node_modules/@types/react-dom",
+    ":node_modules/class-variance-authority",
+    ":node_modules/clsx",
+    ":node_modules/eslint",
+    ":node_modules/eslint-config-next",
+    ":node_modules/framer-motion",
+    ":node_modules/gsap",
+    ":node_modules/lenis",
+    ":node_modules/lucide-react",
+    ":node_modules/motion",
+    ":node_modules/next",
+    ":node_modules/next-transition-router",
+    ":node_modules/ogl",
+    ":node_modules/opentype.js",
+    ":node_modules/postcss",
+    ":node_modules/react",
+    ":node_modules/react-dom",
+    ":node_modules/react-native-ruler-picker",
+    ":node_modules/tailwind-merge",
+    ":node_modules/tailwindcss",
+    ":node_modules/thinking-orbs",
+    ":node_modules/typescript",
+    ":node_modules/vitest",
+    ":node_modules/zod",
+]
+
+# --- Source sets --------------------------------------------------------------
+
+# `components/Logo/**` is included: Website imports `@/components/Logo/src` and
+# Next.js bundles it. Logo's own runtime deps (react, react-dom, magic-string)
+# are already in _WEBSITE_DEPS.
+_WEBSITE_SRC = glob(
+    [
+        "app/**/*.ts",
+        "app/**/*.tsx",
+        "components/**/*.ts",
+        "components/**/*.tsx",
+        "lib/**/*.ts",
+        "proxy.ts",
+        "next-env.d.ts",
+        "next.config.js",
+        "scripts/**/*.mjs",
+    ],
+    exclude = [
+        "**/*.test.ts",
+        "node_modules/**",
+        ".next/**",
+    ],
+)
+
+# Declared inputs: every file the build reads, plus the authoritative Bun
+# lockfile so a dependency change invalidates the Bazel action key.
+_WEBSITE_DATA = _WEBSITE_SRC + [
+    "app/globals.css",
+    "app/tokens.css",
+    "components.json",
+    "package.json",
+    "postcss.config.json",
+    "tailwind.config.js",
+    "tsconfig.json",
+] + glob([
+    "tokens/**/*",
+    "public/**/*",
+    "docs/**/*",
+    "packages/vetwo-fonts/**/*",
+], allow_empty = True)
+
+# --- :typecheck ---------------------------------------------------------------
+#
+# `bun run typecheck` is `tsc --noEmit`.
+vetwo_typecheck(
+    name = "types",
+    srcs = _WEBSITE_SRC + glob(["**/*.test.ts"], exclude = ["components/Logo/**"]),
+    deps = _WEBSITE_DEPS,
+    tsconfig_json = "tsconfig.json",
+    tags = ["manual"],
+    visibility = ["//visibility:public"],
+)
+
+# --- :test --------------------------------------------------------------------
+#
+# `bun run test` is `vitest run`. The vitest config includes `**/*.test.ts`.
+vetwo_vitest(
+    name = "test",
+    srcs = glob(["**/*.test.ts"], exclude = ["components/Logo/**"]),
+    config = "vitest.config.ts",
+    data = _WEBSITE_DATA,
+    deps = [
+        ":node_modules/@aws-sdk/client-s3",
+        ":node_modules/next",
+        ":node_modules/zod",
+    ],
+    env = {
+        "NEXT_TELEMETRY_DISABLED": "1",
+        "TEST_TMPDIR": "/tmp",
+    },
+    args = ["--fsModuleCachePath", "/tmp/.vitest-cache"],
+    cwd = "Projects/OpenSource/Website",
+    tags = ["manual"],
+    visibility = ["//visibility:public"],
+)
+
+# --- :lint --------------------------------------------------------------------
+#
+# `bun run lint` (and `bun run lint:eslint`) is `eslint .` using
+# `eslint.config.mjs`.
+vetwo_eslint(
+    name = "lint",
+    srcs = _WEBSITE_SRC,
+    deps = _WEBSITE_DEPS,
+    config = "eslint.config.mjs",
+    timeout = "long",
+    visibility = ["//visibility:public"],
+)
+
+# --- :build -------------------------------------------------------------------
+#
+# Environment note: next/font/google (`Inter`, `Roboto_Mono`) downloads font
+# files from Google Fonts at build time and self-hosts them at runtime. This is
+# normal production behaviour for Next.js, but the Bazel sandbox blocks network
+# by default. This environment's Bazel sandbox has no external network access
+# (ETIMEDOUT/ENETUNREACH even with --sandbox_default_allow_network=true or
+# --spawn_strategy=standalone), so `:build` cannot complete here. It works with
+# `bun run build` locally (which has network). To build via Bazel, run from a
+# host with outbound HTTPS access to fonts.googleapis.com and override the
+# sandbox default:
+#
+#   bazel build //Projects/OpenSource/Website:build --sandbox_default_allow_network=true
+#
+# This is an environment/network requirement, not a missing Bazel input.
+vetwo_bundle(
+    name = "build",
+    tool = "next",
+    srcs = _WEBSITE_DATA,
+    deps = _WEBSITE_DEPS,
+    args = ["build", "--webpack"],
+    out_dir = ".next",
+    env = {
+        "NEXT_TELEMETRY_DISABLED": "1",
+        "NODE_OPTIONS": "--max-old-space-size=4096",
+    },
+    tags = ["manual"],
+    visibility = ["//visibility:public"],
+)
+
+# --- :package -----------------------------------------------------------------
+#
+# Deployable production output: the `.next` tree produced by :build.
+filegroup(
+    name = "package",
+    srcs = [":build"],
+    tags = ["manual"],
+    visibility = ["//visibility:public"],
+)
+
+load("@aspect_rules_js//npm:defs.bzl", "npm_package")
+
+npm_package(
+    name = "pkg",
+    srcs = [":package"],
+    package = "@vetwo/website",
+    version = "0.1.0",
+    visibility = ["//visibility:public"],
+)
+
+# --- :dev ---------------------------------------------------------------------
+#
+# `bun run dev` is `next dev`. Builds a start script via `bazel build
+# //Projects/OpenSource/Website:dev`; run the produced
+# `bazel-bin/.../Website/dev.sh` to start the real development server from the
+# package directory with Bun. (`sh_binary` is not available in this Bazel
+# toolchain, so the script is a build artifact rather than a `bazel run` target.)
+genrule(
+    name = "dev",
+    outs = ["dev.sh"],
+    cmd = "cat > $@ <<'VETWO_DEV_EOF'\n#!/usr/bin/env bash\nset -euo pipefail\ncd Projects/OpenSource/Website\nexec bun run dev \"$@\"\nVETWO_DEV_EOF\nchmod +x $@\n",
+    visibility = ["//visibility:public"],
+)
+
+# --- :run ---------------------------------------------------------------------
+#
+# `bun run start` is `next start`. Starts the production SSR server from the
+# built `.next` tree. Depends on :build so the production output exists first.
+# Produces `run.sh`; execute it to start the production server.
+genrule(
+    name = "run",
+    outs = ["run.sh"],
+    srcs = [":build"],
+    cmd = "cat > $@ <<'VETWO_RUN_EOF'\n#!/usr/bin/env bash\nset -euo pipefail\ncd Projects/OpenSource/Website\nexec bun run start \"$@\"\nVETWO_RUN_EOF\nchmod +x $@\n",
+    tags = ["manual"],
+    visibility = ["//visibility:public"],
+)

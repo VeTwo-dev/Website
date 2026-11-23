@@ -2,12 +2,12 @@
 
 ## Data sources (MongoDB removed 2026-10-15)
 
-| Source | Content | Location |
-|---|---|---|
-| Editorial catalog | Project records, keyed by canonical `slug` | `lib/projects/data.ts` via `lib/catalog.ts` |
-| `external_meta` | Cached upstream snapshots, one per (slug, provider) | Validated process-local store (`lib/neon-meta.ts` schema) |
-| Lakebase Postgres (Neon) | Connectivity probe only (`SELECT 1`); no app tables | `lib/neon/postgres.ts` |
-| Object storage | Private `assets` bucket; connectivity probe only | `lib/neon/storage.ts` |
+| Source                   | Content                                             | Location                                                  |
+| ------------------------ | --------------------------------------------------- | --------------------------------------------------------- |
+| Editorial catalog        | Project records, keyed by canonical `slug`          | `lib/projects/data.ts` via `lib/catalog.ts`               |
+| `external_meta`          | Cached upstream snapshots, one per (slug, provider) | Validated process-local store (`lib/neon-meta.ts` schema) |
+| Lakebase Postgres (Neon) | Connectivity probe only (`SELECT 1`); no app tables | `lib/neon/postgres.ts`                                    |
+| Object storage           | Private `assets` bucket; connectivity probe only    | `lib/neon/storage.ts`                                     |
 
 ## Canonical identity
 

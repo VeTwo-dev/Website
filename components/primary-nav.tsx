@@ -17,11 +17,15 @@ export function PrimaryNav({ locale }: { locale: Locale }) {
   ];
 
   return (
-    <nav aria-label={t.common.primaryNav} className="hidden items-center gap-4 md:flex lg:gap-6">
+    <nav
+      aria-label={t.common.primaryNav}
+      className="hidden items-center gap-4 md:flex lg:gap-6"
+    >
       {items.map((item, i) => {
         const base = item.href.split("#")[0];
         const isAnchor = item.href.includes("#");
-        const active = !isAnchor && (pathname === base || pathname.startsWith(`${base}/`));
+        const active =
+          !isAnchor && (pathname === base || pathname.startsWith(`${base}/`));
         return (
           <Link
             key={item.href}
@@ -32,7 +36,10 @@ export function PrimaryNav({ locale }: { locale: Locale }) {
               (active ? "text-primary" : "text-secondary")
             }
           >
-            <span aria-hidden="true" className="hidden font-mono text-[11px] text-mint lg:inline">
+            <span
+              aria-hidden="true"
+              className="hidden font-mono text-[11px] text-mint lg:inline"
+            >
               0{i + 1}
             </span>
             <span className="nav-roll-label" data-label={item.label}>

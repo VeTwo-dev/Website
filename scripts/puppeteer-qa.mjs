@@ -37,7 +37,10 @@ const option = (name, fallback) => {
 };
 
 const base = option("--base", "http://localhost:3000").replace(/\/$/, "");
-const routes = option("--routes", "/en").split(",").map((r) => r.trim()).filter(Boolean);
+const routes = option("--routes", "/en")
+  .split(",")
+  .map((r) => r.trim())
+  .filter(Boolean);
 const viewports = option("--viewports", "1440x900,768x1024,390x844")
   .split(",")
   .map((v) => {
@@ -49,16 +52,23 @@ const wantInteractions = flag("--interactions");
 const openMenu = flag("--menu");
 const openPalette = flag("--palette");
 const reducedMotion = flag("--reduced-motion");
-const colorScheme =
-  option("--color-scheme", "dark") === "l" ? "light" : "dark";
+const colorScheme = option("--color-scheme", "dark") === "l" ? "light" : "dark";
 const settle = Number(option("--settle", "900"));
-const timestamp = new Date().toISOString().replace(/[:.]/g, "-").replace("T", "_").slice(0, 19);
-const outDir = path.resolve(option("--out", path.join(".agent", "reports", "puppeteer-qa", timestamp)));
+const timestamp = new Date()
+  .toISOString()
+  .replace(/[:.]/g, "-")
+  .replace("T", "_")
+  .slice(0, 19);
+const outDir = path.resolve(
+  option("--out", path.join(".agent", "reports", "puppeteer-qa", timestamp)),
+);
 
 const puppeteer = await import("puppeteer");
 
 function slug(route) {
-  return route === "/" ? "root" : route.replace(/^\/+|\/+$/g, "").replace(/[^a-zA-Z0-9-]+/g, "-");
+  return route === "/"
+    ? "root"
+    : route.replace(/^\/+|\/+$/g, "").replace(/[^a-zA-Z0-9-]+/g, "-");
 }
 
 /** Wait for fonts + entrance animations to quiesce, then settle.
@@ -72,7 +82,9 @@ async function waitReady(page, settleMs) {
         const startedAt = performance.now();
         let idleCount = 0;
         const timer = setInterval(() => {
-          const running = document.getAnimations().some((a) => a.playState === "running");
+          const running = document
+            .getAnimations()
+            .some((a) => a.playState === "running");
           idleCount = running ? 0 : idleCount + 1;
           const elapsed = performance.now() - startedAt;
           if (idleCount >= 2 || elapsed > 4000) {
@@ -128,10 +140,14 @@ try {
           .on("pageerror", (err) => pageErrors.push(err.message))
           .on("requestfailed", (req) => {
             const f = req.failure()?.errorText ?? "unknown";
-            if (!f.includes("ERR_ABORTED")) failedRequests.push(`${req.url()} (${f})`);
+            if (!f.includes("ERR_ABORTED"))
+              failedRequests.push(`${req.url()} (${f})`);
           });
 
-        await page.setViewport({ width: viewport.width, height: viewport.height });
+        await page.setViewport({
+          width: viewport.width,
+          height: viewport.height,
+        });
         await page.emulateMediaFeatures([
           { name: "prefers-color-scheme", value: colorScheme },
           ...(reducedMotion
@@ -139,7 +155,10 @@ try {
             : []),
         ]);
 
-        const response = await page.goto(url, { waitUntil: "networkidle2", timeout: 45_000 });
+        const response = await page.goto(url, {
+          waitUntil: "networkidle2",
+          timeout: 45_000,
+        });
         status = response?.status() ?? null;
         await waitReady(page, settle);
 
@@ -170,22 +189,33 @@ try {
           // The mobile "Menu" button opens the command palette (variant=menu
           // PaletteTrigger); it is not a <details> disclosure.
           const clicked = await page.evaluate(() => {
-            const button = document.querySelector('header button[data-variant="menu"]');
+            const button = document.querySelector(
+              'header button[data-variant="menu"]',
+            );
             if (!button) return false;
             button.click();
             return true;
           });
           await new Promise((r) => setTimeout(r, 500));
-          if (!clicked) interactionIssues.push("mobile menu trigger not found in header");
+          if (!clicked)
+            interactionIssues.push("mobile menu trigger not found in header");
           overlayOpen = clicked && (await paletteOpenState());
-          if (!overlayOpen) interactionIssues.push("mobile menu did not open the palette dialog");
+          if (!overlayOpen)
+            interactionIssues.push(
+              "mobile menu did not open the palette dialog",
+            );
         } else if (openPalette) {
-          await page.keyboard.down(process.platform === "darwin" ? "Meta" : "Control");
+          await page.keyboard.down(
+            process.platform === "darwin" ? "Meta" : "Control",
+          );
           await page.keyboard.press("k");
-          await page.keyboard.up(process.platform === "darwin" ? "Meta" : "Control");
+          await page.keyboard.up(
+            process.platform === "darwin" ? "Meta" : "Control",
+          );
           await new Promise((r) => setTimeout(r, 500));
           overlayOpen = await paletteOpenState();
-          if (!overlayOpen) interactionIssues.push("palette did not open with Ctrl/Meta+K");
+          if (!overlayOpen)
+            interactionIssues.push("palette did not open with Ctrl/Meta+K");
         }
 
         if (overlayOpen) {
@@ -198,7 +228,9 @@ try {
           const closed = !(await paletteOpenState());
           if (!closed) {
             interactionIssues.push(
-              openMenu ? "mobile menu/palette did not close with Escape" : "palette did not close with Escape",
+              openMenu
+                ? "mobile menu/palette did not close with Escape"
+                : "palette did not close with Escape",
             );
           }
         } else {
@@ -235,17 +267,24 @@ try {
             offenders: offenders.slice(0, 5),
             fontsLoaded: document.fonts.status === "loaded",
             mainText: getComputedStyle(document.body).fontFamily,
-            scrollProgress: getComputedStyle(doc).getPropertyValue("--scroll-progress"),
+            scrollProgress:
+              getComputedStyle(doc).getPropertyValue("--scroll-progress"),
             dcl: nav ? Math.round(nav.domContentLoadedEventEnd) : null,
             load: nav ? Math.round(nav.loadEventEnd) : null,
           };
         });
-        Object.assign(perf, { dcl: metrics.dcl, load: metrics.load, fonts: metrics.fontsLoaded });
+        Object.assign(perf, {
+          dcl: metrics.dcl,
+          load: metrics.load,
+          fonts: metrics.fontsLoaded,
+        });
 
         if (reducedMotion) {
           // Animation gate: entrance/gsap motion must leave the final state.
           const runningAfterSettle = await page.evaluate(
-            () => document.getAnimations().filter((a) => a.playState === "running").length,
+            () =>
+              document.getAnimations().filter((a) => a.playState === "running")
+                .length,
           );
           const heroText = await page.evaluate(() => {
             const item = document.querySelector("[data-hero]");
@@ -259,29 +298,52 @@ try {
             // reporting a phantom failure. (2026-10-30: /en/blog and /ar/blog
             // were flagged as FAIL here before this branch was added.)
           } else if (heroText !== "1") {
-            interactionIssues.push(`reduced-motion: hero item opacity=${heroText}`);
+            interactionIssues.push(
+              `reduced-motion: hero item opacity=${heroText}`,
+            );
           }
           if (runningAfterSettle > 0) {
-            interactionIssues.push(`reduced-motion: ${runningAfterSettle} animation(s) still running after settle`);
+            interactionIssues.push(
+              `reduced-motion: ${runningAfterSettle} animation(s) still running after settle`,
+            );
           }
         }
 
         if (wantInteractions) {
-          // Scroll sanity: progress rule + statement fill respond to scroll.
-          await page.evaluate(() => window.scrollTo({ top: document.body.scrollHeight, behavior: "instant" }));
-          await new Promise((r) => setTimeout(r, 400));
-          const progress = await page.evaluate(
-            () => Number(getComputedStyle(document.documentElement).getPropertyValue("--scroll-progress") || "0"),
+          // Scroll sanity: the page is scrollable and Lenis leaves a real
+          // scroll position after a programmatic scroll. (The former probe
+          // read a `--scroll-progress` CSS variable, but the header now uses
+          // RulerScrollProgress — a Motion scaleX bar with no CSS variable —
+          // so that assertion could never pass and was replaced.)
+          const scrollable = await page.evaluate(
+            () =>
+              document.documentElement.scrollHeight > window.innerHeight + 50,
           );
-          if (progress <= 0) interactionIssues.push("scroll progress rule did not update");
-          await page.evaluate(() => window.scrollTo({ top: 0, behavior: "instant" }));
+          await page.evaluate(() =>
+            window.scrollTo({
+              top: document.body.scrollHeight,
+              behavior: "instant",
+            }),
+          );
+          await new Promise((r) => setTimeout(r, 400));
+          const scrolledTo = await page.evaluate(() => window.scrollY);
+          if (scrollable && scrolledTo <= 0) {
+            interactionIssues.push(
+              "page did not scroll (smooth-scroll regression)",
+            );
+          }
+          await page.evaluate(() =>
+            window.scrollTo({ top: 0, behavior: "instant" }),
+          );
           await new Promise((r) => setTimeout(r, 250));
         }
 
         // Primary nav link destinations resolve to real routes.
         const brokenLinks = await page.evaluate((rootUrl) => {
           const issues = [];
-          for (const a of document.querySelectorAll("header a[href^='/'], footer a[href^='/']")) {
+          for (const a of document.querySelectorAll(
+            "header a[href^='/'], footer a[href^='/']",
+          )) {
             const href = a.getAttribute("href");
             if (!href || href.startsWith("//")) continue;
             const target = new URL(href, rootUrl);
@@ -290,7 +352,10 @@ try {
           }
           return issues;
         }, base);
-        if (brokenLinks.length) interactionIssues.push(`malformed in-app links: ${brokenLinks.join(", ")}`);
+        if (brokenLinks.length)
+          interactionIssues.push(
+            `malformed in-app links: ${brokenLinks.join(", ")}`,
+          );
 
         const problems =
           consoleErrors.length +
@@ -303,9 +368,17 @@ try {
         if (problems) failures.push({ url, viewport, state });
 
         results.push({
-          url, route, viewport, state, status,
-          metrics, consoleErrors, pageErrors, failedRequests,
-          interactionIssues, screenshot: shot,
+          url,
+          route,
+          viewport,
+          state,
+          status,
+          metrics,
+          consoleErrors,
+          pageErrors,
+          failedRequests,
+          interactionIssues,
+          screenshot: shot,
         });
         console.log(
           `${problems ? "FAIL" : "ok  "} ${route} @ ${viewport.width}x${viewport.height}${state ? ` [${state}]` : ""} · ${status ?? "?"} · h1=${metrics.h1Count} · overflow=${metrics.overflow}px · console=${consoleErrors.length} · dcl=${metrics.dcl}ms${shot ? ` · ${shot}` : ""}`,
@@ -314,10 +387,20 @@ try {
         pageErrors.push(err instanceof Error ? err.message : String(err));
         failures.push({ url, viewport, state });
         results.push({
-          url, route, viewport, state, status, consoleErrors, pageErrors,
-          failedRequests, interactionIssues, screenshot: null,
+          url,
+          route,
+          viewport,
+          state,
+          status,
+          consoleErrors,
+          pageErrors,
+          failedRequests,
+          interactionIssues,
+          screenshot: null,
         });
-        console.log(`FAIL ${route} @ ${viewport.width}x${viewport.height} · ${pageErrors[pageErrors.length - 1]}`);
+        console.log(
+          `FAIL ${route} @ ${viewport.width}x${viewport.height} · ${pageErrors[pageErrors.length - 1]}`,
+        );
       } finally {
         await page.close();
       }
@@ -354,18 +437,32 @@ await writeFile(
   ) + "\n",
 );
 
-console.log(`\n${results.length - failures.length}/${results.length} clean · output: ${path.relative(process.cwd(), outDir)}`);
+console.log(
+  `\n${results.length - failures.length}/${results.length} clean · output: ${path.relative(process.cwd(), outDir)}`,
+);
 if (failures.length) {
-  for (const r of results.filter((x) =>
-    x.consoleErrors?.length || x.pageErrors?.length || x.failedRequests?.length ||
-    x.metrics?.overflow > 1 || x.interactionIssues?.length || (x.status && x.status >= 400),
+  for (const r of results.filter(
+    (x) =>
+      x.consoleErrors?.length ||
+      x.pageErrors?.length ||
+      x.failedRequests?.length ||
+      x.metrics?.overflow > 1 ||
+      x.interactionIssues?.length ||
+      (x.status && x.status >= 400),
   )) {
-    console.log(`\n${r.url} @ ${r.viewport.width}x${r.viewport.height} ${r.state ? `[${r.state}]` : ""}`);
-    for (const m of (r.consoleErrors ?? []).slice(0, 5)) console.log(`  console: ${m}`);
-    for (const m of (r.pageErrors ?? []).slice(0, 5)) console.log(`  page: ${m}`);
-    for (const m of (r.failedRequests ?? []).slice(0, 5)) console.log(`  request: ${m}`);
-    if (r.metrics?.overflow > 1) console.log(`  overflow: ${r.metrics.overflow}px`, r.metrics.offenders);
-    for (const m of r.interactionIssues ?? []) console.log(`  interaction: ${m}`);
+    console.log(
+      `\n${r.url} @ ${r.viewport.width}x${r.viewport.height} ${r.state ? `[${r.state}]` : ""}`,
+    );
+    for (const m of (r.consoleErrors ?? []).slice(0, 5))
+      console.log(`  console: ${m}`);
+    for (const m of (r.pageErrors ?? []).slice(0, 5))
+      console.log(`  page: ${m}`);
+    for (const m of (r.failedRequests ?? []).slice(0, 5))
+      console.log(`  request: ${m}`);
+    if (r.metrics?.overflow > 1)
+      console.log(`  overflow: ${r.metrics.overflow}px`, r.metrics.offenders);
+    for (const m of r.interactionIssues ?? [])
+      console.log(`  interaction: ${m}`);
   }
   process.exitCode = 1;
 }

@@ -1,5 +1,10 @@
 import { describe, expect, it } from "vitest";
-import { freshnessOf, isStale, provenanceLabel, type Provenance } from "./provenance";
+import {
+  freshnessOf,
+  isStale,
+  provenanceLabel,
+  type Provenance,
+} from "./provenance";
 
 const HOUR = 3600_000;
 
@@ -33,7 +38,11 @@ describe("provenanceLabel", () => {
     expect(provenanceLabel(cached)).toContain("stale");
   });
   it("labels editorial and simulated distinctly", () => {
-    expect(provenanceLabel({ ...cached, kind: "static" })).toContain("Editorial");
-    expect(provenanceLabel({ ...cached, kind: "simulated" })).toContain("Simulated");
+    expect(provenanceLabel({ ...cached, kind: "static" })).toContain(
+      "Editorial",
+    );
+    expect(provenanceLabel({ ...cached, kind: "simulated" })).toContain(
+      "Simulated",
+    );
   });
 });

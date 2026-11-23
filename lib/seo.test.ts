@@ -6,8 +6,14 @@ import robots from "../app/robots";
 
 // CSP lives in proxy.ts (per-request nonce) built by lib/security/csp.ts.
 // Assert on those committed sources (regression guard for header weakening).
-const proxyText = fs.readFileSync(path.resolve(__dirname, "../proxy.ts"), "utf8");
-const nextConfigText = fs.readFileSync(path.resolve(__dirname, "../next.config.js"), "utf8");
+const proxyText = fs.readFileSync(
+  path.resolve(__dirname, "../proxy.ts"),
+  "utf8",
+);
+const nextConfigText = fs.readFileSync(
+  path.resolve(__dirname, "../next.config.js"),
+  "utf8",
+);
 
 describe("security headers regression", () => {
   it("declares a restrictive CSP without unsafe-eval", () => {
@@ -53,7 +59,9 @@ describe("SEO regression: sitemap + robots", () => {
     // legitimately reuse those words under /blog).
     for (const u of urls) {
       const first = new URL(u).pathname.split("/")[2];
-      expect(["projects", "packages", "docs", "ecosystem"]).not.toContain(first);
+      expect(["projects", "packages", "docs", "ecosystem"]).not.toContain(
+        first,
+      );
     }
   });
   it("keeps APIs out of indexing and points at the sitemap", () => {

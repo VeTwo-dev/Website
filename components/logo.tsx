@@ -13,7 +13,13 @@ export function HorseMark({ size = 34 }: { size?: number }) {
       aria-hidden="true"
       className={`inline-flex items-center justify-center rounded-xl border border-accent/40 bg-gradient-to-br from-accent/25 to-transparent ${box}`}
     >
-      <svg width={mark} height={mark} viewBox="0 0 24 24" fill="none" aria-hidden="true">
+      <svg
+        width={mark}
+        height={mark}
+        viewBox="0 0 24 24"
+        fill="none"
+        aria-hidden="true"
+      >
         <path
           d="M5 20 L9 4 L12 8 L15 4 L19 20 L15.5 20 L14.5 12 L12 15 L9.5 12 L8.5 20 Z"
           className="stroke-accent"

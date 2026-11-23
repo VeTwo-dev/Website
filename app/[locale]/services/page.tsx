@@ -2,27 +2,54 @@ import type { Metadata } from "next";
 import { ArrowRight } from "lucide-react";
 import { isLocale, DEFAULT_LOCALE } from "@/lib/i18n/config";
 import { getDict } from "@/lib/i18n/dict";
-import { localeAlternates } from "@/lib/seo/alternates";
+import { pageMetadata } from "@/lib/seo/page-meta";
 import { PROJECTS, getProject } from "@/lib/projects/data";
 import { NPM_PACKAGE_MAP } from "@/lib/external/npm";
 import { VERIFIED_EDGES } from "@/lib/ecosystem/graph";
-import { Button, PageIntro, SectionHead, CtaBand, MetaRow } from "@/components/ui";
+import {
+  Button,
+  PageIntro,
+  SectionHead,
+  CtaBand,
+  MetaRow,
+} from "@/components/ui";
 import { Statement } from "@/components/statement";
 
-export const metadata: Metadata = {
-  title: "Capabilities",
-  description:
-    "What VeTwo builds: a dimensional units engine, nutrition and feed-formulation rules, developer infrastructure, and open-source distribution.",
-  alternates: localeAlternates("/services"),
-};
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}): Promise<Metadata> {
+  const { locale: raw } = await params;
+  const locale = isLocale(raw) ? raw : DEFAULT_LOCALE;
+  const copy = getDict(locale).pages.services;
+  return pageMetadata({
+    locale,
+    path: "/services",
+    title: copy.title,
+    description:
+      locale === "ar"
+        ? copy.lead
+        : "What VeTwo builds: a dimensional units engine, nutrition and feed-formulation rules, developer infrastructure, and open-source distribution.",
+  });
+}
 
 const GITHUB_URL = "https://github.com/VeTwo-dev";
 const NPM_URL = "https://www.npmjs.com/~vetwo.dev";
 
 /** Layer index → verified repository slug (or null for the npm scope). */
-const LAYER_PROJECTS: (string | null)[] = ["units", "nutrition-units", "whichenv", null];
+const LAYER_PROJECTS: (string | null)[] = [
+  "units",
+  "nutrition-units",
+  "whichenv",
+  null,
+];
 
-export default async function ServicesPage({ params }: { params: Promise<{ locale: string }> }) {
+export default async function ServicesPage({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}) {
   const { locale: raw } = await params;
   const locale = isLocale(raw) ? raw : DEFAULT_LOCALE;
   const t = getDict(locale);
@@ -66,13 +93,20 @@ export default async function ServicesPage({ params }: { params: Promise<{ local
                   {String(i + 1).padStart(2, "0")}
                 </p>
                 <div className="lg:col-span-4">
-                  <h2 className="text-balance text-xl font-semibold">{layer.title}</h2>
-                  <p className="mt-2 font-mono text-[11px] text-secondary" dir="ltr">
+                  <h2 className="text-balance text-xl font-semibold">
+                    {layer.title}
+                  </h2>
+                  <p
+                    className="mt-2 font-mono text-[11px] text-secondary"
+                    dir="ltr"
+                  >
                     {layer.meta}
                   </p>
                 </div>
                 <div className="lg:col-span-6">
-                  <p className="max-w-prose text-pretty text-secondary">{layer.body}</p>
+                  <p className="max-w-prose text-pretty text-secondary">
+                    {layer.body}
+                  </p>
                   <a
                     href={href}
                     target="_blank"
@@ -92,7 +126,11 @@ export default async function ServicesPage({ params }: { params: Promise<{ local
       <section className="border-y border-border bg-surface/40">
         <div className="container-content grid gap-10 py-20 sm:py-24 lg:grid-cols-12">
           <div className="lg:col-span-5">
-            <SectionHead index="02" label={copy.principlesLabel} title={copy.principlesTitle} />
+            <SectionHead
+              index="02"
+              label={copy.principlesLabel}
+              title={copy.principlesTitle}
+            />
           </div>
           <ul className="lg:col-span-7">
             {copy.principles.map((principle) => (

@@ -10,7 +10,10 @@ function sourceFiles(dir: string, out: string[] = []): string[] {
     if (entry.isDirectory()) {
       if (entry.name === "node_modules") continue;
       sourceFiles(full, out);
-    } else if (/\.(tsx?|mjs)$/.test(entry.name) && !entry.name.endsWith(".test.ts")) {
+    } else if (
+      /\.(tsx?|mjs)$/.test(entry.name) &&
+      !entry.name.endsWith(".test.ts")
+    ) {
       out.push(full);
     }
   }
@@ -23,14 +26,17 @@ describe("UI library state (Path A: no migration in progress)", () => {
     for (const dir of ["app", "components"].map((d) => path.join(ROOT, d))) {
       for (const file of sourceFiles(dir)) {
         const text = fs.readFileSync(file, "utf8");
-        if (/@radix-ui\/(?!react-slot)|@base-ui\//.test(text)) hits.push(path.relative(ROOT, file));
+        if (/@radix-ui\/(?!react-slot)|@base-ui\//.test(text))
+          hits.push(path.relative(ROOT, file));
       }
     }
     expect(hits).toEqual([]);
   });
 
   it("declares a known shadcn base and the configured icon library", () => {
-    const config = JSON.parse(fs.readFileSync(path.join(ROOT, "components.json"), "utf8")) as {
+    const config = JSON.parse(
+      fs.readFileSync(path.join(ROOT, "components.json"), "utf8"),
+    ) as {
       base?: string;
       iconLibrary?: string;
     };
@@ -38,7 +44,9 @@ describe("UI library state (Path A: no migration in progress)", () => {
     // An explicit "base" value would take precedence when present.
     expect(["radix", "base", undefined]).toContain(config.base);
     expect(config.iconLibrary).toBe("lucide");
-    const pkg = JSON.parse(fs.readFileSync(path.join(ROOT, "package.json"), "utf8")) as {
+    const pkg = JSON.parse(
+      fs.readFileSync(path.join(ROOT, "package.json"), "utf8"),
+    ) as {
       dependencies?: Record<string, string>;
     };
     expect(pkg.dependencies?.["lucide-react"]).toBeTruthy();

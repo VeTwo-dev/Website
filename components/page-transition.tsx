@@ -81,12 +81,19 @@ export function PageTransition({ children }: { children: ReactNode }) {
     timelineRef.current = tl;
     // The surface must actually intercept pointers while it covers the page
     // (the rest state is pointer-events: none via utility classes).
-    gsap.set(overlayRef.current, { visibility: "visible", pointerEvents: "auto" });
+    gsap.set(overlayRef.current, {
+      visibility: "visible",
+      pointerEvents: "auto",
+    });
     gsap.set(lineRef.current, { scaleX: 0 });
     tl.fromTo(
       overlayRef.current,
       { autoAlpha: 0 },
-      { autoAlpha: 1, duration: TRANSITION_TIMES.exit * 0.75, ease: "power1.out" },
+      {
+        autoAlpha: 1,
+        duration: TRANSITION_TIMES.exit * 0.75,
+        ease: "power1.out",
+      },
       0,
     )
       .fromTo(
@@ -120,12 +127,21 @@ export function PageTransition({ children }: { children: ReactNode }) {
     )
       .to(
         pageRef.current,
-        { opacity: 1, y: 0, duration: TRANSITION_TIMES.enter * 0.65, ease: "power2.out" },
+        {
+          opacity: 1,
+          y: 0,
+          duration: TRANSITION_TIMES.enter * 0.65,
+          ease: "power2.out",
+        },
         0.1,
       )
       .to(
         overlayRef.current,
-        { autoAlpha: 0, duration: TRANSITION_TIMES.enter * 0.5, ease: "power1.in" },
+        {
+          autoAlpha: 0,
+          duration: TRANSITION_TIMES.enter * 0.5,
+          ease: "power1.in",
+        },
         0.18,
       );
     return tl;
@@ -137,7 +153,9 @@ export function PageTransition({ children }: { children: ReactNode }) {
   ): Promise<void> => {
     // Reduced motion (checked live at invocation): instant navigation, no
     // decorations, no delay. Also guards a missing container (SSR edge).
-    const prefersReduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    const prefersReduced = window.matchMedia(
+      "(prefers-reduced-motion: reduce)",
+    ).matches;
     if (prefersReduced || !pageRef.current || !overlayRef.current) {
       return next();
     }
@@ -175,7 +193,10 @@ export function PageTransition({ children }: { children: ReactNode }) {
     });
     // Restore interaction only after the reveal settles.
     gsap.set(pageRef.current, { clearProps: "pointer-events" });
-    gsap.set(overlayRef.current, { visibility: "hidden", pointerEvents: "none" });
+    gsap.set(overlayRef.current, {
+      visibility: "hidden",
+      pointerEvents: "none",
+    });
     scroll.start(); // resume user scrolling (no-op when smooth-scroll inactive)
     next();
   };

@@ -49,8 +49,8 @@ export function Signature({
     async function load() {
       try {
         let font;
-        const fontPaths = fontUrl 
-          ? [fontUrl] 
+        const fontPaths = fontUrl
+          ? [fontUrl]
           : [
               "/LastoriaBoldRegular.otf",
               "./LastoriaBoldRegular.otf",
@@ -167,7 +167,9 @@ export function Signature({
       ))}
 
       <g mask={`url(#${maskId})`}>
-        {paths.map((d, i) => <path key={i} d={d} fill={color} />)}
+        {paths.map((d, i) => (
+          <path key={i} d={d} fill={color} />
+        ))}
       </g>
     </motion.svg>
   );

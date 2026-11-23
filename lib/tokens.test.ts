@@ -35,7 +35,9 @@ describe("design token single source of truth", () => {
   });
 
   it("light palette mirrors the dark palette's keys", () => {
-    expect(Object.keys(tokens.colorLight).sort()).toEqual(Object.keys(tokens.color).sort());
+    expect(Object.keys(tokens.colorLight).sort()).toEqual(
+      Object.keys(tokens.color).sort(),
+    );
   });
 
   it("generated CSS carries dark defaults and light overrides for every color", () => {
@@ -60,9 +62,13 @@ describe("design token single source of truth", () => {
   it("generated CSS carries elevation, border, focus, and motion tokens", () => {
     expect(css).toContain(`--border-subtle: ${tokens.layout.border.subtle}`);
     expect(css).toContain(`--shadow-card: ${tokens.layout.shadow.card}`);
-    expect(css).toContain(`--shadow-elevated: ${tokens.layout.shadow.elevated}`);
+    expect(css).toContain(
+      `--shadow-elevated: ${tokens.layout.shadow.elevated}`,
+    );
     expect(css).toContain(`--focus-ring: ${tokens.layout.focus.ring}`);
-    expect(css).toContain(`--transition-base: ${tokens.layout.transition.base}ms`);
+    expect(css).toContain(
+      `--transition-base: ${tokens.layout.transition.base}ms`,
+    );
   });
 
   it("declares Inter/Roboto Mono/PNU stacks (next/font, build-time fetch)", () => {
@@ -74,7 +80,15 @@ describe("design token single source of truth", () => {
     expect(tokens.font.stacks.display[0]).toBe("var(--font-inter)");
     expect(tokens.font.stacks.mono[0]).toBe("var(--font-roboto-mono)");
     expect(tokens.font.stacks.arabic[0]).toBe("PNU");
-    expect(JSON.stringify([tokens.font.sans, tokens.font.display, tokens.font.arabic, tokens.font.mono, tokens.font.stacks])).not.toMatch(/plex|jetbrains|lato|audiowide|orbitron/i);
+    expect(
+      JSON.stringify([
+        tokens.font.sans,
+        tokens.font.display,
+        tokens.font.arabic,
+        tokens.font.mono,
+        tokens.font.stacks,
+      ]),
+    ).not.toMatch(/plex|jetbrains|lato|audiowide|orbitron/i);
   });
 
   it("emits the font variables the CSS and Tailwind config consume", () => {
@@ -84,10 +98,16 @@ describe("design token single source of truth", () => {
     for (const key of ["sans", "arabic", "display", "mono"] as const) {
       expect(css, `--font-${key} must be defined`).toContain(`--font-${key}:`);
     }
-    expect(css).toContain("--font-sans: var(--font-inter), PNU, system-ui, sans-serif;");
-    expect(css).toContain("--font-display: var(--font-inter), PNU, system-ui, sans-serif;");
+    expect(css).toContain(
+      "--font-sans: var(--font-inter), PNU, system-ui, sans-serif;",
+    );
+    expect(css).toContain(
+      "--font-display: var(--font-inter), PNU, system-ui, sans-serif;",
+    );
     expect(css).toContain("--font-arabic: PNU, system-ui, sans-serif;");
-    expect(css).toContain("--font-mono: var(--font-roboto-mono), ui-monospace, monospace;");
+    expect(css).toContain(
+      "--font-mono: var(--font-roboto-mono), ui-monospace, monospace;",
+    );
     expect(configText).toContain("var(--font-sans)");
     expect(configText).toContain("var(--font-display)");
     expect(configText).toContain("var(--font-mono)");

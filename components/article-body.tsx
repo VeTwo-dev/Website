@@ -20,7 +20,10 @@ export function ArticleBody({ blocks }: { blocks: ArticleBlock[] }) {
                     key={item}
                     className="flex gap-3 text-pretty leading-relaxed text-secondary"
                   >
-                    <span aria-hidden="true" className="font-mono text-xs text-mint">
+                    <span
+                      aria-hidden="true"
+                      className="font-mono text-xs text-mint"
+                    >
                       ·
                     </span>
                     <span>{item}</span>
@@ -53,14 +56,20 @@ export function ArticleBody({ blocks }: { blocks: ArticleBlock[] }) {
                 key={i}
                 className={`border-s-2 bg-surface/60 px-4 py-3 text-pretty leading-relaxed ${tone}`}
               >
-                <span className="me-2 font-mono text-[11px] uppercase">{block.tone}</span>
+                <span className="me-2 font-mono text-[11px] uppercase">
+                  {block.tone}
+                </span>
                 <span className="text-secondary">{block.text}</span>
               </aside>
             );
           }
           case "table":
             return (
-              <div key={i} tabIndex={0} className="overflow-x-auto border border-border">
+              <div
+                key={i}
+                tabIndex={0}
+                className="overflow-x-auto border border-border"
+              >
                 <table className="w-full border-collapse text-start">
                   <thead>
                     <tr className="border-b border-border font-mono text-[11px] text-secondary">
@@ -74,8 +83,13 @@ export function ArticleBody({ blocks }: { blocks: ArticleBlock[] }) {
                   </thead>
                   <tbody>
                     {block.rows.map((row) => (
-                      <tr key={row[0]} className="border-b border-border last:border-b-0">
-                        <td className="px-4 py-3 text-sm text-secondary">{row[0]}</td>
+                      <tr
+                        key={row[0]}
+                        className="border-b border-border last:border-b-0"
+                      >
+                        <td className="px-4 py-3 text-sm text-secondary">
+                          {row[0]}
+                        </td>
                         <td className="px-4 py-3 font-mono text-xs" dir="ltr">
                           {row[1]}
                         </td>

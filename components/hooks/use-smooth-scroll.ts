@@ -1,9 +1,16 @@
 "use client";
 
-import { useSmoothScroll as useSmoothScrollCore, type ScrollApi } from "../providers/smooth-scroll-provider";
+import {
+  useSmoothScroll as useSmoothScrollCore,
+  type ScrollApi,
+} from "../providers/smooth-scroll-provider";
 
 export type { ScrollApi } from "../providers/smooth-scroll-provider";
-export type { ScrollState, ScrollTarget, ScrollToOptions } from "@/lib/smooth-scroll";
+export type {
+  ScrollState,
+  ScrollTarget,
+  ScrollToOptions,
+} from "@/lib/smooth-scroll";
 
 /**
  * Public scroll API hook.

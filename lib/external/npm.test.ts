@@ -38,7 +38,10 @@ describe("NPM_PACKAGE_MAP", () => {
 
 describe("fetchNpmPackageMeta", () => {
   it("maps version + publication time from the abbreviated doc", async () => {
-    vi.stubGlobal("fetch", vi.fn(async () => jsonResponse(DOC)));
+    vi.stubGlobal(
+      "fetch",
+      vi.fn(async () => jsonResponse(DOC)),
+    );
     const res = await fetchNpmPackageMeta("@vetwo/units");
     expect(res).toEqual({
       ok: true,
@@ -52,7 +55,10 @@ describe("fetchNpmPackageMeta", () => {
     });
   });
   it("treats missing packages as failures, never zero-version data", async () => {
-    vi.stubGlobal("fetch", vi.fn(async () => jsonResponse({ error: "Not found" }, 404)));
+    vi.stubGlobal(
+      "fetch",
+      vi.fn(async () => jsonResponse({ error: "Not found" }, 404)),
+    );
     expect(await fetchNpmPackageMeta("@vetwo/docs")).toEqual({
       ok: false,
       failure: { kind: "http", status: 404 },
@@ -62,7 +68,9 @@ describe("fetchNpmPackageMeta", () => {
   it("rejects invalid package names without any network call", async () => {
     const spy = vi.fn(async () => jsonResponse(DOC));
     vi.stubGlobal("fetch", spy);
-    expect((await fetchNpmPackageMeta("https://evil.example/x")).ok).toBe(false);
+    expect((await fetchNpmPackageMeta("https://evil.example/x")).ok).toBe(
+      false,
+    );
     expect(spy).not.toHaveBeenCalled();
   });
 });

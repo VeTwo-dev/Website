@@ -34,9 +34,9 @@ ln -sfn "$SHM" .next
 # 3. Build (NODE_PATH makes next/dist/compiled/* resolvable without a
 #    node_modules inside .next).
 echo "=== building (this takes ~8 min) ==="
-bun run build -- --webpack
+pnpm exec next build -- --webpack
 echo "BUILD_OK"
 
 # 4. Start the server
 echo "=== starting server on :$PORT ==="
-exec bun run start -- -p "$PORT"
+exec pnpm run start -- -p "$PORT"

@@ -30,4 +30,4 @@ if [ ! -L .next ]; then
   exit 1
 fi
 
-exec bun run start
+exec pnpm run start

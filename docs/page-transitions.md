@@ -45,7 +45,9 @@ fall through by origin check.
 <body>
   <SmoothScrollProvider>
     <Header locale={locale} />
-    <main id="content"><PageTransition>{children}</PageTransition></main>
+    <main id="content">
+      <PageTransition>{children}</PageTransition>
+    </main>
     <Footer locale={locale} />
     <CommandPalette locale={locale} items={paletteItems(locale)} />
   </SmoothScrollProvider>

@@ -42,13 +42,13 @@ It is **not** a component library, a colour system for VeTwo, or a content model
 
 ### 2.1 Observed rules
 
-| Property | 1440×900 | 768×1024 | 390×844 | Evidence |
-| --- | --- | --- | --- | --- |
-| Outer gutter | 31.68px (`clamp(16px, 2.2vw, 32px)`) | 16.896px | 16px | `evidence/metrics.json` |
-| Content width | 1377px | 734px | 358px | same |
-| Grid | 12 columns, 20.16px gap | 12 columns, 12px gap | 4 columns, 12px gap | same |
-| Section top padding | 158.4px (`clamp(88px, 11vw, 180px)`) | 88px | 88px | same |
-| Header | fixed, 72px, transparent, overlays hero | same | same, collapses to brand + 3 controls + MENU | screenshots `home-*` |
+| Property            | 1440×900                                | 768×1024             | 390×844                                      | Evidence                |
+| ------------------- | --------------------------------------- | -------------------- | -------------------------------------------- | ----------------------- |
+| Outer gutter        | 31.68px (`clamp(16px, 2.2vw, 32px)`)    | 16.896px             | 16px                                         | `evidence/metrics.json` |
+| Content width       | 1377px                                  | 734px                | 358px                                        | same                    |
+| Grid                | 12 columns, 20.16px gap                 | 12 columns, 12px gap | 4 columns, 12px gap                          | same                    |
+| Section top padding | 158.4px (`clamp(88px, 11vw, 180px)`)    | 88px                 | 88px                                         | same                    |
+| Header              | fixed, 72px, transparent, overlays hero | same                 | same, collapses to brand + 3 controls + MENU | screenshots `home-*`    |
 
 - The page is full-bleed; a centred `wrap` supplies gutters. Hero fills the viewport (900px tall at 1440×900).
 - A mono meta strip sits directly under the header: identity / location / availability, split across the same 12-column measure.
@@ -89,16 +89,16 @@ Fluid scale variables (observed in their stylesheet):
 
 Measured at the three viewports (`evidence/metrics.json`):
 
-| Role | 1440 | 768 | 390 | Line-height | Tracking | Weight |
-| --- | --- | --- | --- | --- | --- | --- |
-| Display (hero / CTA) | 177.6px | 103.68px | 62.1px | 0.86 | −0.055em | 500 |
-| Editorial statement | 120.64px | 76.288px | 36.48px | 0.90 | −0.05em | 400 |
-| Subhead | 70.08px | 48.576px | 36.48px | 0.95 | −0.045em | 500 |
-| H2 | 40px | 31.55px | 26.26px | 1.05 | −0.03em | 500 |
-| H3 | 26px | 22.69px | 20.42px | 0.95–1.0 | −0.035em | 500 |
-| Lead | 26px | 22.69px | 20.42px | 1.35 | −0.015em | 400 |
-| Body | 18px | 16.9px | 16.14px | 1.55 | normal | 400 |
-| Mono label | 11.52px | 11.52px | 11.52px | 1.4 | +0.02em | 400, uppercase |
+| Role                 | 1440     | 768      | 390     | Line-height | Tracking | Weight         |
+| -------------------- | -------- | -------- | ------- | ----------- | -------- | -------------- |
+| Display (hero / CTA) | 177.6px  | 103.68px | 62.1px  | 0.86        | −0.055em | 500            |
+| Editorial statement  | 120.64px | 76.288px | 36.48px | 0.90        | −0.05em  | 400            |
+| Subhead              | 70.08px  | 48.576px | 36.48px | 0.95        | −0.045em | 500            |
+| H2                   | 40px     | 31.55px  | 26.26px | 1.05        | −0.03em  | 500            |
+| H3                   | 26px     | 22.69px  | 20.42px | 0.95–1.0    | −0.035em | 500            |
+| Lead                 | 26px     | 22.69px  | 20.42px | 1.35        | −0.015em | 400            |
+| Body                 | 18px     | 16.9px   | 16.14px | 1.55        | normal   | 400            |
+| Mono label           | 11.52px  | 11.52px  | 11.52px | 1.4         | +0.02em  | 400, uppercase |
 
 Rules:
 
@@ -160,17 +160,17 @@ Durations/easings observed in the reference stylesheet:
 --ease-out:    cubic-bezier(.25, 1, .5, 1)
 ```
 
-| Effect | Trigger | Observed behaviour | Timing / easing | Status | Reduced-motion |
-| --- | --- | --- | --- | --- | --- |
-| Preloader | first load | Panel with SVG path draw, count-up, "lift" exit; hidden ~2.6s after first paint (visible at 0.87s, hidden at 3.48s in sampling); `html` gains `motion-ready` | lift 0.9s, path draw 1.2s, count 1.1s, pop 0.4s; `cubic-bezier(.76,0,.24,1)` | Observed | Preloader `display:none`; all animation durations `1e-05s` |
-| Hero "machine" text | load / interaction | Subhead words (`gen-word`) and a caret block; alternates with a "human" variant | not measured | Partly observed | No caret/animation in reduced-motion capture |
-| Manifesto fill | scroll | Outline-only lines become solid as the section advances; mid-state captured with last line still outlined | scroll-linked; exact curve not verified (`--fill` mechanism) | Observed visually | All motion reduced; final state legible |
-| Header progress | scroll | Fixed header gains a tick ruler and a moving accent segment with a percentage tag (10% at ~980px, 17% at ~1400px) | scroll-linked, no easing curve | Observed | Not separately tested |
-| Nav label roll | hover | Label slides/rolls to a duplicate (`::after`); colour unchanged | 0.4s, `cubic-bezier(.76,0,.24,1)` | Observed computed styles | CSS transition disabled |
-| Button hover | hover/focus | 0.4s colour/transform transition; text roll on some buttons | 0.4s, ease-out | Partly observed (computed colour did not change in probe) | Disabled |
-| Cursor | pointer move | Crosshair + ring follows pointer; `.cursor` fixed overlay | continuous | Observed | `.cursor` absent |
-| Command palette | ⌘K / Ctrl+K / Menu (mobile) | Centred dialog, blurred backdrop, GO TO / DO groups, inverted selected row, ESC close | open/close transition not measured | Observed | Not tested |
-| Balanced headline wrapping | layout | Display lines break deliberately; large negative space around statements | n/a | Observed | n/a |
+| Effect                     | Trigger                     | Observed behaviour                                                                                                                                           | Timing / easing                                                              | Status                                                    | Reduced-motion                                             |
+| -------------------------- | --------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------ | ---------------------------------------------------------------------------- | --------------------------------------------------------- | ---------------------------------------------------------- |
+| Preloader                  | first load                  | Panel with SVG path draw, count-up, "lift" exit; hidden ~2.6s after first paint (visible at 0.87s, hidden at 3.48s in sampling); `html` gains `motion-ready` | lift 0.9s, path draw 1.2s, count 1.1s, pop 0.4s; `cubic-bezier(.76,0,.24,1)` | Observed                                                  | Preloader `display:none`; all animation durations `1e-05s` |
+| Hero "machine" text        | load / interaction          | Subhead words (`gen-word`) and a caret block; alternates with a "human" variant                                                                              | not measured                                                                 | Partly observed                                           | No caret/animation in reduced-motion capture               |
+| Manifesto fill             | scroll                      | Outline-only lines become solid as the section advances; mid-state captured with last line still outlined                                                    | scroll-linked; exact curve not verified (`--fill` mechanism)                 | Observed visually                                         | All motion reduced; final state legible                    |
+| Header progress            | scroll                      | Fixed header gains a tick ruler and a moving accent segment with a percentage tag (10% at ~980px, 17% at ~1400px)                                            | scroll-linked, no easing curve                                               | Observed                                                  | Not separately tested                                      |
+| Nav label roll             | hover                       | Label slides/rolls to a duplicate (`::after`); colour unchanged                                                                                              | 0.4s, `cubic-bezier(.76,0,.24,1)`                                            | Observed computed styles                                  | CSS transition disabled                                    |
+| Button hover               | hover/focus                 | 0.4s colour/transform transition; text roll on some buttons                                                                                                  | 0.4s, ease-out                                                               | Partly observed (computed colour did not change in probe) | Disabled                                                   |
+| Cursor                     | pointer move                | Crosshair + ring follows pointer; `.cursor` fixed overlay                                                                                                    | continuous                                                                   | Observed                                                  | `.cursor` absent                                           |
+| Command palette            | ⌘K / Ctrl+K / Menu (mobile) | Centred dialog, blurred backdrop, GO TO / DO groups, inverted selected row, ESC close                                                                        | open/close transition not measured                                           | Observed                                                  | Not tested                                                 |
+| Balanced headline wrapping | layout                      | Display lines break deliberately; large negative space around statements                                                                                     | n/a                                                                          | Observed                                                  | n/a                                                        |
 
 **Motion principles to adopt**
 
@@ -192,39 +192,39 @@ Durations/easings observed in the reference stylesheet:
 
 ## 6. Component patterns
 
-| Pattern | Observed structure | VeTwo rule |
-| --- | --- | --- |
-| Header | Fixed 72px; brand; numbered nav (`01 Work`…); theme/accent/⌘K controls; pill CTA; tick-ruler progress on scroll | Keep VeTwo header (`components/header.tsx`). Numbered nav is optional; if added, digits are decorative and `aria-hidden`, with localized labels. Keep sticky behaviour and skip link. |
-| Meta strip | Mono three-column strip under header: identity · location · availability | Use only with verified facts. VeTwo's hero badge + metrics strip already covers this; do not duplicate. |
-| Hero | Full-bleed; display line; human/machine variants; subhead; lead; 2 CTAs; mono footnotes; blueprint annotations | Keep VeTwo hero: badge, `text-display`, lead, primary + secondary CTA, proof metrics. Do not import variant text toys. |
-| Numbered section header | `[0N] LABEL` + right metadata + hairline + heading + lead | Implemented via `SectionHeading index=...`; add a right-side meta only when it carries real information. |
-| Editorial statement | 2–3 display lines, outline→solid; narrow right column; margin annotations | Allowed for English only; must remain readable without motion; no fabricated annotations. |
-| Work / project showcase | Counter `01/03` with outlined total; index/date + stack tags; title; summary; CTA; media plate; prev/next | VeTwo uses project cards (`Card`, `MediaSlot`). Adopt the index/stack metadata and hairline grouping; keep cards for scannability. |
-| Service sheet | `SHEET 01/03 · FOR · SCALE 1:1`; blueprint plate left; 70px title, muted subhead, body right; sticky index | No services route in VeTwo today. If added, mirror the two-column sheet + mono sheet metadata; diagrams must use VeTwo's circuit language. |
-| Process steps | 4 numbered columns with short labels and body | VeTwo's engineering cards already map to this; numbering and equal rhythm are the transferable parts. |
-| Blog listing | Year groups with entry counts; date + title rows; category mono | No blog route today. If added, use dated rows + year grouping, not card grids. |
-| CTA | 177px statement + 2 CTAs + mono note | VeTwo's closing section already has this shape at a smaller scale; keep centred, keep two actions. |
-| Footer | Prompt + link columns + giant wordmark + legal line | Keep VeTwo footer; the giant wordmark is optional and must not introduce a new logo asset. |
-| Command palette | 640px dialog, search, grouped actions, path hints, keyboard nav, mobile menu entry | Out of scope until VeTwo has enough destinations to justify it. If built, use an accessible dialog with focus trap + ESC. |
+| Pattern                 | Observed structure                                                                                              | VeTwo rule                                                                                                                                                                            |
+| ----------------------- | --------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Header                  | Fixed 72px; brand; numbered nav (`01 Work`…); theme/accent/⌘K controls; pill CTA; tick-ruler progress on scroll | Keep VeTwo header (`components/header.tsx`). Numbered nav is optional; if added, digits are decorative and `aria-hidden`, with localized labels. Keep sticky behaviour and skip link. |
+| Meta strip              | Mono three-column strip under header: identity · location · availability                                        | Use only with verified facts. VeTwo's hero badge + metrics strip already covers this; do not duplicate.                                                                               |
+| Hero                    | Full-bleed; display line; human/machine variants; subhead; lead; 2 CTAs; mono footnotes; blueprint annotations  | Keep VeTwo hero: badge, `text-display`, lead, primary + secondary CTA, proof metrics. Do not import variant text toys.                                                                |
+| Numbered section header | `[0N] LABEL` + right metadata + hairline + heading + lead                                                       | Implemented via `SectionHeading index=...`; add a right-side meta only when it carries real information.                                                                              |
+| Editorial statement     | 2–3 display lines, outline→solid; narrow right column; margin annotations                                       | Allowed for English only; must remain readable without motion; no fabricated annotations.                                                                                             |
+| Work / project showcase | Counter `01/03` with outlined total; index/date + stack tags; title; summary; CTA; media plate; prev/next       | VeTwo uses project cards (`Card`, `MediaSlot`). Adopt the index/stack metadata and hairline grouping; keep cards for scannability.                                                    |
+| Service sheet           | `SHEET 01/03 · FOR · SCALE 1:1`; blueprint plate left; 70px title, muted subhead, body right; sticky index      | No services route in VeTwo today. If added, mirror the two-column sheet + mono sheet metadata; diagrams must use VeTwo's circuit language.                                            |
+| Process steps           | 4 numbered columns with short labels and body                                                                   | VeTwo's engineering cards already map to this; numbering and equal rhythm are the transferable parts.                                                                                 |
+| Blog listing            | Year groups with entry counts; date + title rows; category mono                                                 | No blog route today. If added, use dated rows + year grouping, not card grids.                                                                                                        |
+| CTA                     | 177px statement + 2 CTAs + mono note                                                                            | VeTwo's closing section already has this shape at a smaller scale; keep centred, keep two actions.                                                                                    |
+| Footer                  | Prompt + link columns + giant wordmark + legal line                                                             | Keep VeTwo footer; the giant wordmark is optional and must not introduce a new logo asset.                                                                                            |
+| Command palette         | 640px dialog, search, grouped actions, path hints, keyboard nav, mobile menu entry                              | Out of scope until VeTwo has enough destinations to justify it. If built, use an accessible dialog with focus trap + ESC.                                                             |
 
 ---
 
 ## 7. Adoption decisions (reference vs VeTwo)
 
-| Decision | Item | Level | Notes |
-| --- | --- | --- | --- |
-| Adopt | Numbered section headers (`[01]` + hairline) | Layout/hierarchy | Implemented in `components/ui.tsx`; applied on the homepage. |
-| Adopt | Larger editorial section rhythm (`py-20 sm:py-24 lg:py-28`) | Spacing | Applied to homepage content sections. |
-| Adopt | Mono metadata, numbered indices, revision-style labels (only with real data) | Graphic language | Matches VeTwo's existing mono/circuit language. |
-| Adopt | Constrained reading measure + deliberate negative space | Typography/layout | Enforce with `max-w-*`; never full-bleed body copy. |
-| Adapt | Section heading scale (30/36px) | Typography | Strengthens display→section jump while staying compact. |
-| Adapt | Outline text / scroll fill | Motion/typography | English-only, non-essential, reduced-motion safe. Not implemented. |
-| Adapt | Sticky section index | Navigation | Only for long service/spec pages. |
-| Adapt | Blueprint plates | Graphics | Use VeTwo circuit/geometry assets, not reference imagery. |
-| Avoid | Geist fonts, blue/lime accent, exact layouts/copy/assets | Brand | VeTwo identity and tokens are authoritative. |
-| Avoid | Custom cursor, Lenis smooth scroll, branded preloader | Motion | Not justified for VeTwo's content and risk accessibility/performance. |
-| Avoid | Outline text or letter-spacing on Arabic | i18n | Breaks PNU rendering. |
-| Avoid | Dimension/telemetry labels without verified values | Content integrity | Violates AGENTS.md. |
+| Decision | Item                                                                         | Level             | Notes                                                                 |
+| -------- | ---------------------------------------------------------------------------- | ----------------- | --------------------------------------------------------------------- |
+| Adopt    | Numbered section headers (`[01]` + hairline)                                 | Layout/hierarchy  | Implemented in `components/ui.tsx`; applied on the homepage.          |
+| Adopt    | Larger editorial section rhythm (`py-20 sm:py-24 lg:py-28`)                  | Spacing           | Applied to homepage content sections.                                 |
+| Adopt    | Mono metadata, numbered indices, revision-style labels (only with real data) | Graphic language  | Matches VeTwo's existing mono/circuit language.                       |
+| Adopt    | Constrained reading measure + deliberate negative space                      | Typography/layout | Enforce with `max-w-*`; never full-bleed body copy.                   |
+| Adapt    | Section heading scale (30/36px)                                              | Typography        | Strengthens display→section jump while staying compact.               |
+| Adapt    | Outline text / scroll fill                                                   | Motion/typography | English-only, non-essential, reduced-motion safe. Not implemented.    |
+| Adapt    | Sticky section index                                                         | Navigation        | Only for long service/spec pages.                                     |
+| Adapt    | Blueprint plates                                                             | Graphics          | Use VeTwo circuit/geometry assets, not reference imagery.             |
+| Avoid    | Geist fonts, blue/lime accent, exact layouts/copy/assets                     | Brand             | VeTwo identity and tokens are authoritative.                          |
+| Avoid    | Custom cursor, Lenis smooth scroll, branded preloader                        | Motion            | Not justified for VeTwo's content and risk accessibility/performance. |
+| Avoid    | Outline text or letter-spacing on Arabic                                     | i18n              | Breaks PNU rendering.                                                 |
+| Avoid    | Dimension/telemetry labels without verified values                           | Content integrity | Violates AGENTS.md.                                                   |
 
 ---
 
@@ -323,23 +323,23 @@ This guide is now wired into a **real, discoverable** agent-instruction mechanis
 
 Reproducible comparison of VeTwo's source-declared CSS against the reference's measured values in `evidence/metrics.json` (1440×900 viewport). No pixel-level or subjective assessment — values are read from `app/globals.css` / `app/tokens.css` / `tailwind.config.js` and compared numerically. Script: `./compare-refs.mjs`.
 
-| Principle | Reference measured | VeTwo source-declared | Status |
-| --- | --- | --- | --- |
-| Display size | 177.6px / 0.86 lh / −0.055em tracking | `clamp(2.75rem, 5.4vw+0.5rem, 3.75rem)` ≈ 60px / 1.04 lh / −0.025em | **Adapted** — spec §3.2: "Preserve VeTwo's existing hero display role … The reference justifies tighter leading/tracking, not a 177px VeTwo hero." |
-| H2 size | 40px / 1.05 lh | `text-3xl sm:text-4xl` = 30/36px | **Adapted** — spec §3.2 adopted: "section headings move from text-2xl/3xl to text-3xl/4xl (30/36px) to strengthen the jump." |
-| Body size | 18px / 1.55 lh | 18px (`text-base`) | **Match** |
-| Mono label | 11.52px fixed | 12px (`text-xs` = 0.75rem) | **Match** (within 0.5px) |
-| Container width | 1377px (12-col grid) | 1280px (`container-content`) | **Adapted** — spec §2.2: "Keep VeTwo's container-content (max 1280px) and existing 4/8/12-column token spec. Do not import the reference's 1377px measure." |
-| Section top spacing | 158.4px (`clamp(88px, 11vw, 180px)`) | `py-20 sm:py-24 lg:py-28` = 80/96/112px | **Adapted** — spec §2.2: "VeTwo uses py-20 sm:py-24 lg:py-28 (80/96/112px) as the approved adaptation of the reference's 88–158px." |
-| Font family | Geist Variable / Geist Mono | Inter (Latin) / PNU (Arabic) / Roboto Mono (labels) | **Avoided** — spec §3.2: "Keep Inter for Latin and PNU for Arabic … Do not add Geist." Enforced by `tokens/design-tokens.json` → `font.stacks` → `app/tokens.css`; `lib/tokens.test.ts` asserts the variables exist. |
-| Arabic tracking | −0.055em (display) | `:lang(ar) .text-display { letter-spacing: normal; line-height: 1.45 }` | **Avoided** — spec §3.2: "Never apply negative tracking or outline-stroke text to Arabic." |
-| Numbered section headers | `[0N] LABEL` + hairline | `SectionHeading` renders `[0N]` + label + hairline (`components/ui.tsx:285`) | **Adopted** |
-| Mono metadata | 11.52px uppercase technical labels | `.font-mono.text-xs` + revision-style labels | **Adopted** |
-| Constrained reading measure | lead ≈ 586–690px; body ≈ 445px | `max-w-prose` / `max-w-2xl` / `max-w-3xl` | **Adopted** |
-| Blueprint graphics | dashed 1px blue boxes + dimension labels | VeTwo circuit background (`VeTwoCircuitBackground.tsx`) | **Adapted** — spec §2.2: "VeTwo's circuit background is the brand-native equivalent … Prefer extending it over importing grid-paper imagery." |
-| Custom cursor / Lenis / preloader | crosshair + ring, smooth scroll, branded intro | absent | **Avoided** — spec §5/§7: "Do not add a custom cursor by default … No preloader unless a real loading state requires it." |
+| Principle                         | Reference measured                             | VeTwo source-declared                                                        | Status                                                                                                                                                                                                               |
+| --------------------------------- | ---------------------------------------------- | ---------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Display size                      | 177.6px / 0.86 lh / −0.055em tracking          | `clamp(2.75rem, 5.4vw+0.5rem, 3.75rem)` ≈ 60px / 1.04 lh / −0.025em          | **Adapted** — spec §3.2: "Preserve VeTwo's existing hero display role … The reference justifies tighter leading/tracking, not a 177px VeTwo hero."                                                                   |
+| H2 size                           | 40px / 1.05 lh                                 | `text-3xl sm:text-4xl` = 30/36px                                             | **Adapted** — spec §3.2 adopted: "section headings move from text-2xl/3xl to text-3xl/4xl (30/36px) to strengthen the jump."                                                                                         |
+| Body size                         | 18px / 1.55 lh                                 | 18px (`text-base`)                                                           | **Match**                                                                                                                                                                                                            |
+| Mono label                        | 11.52px fixed                                  | 12px (`text-xs` = 0.75rem)                                                   | **Match** (within 0.5px)                                                                                                                                                                                             |
+| Container width                   | 1377px (12-col grid)                           | 1280px (`container-content`)                                                 | **Adapted** — spec §2.2: "Keep VeTwo's container-content (max 1280px) and existing 4/8/12-column token spec. Do not import the reference's 1377px measure."                                                          |
+| Section top spacing               | 158.4px (`clamp(88px, 11vw, 180px)`)           | `py-20 sm:py-24 lg:py-28` = 80/96/112px                                      | **Adapted** — spec §2.2: "VeTwo uses py-20 sm:py-24 lg:py-28 (80/96/112px) as the approved adaptation of the reference's 88–158px."                                                                                  |
+| Font family                       | Geist Variable / Geist Mono                    | Inter (Latin) / PNU (Arabic) / Roboto Mono (labels)                          | **Avoided** — spec §3.2: "Keep Inter for Latin and PNU for Arabic … Do not add Geist." Enforced by `tokens/design-tokens.json` → `font.stacks` → `app/tokens.css`; `lib/tokens.test.ts` asserts the variables exist. |
+| Arabic tracking                   | −0.055em (display)                             | `:lang(ar) .text-display { letter-spacing: normal; line-height: 1.45 }`      | **Avoided** — spec §3.2: "Never apply negative tracking or outline-stroke text to Arabic."                                                                                                                           |
+| Numbered section headers          | `[0N] LABEL` + hairline                        | `SectionHeading` renders `[0N]` + label + hairline (`components/ui.tsx:285`) | **Adopted**                                                                                                                                                                                                          |
+| Mono metadata                     | 11.52px uppercase technical labels             | `.font-mono.text-xs` + revision-style labels                                 | **Adopted**                                                                                                                                                                                                          |
+| Constrained reading measure       | lead ≈ 586–690px; body ≈ 445px                 | `max-w-prose` / `max-w-2xl` / `max-w-3xl`                                    | **Adopted**                                                                                                                                                                                                          |
+| Blueprint graphics                | dashed 1px blue boxes + dimension labels       | VeTwo circuit background (`VeTwoCircuitBackground.tsx`)                      | **Adapted** — spec §2.2: "VeTwo's circuit background is the brand-native equivalent … Prefer extending it over importing grid-paper imagery."                                                                        |
+| Custom cursor / Lenis / preloader | crosshair + ring, smooth scroll, branded intro | absent                                                                       | **Avoided** — spec §5/§7: "Do not add a custom cursor by default … No preloader unless a real loading state requires it."                                                                                            |
 
-**Net assessment:** VeTwo matches the reference on the five adopted/adapted principles (numbered headers, mono metadata, constrained measure, section rhythm, blueprint-equivalent graphics) and deliberately diverges on the seven avoided items (fonts, palette, cursor, preloader, exact measures, outline text on Arabic, unverified telemetry). No principle in §2–§6 is violated by the current implementation. The two divergences that are *larger* than the reference (60px vs 177.6px display; 1280px vs 1377px container) are both explicitly sanctioned by §2.2/§3.2 of this guide.
+**Net assessment:** VeTwo matches the reference on the five adopted/adapted principles (numbered headers, mono metadata, constrained measure, section rhythm, blueprint-equivalent graphics) and deliberately diverges on the seven avoided items (fonts, palette, cursor, preloader, exact measures, outline text on Arabic, unverified telemetry). No principle in §2–§6 is violated by the current implementation. The two divergences that are _larger_ than the reference (60px vs 177.6px display; 1280px vs 1377px container) are both explicitly sanctioned by §2.2/§3.2 of this guide.
 
 **Not assessed by this method** (require live browser, not source): hover/focus states, scroll-fill curve, header progress ruler, nav label roll, command palette transitions, responsive stacking at intermediate breakpoints, light-theme parity. The Puppeteer matrix in §14 covers the subset that is automatable.
 

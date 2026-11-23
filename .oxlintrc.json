@@ -1,0 +1,12 @@
+{
+  "extends": ["../../../.oxlintrc.json"],
+  "ignorePatterns": [
+    ".next/**",
+    "node_modules/**",
+    "coverage/**",
+    ".agents/skills/**",
+    ".github/skills/**",
+    ".opencode/skills/**",
+    "b5bf2e54cb654f7b/**"
+  ]
+}

@@ -1,3 +1,7 @@
+"use client";
+
+import { useEffect, useState } from "react";
+import { useScroll } from "motion/react";
 import Link from "next/link";
 import type { Locale } from "@/lib/i18n/config";
 import { getDict } from "@/lib/i18n/dict";
@@ -5,7 +9,6 @@ import { LocaleSwitch } from "./locale-switch";
 
 import { PaletteTrigger } from "./palette-trigger";
 import { PrimaryNav } from "./primary-nav";
-// import ScrollProgress from './smoothui/scroll-progress/index';
 import { ThemeToggle } from "./theme-toggle";
 import RulerScrollProgress from "./ruler-scroll-progress";
 
@@ -13,9 +16,24 @@ const GITHUB_URL = "https://github.com/VeTwo-dev";
 
 export function Header({ locale }: { locale: Locale }) {
   const t = getDict(locale);
+  const { scrollYProgress } = useScroll();
+  const [scrolled, setScrolled] = useState(false);
+
+  useEffect(() => {
+    const unsub = scrollYProgress.on("change", (v) => {
+      setScrolled(v * 100 >= 2);
+    });
+    return () => unsub();
+  }, [scrollYProgress]);
 
   return (
-    <header className="site-header fixed inset-x-0 top-0 z-40">
+    <header
+      className={`site-header fixed inset-x-0 top-0 z-40 transition-colors duration-200 ${
+        scrolled
+          ? "bg-background border-b border-border"
+          : "bg-transparent border-b border-transparent"
+      }`}
+    >
       <a
         href="#content"
         className="sr-only focus:not-sr-only focus:absolute focus:inset-s-2 focus:top-2 focus:rounded focus:bg-accent focus:px-3 focus:py-2 focus:text-onAccent"
@@ -23,7 +41,10 @@ export function Header({ locale }: { locale: Locale }) {
         {t.common.skip}
       </a>
       <div className="container-content flex h-18 items-center justify-between gap-4">
-        <Link href={`/${locale}`} className="flex min-h-11 items-center gap-2.5">
+        <Link
+          href={`/${locale}`}
+          className="flex min-h-11 items-center gap-2.5"
+        >
           <span
             aria-hidden="true"
             className="inline-flex size-8 items-center justify-center rounded-control border border-accent/40 bg-accent/10 font-mono text-sm font-bold text-mint"
@@ -41,7 +62,11 @@ export function Header({ locale }: { locale: Locale }) {
           <ThemeToggle locale={locale} />
           <LocaleSwitch locale={locale} />
           <PaletteTrigger locale={locale} className="max-sm:hidden" />
-          <PaletteTrigger locale={locale} variant="menu" className="sm:hidden" />
+          <PaletteTrigger
+            locale={locale}
+            variant="menu"
+            className="sm:hidden"
+          />
           <a
             href={GITHUB_URL}
             target="_blank"
@@ -52,7 +77,7 @@ export function Header({ locale }: { locale: Locale }) {
           </a>
         </div>
       </div>
-      <RulerScrollProgress/>
+      <RulerScrollProgress />
     </header>
   );
 }

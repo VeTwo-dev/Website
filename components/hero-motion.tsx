@@ -25,7 +25,8 @@ export function HeroMotion() {
 
     const root = document.querySelector<HTMLElement>("[data-hero-root]");
     const items = root?.querySelectorAll<HTMLElement>("[data-hero]");
-    const edges = root?.querySelectorAll<SVGGeometryElement>("[data-hero-edge]");
+    const edges =
+      root?.querySelectorAll<SVGGeometryElement>("[data-hero-edge]");
     const nodes = root?.querySelectorAll<SVGGElement>("[data-hero-node]");
     if (!items?.length || !root) return;
 
@@ -65,7 +66,7 @@ export function HeroMotion() {
               }
             });
           }
-const label = "chart";
+          const label = "chart";
           tl.addLabel(label, ">-0.1");
           if (edges) {
             tl.to(

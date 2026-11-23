@@ -1,0 +1,5 @@
+{
+  "tags": ["domain:docs", "type:app", "scope:private"],
+  "name": "@vetwo/website",
+  "$schema": "../../../node_modules/nx/schemas/project-schema.json"
+}

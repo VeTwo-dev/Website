@@ -53,7 +53,10 @@ type Entry<V> = { value: V; expiresAt: number };
  * after mutations; there are currently no write endpoints, so these are
  * exercised by tests and reserved for future admin use.
  */
-export function createTtlCache<K, V>(ttlMs: number, options: TtlCacheOptions = {}) {
+export function createTtlCache<K, V>(
+  ttlMs: number,
+  options: TtlCacheOptions = {},
+) {
   const maxEntries = options.maxEntries ?? MAX_CACHE_ENTRIES;
   const now = options.nowMs ?? Date.now;
   const store = new Map<K, Entry<V>>();

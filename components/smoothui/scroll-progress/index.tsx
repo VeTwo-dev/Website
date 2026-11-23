@@ -100,7 +100,7 @@ const PercentFigure = ({
   <span
     className={cn(
       "inline-flex items-baseline font-semibold leading-none tracking-tight",
-      className
+      className,
     )}
     style={style}
   >
@@ -135,7 +135,7 @@ const SegmentDash = ({
   // Each pill owns one 1/segments slice of the range, so they fill strictly
   // one after another instead of all easing together.
   const fill = useTransform(value, (progress) =>
-    clampUnit(progress * segments - index)
+    clampUnit(progress * segments - index),
   );
   const springFill = useSpring(fill, SEGMENT_SPRING);
 
@@ -183,7 +183,7 @@ export default function ScrollProgress({
   // away from it the way a separately positioned glow could.
   const fillX = useTransform(
     value,
-    (latest) => `${-PERCENT_MULTIPLIER * (1 - clampUnit(latest))}%`
+    (latest) => `${-PERCENT_MULTIPLIER * (1 - clampUnit(latest))}%`,
   );
 
   const ariaProps = {
@@ -228,7 +228,7 @@ export default function ScrollProgress({
         className={cn(
           POSITION_CLASSES[position],
           "inline-flex shrink-0 items-center justify-center",
-          className
+          className,
         )}
       >
         <svg
@@ -289,7 +289,7 @@ export default function ScrollProgress({
           // Size lives on the root so a consumer's `text-*` class wins over it
           // and scales the figures with it.
           "inline-flex shrink-0 items-baseline text-4xl leading-none",
-          className
+          className,
         )}
       >
         <PercentFigure digitColor={color} percent={percent} />
@@ -310,7 +310,7 @@ export default function ScrollProgress({
       className={cn(
         POSITION_CLASSES[position],
         "flex items-center gap-1.5",
-        className
+        className,
       )}
     >
       {Array.from({ length: segments }, (_, index) => (

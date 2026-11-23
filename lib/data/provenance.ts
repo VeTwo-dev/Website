@@ -29,19 +29,33 @@ export function freshnessOf(
   return nowMs - t <= maxAgeMs ? "fresh" : "stale";
 }
 
-export function isStale(fetchedAtIso: string | null, maxAgeMs: number, nowMs = Date.now()): boolean {
+export function isStale(
+  fetchedAtIso: string | null,
+  maxAgeMs: number,
+  nowMs = Date.now(),
+): boolean {
   return freshnessOf(fetchedAtIso, maxAgeMs, nowMs) !== "fresh";
 }
 
 /** UI label for a provenance record. Never invents precision. */
-export function provenanceLabel(p: Provenance, locale: "en" | "ar" = "en"): string {
-  if (p.kind === "static") return locale === "ar" ? "محتوى تحريري" : "Editorial content";
-  if (p.kind === "simulated") return locale === "ar" ? "بيانات محاكاة" : "Simulated data";
+export function provenanceLabel(
+  p: Provenance,
+  locale: "en" | "ar" = "en",
+): string {
+  if (p.kind === "static")
+    return locale === "ar" ? "محتوى تحريري" : "Editorial content";
+  if (p.kind === "simulated")
+    return locale === "ar" ? "بيانات محاكاة" : "Simulated data";
   if (p.kind === "live") return locale === "ar" ? "بيانات حيّة" : "Live data";
   const date = p.retrievedAt.slice(0, 10);
-  const state = p.freshness === "fresh"
-    ? locale === "ar" ? "حديثة" : "fresh"
-    : locale === "ar" ? "قديمة" : "stale";
+  const state =
+    p.freshness === "fresh"
+      ? locale === "ar"
+        ? "حديثة"
+        : "fresh"
+      : locale === "ar"
+        ? "قديمة"
+        : "stale";
   return locale === "ar"
     ? `مخزّنة من ${p.source} · بتاريخ ${date} · ${state}`
     : `Cached from ${p.source} · ${date} · ${state}`;
